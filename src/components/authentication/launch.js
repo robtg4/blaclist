@@ -52,10 +52,11 @@ module.exports = React.createClass({
 	}, 
 	onPress: function() {
 		//navigate over to login, access navigator as prop of signin
-		this.props.navigator.push({name: 'login'});
+		this.props.navigator.push({name: 'signin'});
 	},
 	onSignupPress: function() {
-
+		//navigate over to signup, access navigator as prop of signup
+		this.props.navigator.push({name: 'signup'});
 	},
 	 //function that helps with laying out flexbox itmes 
 	 //takes a color argument to construct border, this is an additional 

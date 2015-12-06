@@ -51,13 +51,16 @@ module.exports = React.createClass({
 					<View style={[styles.footer, this.border('blue')]} >
 						<View style={styles.footerWrapper} >
 							<TextInput 
+								placeholder={'Email'}
 								style={styles.input} 
 								value={this.state.username}
 								onChangeText={(text) => this.setState({username: text})} />
 							<TextInput 
+								placeholder={'Password'}
 								style={styles.input} 
-								value={this.state.username}
-								onChangeText={(text) => this.setState({username: text})} />
+								secureTextEntry={true} 
+								value={this.state.password}
+								onChangeText={(text) => this.setState({password: text})} />
 							<ImageButton
 								style={[styles.email_btn]}
 								resizeMode={'contain'}
@@ -78,7 +81,12 @@ module.exports = React.createClass({
 
 	},
 	onEmailLoginPress: function() {
-
+		//log the user on, get eror if login information doesn't exist 
+		//we need to show the user that the error occured
+		Parse.User.logIn(this.state.username, this.state.password, {
+			  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]); },
+			  error: (data, error) => { this.setState({ errorMessage: error.message }); }
+		});
 	},
 	onCreateAcctPress: function() {
 		this.props.navigator.pop();

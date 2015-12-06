@@ -9,8 +9,10 @@ var {
 } = React;
 
 //authentication components 
-var Login = require('./components/authentication/login');
+var Signin = require('./components/authentication/signin');
 var Launch = require('./components/authentication/launch');
+var Signup = require('./components/authentication/signup');
+var Home = require('./components/experience/home');
 
 //we have router flux enabled and react-native-navbar but we
 //need time to change a few things around to enable more customized 
@@ -19,14 +21,16 @@ var ROUTES ={
 	//relates to imported component to display
 	//initial route is am object with the name of the route within this variable
 	launch: Launch,
-	login: Login, 
+	signin: Signin, 
+	signup: Signup,
+	home: Home, 
 }
 
 module.exports = React.createClass({
 	componentWillMount: function() {
 		//executed when component shows on screen
 		//tells app to initialize parse 
-		
+		Parse.initialize("jspeQAWhXjb9QAIKxfVbxnggnMv3Y4RuRJ13YLDY", "1IlLlb7x3mHq1vm80zlFlqcoydFuZUQqmjvvmXze");
 	}, 
 	renderScene: function(route, navigator) {
 		//when navigator is initially shown it has to render initial route 
