@@ -10,7 +10,6 @@ var {
 
 //additional libraries
 var Parse = require('parse/react-native');
-var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -89,13 +88,7 @@ module.exports = React.createClass({
 	}, 
 	onFbSignupPress: function() {
 		//sign up via facebook and store credentials into parse
-		FacebookLoginManager.newSession((error, info) => {
-		      if (error) {
-		      	console.log(error);
-		      } else {
-		        console.log(info);
-		      }
-    	});
+	
 	},
 	onCreateAcctPress: function() {
 		if (this.state.password === this.state.passwordConfirmation)

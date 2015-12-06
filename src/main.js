@@ -29,8 +29,9 @@ var ROUTES ={
 module.exports = React.createClass({
 	componentWillMount: function() {
 		//executed when component shows on screen
-		//tells app to initialize parse 
+		//tells app to initialize parse and facebook js sdk
 		Parse.initialize("jspeQAWhXjb9QAIKxfVbxnggnMv3Y4RuRJ13YLDY", "1IlLlb7x3mHq1vm80zlFlqcoydFuZUQqmjvvmXze");
+
 	}, 
 	renderScene: function(route, navigator) {
 		//when navigator is initially shown it has to render initial route 
