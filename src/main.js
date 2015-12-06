@@ -10,12 +10,15 @@ var {
 
 //authentication components 
 var Login = require('./components/authentication/login');
-var Signin = require('./components/authentication/signin');
+var Launch = require('./components/authentication/launch');
 
+//we have router flux enabled and react-native-navbar but we
+//need time to change a few things around to enable more customized 
+//component transitions 
 var ROUTES ={
 	//relates to imported component to display
 	//initial route is am object with the name of the route within this variable
-	signin: Signin,
+	launch: Launch,
 	login: Login, 
 }
 
@@ -32,11 +35,14 @@ module.exports = React.createClass({
 		var Component = ROUTES[route.name]; //ROUTE['signin'] => Signin
 		return <Component route={route} navigator={navigator} />;
 	}, 
+	transition: function(route) {
+    	return ROUTES[route.name].transition;
+  	},
 	render: function() {
 		return (
 			<Navigator 
 				style={styles.container}
-				initialRoute={{name: 'signin'}}
+				initialRoute={{name: 'launch'}}
 				renderScene={this.renderScene}
 				configureScene={ () => { return Navigator.SceneConfigs.FloatFromRight; }} />
 		);
