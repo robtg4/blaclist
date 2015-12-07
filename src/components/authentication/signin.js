@@ -7,7 +7,10 @@ var {
 	Image,  
 	TextInput,
 } = React;
+
+//additional libraries
 var Parse = require('parse/react-native');
+var FBLoginManager = require('NativeModules').FBLoginManager;
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -17,11 +20,24 @@ var window = Dimensions.get('window');
 var ImageButton = require('../common/imageButton');
 
 module.exports = React.createClass({
+	propTypes: {
+	    style: View.propTypes.style,
+	    onFbLoginPress: React.PropTypes.func,
+    },
+	componentWillMount: function(){
+	    var _this = this;
+	    FBLoginManager.getCredentials(function(error, data){
+	      if (!error) {
+	        console.log("Login data: ", data);
+	      }
+	    });
+    },
 	getInitialState: function() {
 		return {
 			username: '', 
 			password: '', 
 			errorMessage: '',
+			userLoggedIn: false, 
 		};
 	},
 	render: function() {
@@ -78,7 +94,22 @@ module.exports = React.createClass({
 		);
 	}, 
 	onFbLoginPress: function() {
+		//sign up/login via facebook and store credentials into parse
+		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
+	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile", "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"], function(error, data){
+		  if (!error) {
+		    console.log("Login data: ", data);
+		    var authData = {
+			    id: data.userId,
+			    access_token: data.token,
+			    expiration_date: data.tokenExpirationDate,
+			 };
 
+		  } else {
+		  	console.log("Error: ", error);
+		    this.setState({errorMessage: error.message});
+		  }
+		});
 	},
 	onEmailLoginPress: function() {
 		//log the user on, get eror if login information doesn't exist 

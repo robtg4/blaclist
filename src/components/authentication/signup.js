@@ -28,7 +28,7 @@ module.exports = React.createClass({
 	    var _this = this;
 	    FBLoginManager.getCredentials(function(error, data){
 	      if (!error) {
-	        _this.setState({ user : data})
+	        console.log("Login data: ", data);
 	      }
 	    });
     },
@@ -38,7 +38,7 @@ module.exports = React.createClass({
 			password: '', 
 			errorMessage: '',
 			passwordConfirmation: '',
-			user: null,
+			loadingCurrentUser: true, 
 		};
 	},
 	render: function() {
@@ -101,16 +101,25 @@ module.exports = React.createClass({
 		);
 	}, 
 	onFbSignupPress: function() {
-		//sign up via facebook and store credentials into parse
-		var _this = this;
-	    FBLoginManager.login(function(error, data){
-	      if (!error) {
-	        _this.setState({ user : data});
-	        _this.props.onLogin && _this.props.onLogin();
-	      } else {
-	        console.log(error, data);
-	      }
-	    });
+		//sign up/login via facebook and store credentials into parse
+		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
+	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile", "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"], function(error, data){
+		  if (!error) {
+		    console.log("Login data: ", data);
+		    var authData = {
+			    id: data.userId,
+			    access_token: data.token,
+			    expiration_date: data.tokenExpirationDate,
+			 };
+
+			 //sign up into parse db
+			 
+
+		  } else {
+		  	console.log("Error: ", error);
+		    this.setState({errorMessage: error.message});
+		  }
+		});
 	},
 	onCreateAcctPress: function() {
 		if (this.state.password === this.state.passwordConfirmation)
