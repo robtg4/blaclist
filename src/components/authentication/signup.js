@@ -10,6 +10,7 @@ var {
 
 //additional libraries
 var Parse = require('parse/react-native');
+var FBLoginManager = require('NativeModules').FBLoginManager;
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -19,12 +20,25 @@ var window = Dimensions.get('window');
 var ImageButton = require('../common/imageButton');
 
 module.exports = React.createClass({
+	propTypes: {
+	    style: View.propTypes.style,
+	    onFbSignupPress: React.PropTypes.func,
+    },
+	componentWillMount: function(){
+	    var _this = this;
+	    FBLoginManager.getCredentials(function(error, data){
+	      if (!error) {
+	        _this.setState({ user : data})
+	      }
+	    });
+    },
 	getInitialState: function() {
 		return {
 			username: '', 
 			password: '', 
 			errorMessage: '',
 			passwordConfirmation: '',
+			user: null,
 		};
 	},
 	render: function() {
@@ -88,7 +102,15 @@ module.exports = React.createClass({
 	}, 
 	onFbSignupPress: function() {
 		//sign up via facebook and store credentials into parse
-	
+		var _this = this;
+	    FBLoginManager.login(function(error, data){
+	      if (!error) {
+	        _this.setState({ user : data});
+	        _this.props.onLogin && _this.props.onLogin();
+	      } else {
+	        console.log(error, data);
+	      }
+	    });
 	},
 	onCreateAcctPress: function() {
 		if (this.state.password === this.state.passwordConfirmation)
