@@ -7,7 +7,9 @@ var {
 } = React;
 
 //additional libraries
-var Parse = require('parse/react-native');
+var Parse = require('parse/react-native'); //parse for data storage
+var ActionButton = require('react-native-action-button'); //action button for next frame
+Icon = require('react-native-vector-icons/Ionicons'); //vector icons
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -24,6 +26,17 @@ module.exports = React.createClass({
 					style={styles.bg} 
 					source={require('./img/login_bg1_3x.png')}>
 				</Image>
+				<ActionButton buttonColor="rgba(231,76,60,1)">
+		          <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("notes tapped!")}>
+		            <Icon name="android-create" style={styles.actionButtonIcon} />
+		          </ActionButton.Item>
+		          <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
+		            <Icon name="android-notifications-none" style={styles.actionButtonIcon} />
+		          </ActionButton.Item>
+		          <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
+		            <Icon name="android-done-all" style={styles.actionButtonIcon} />
+		          </ActionButton.Item>
+		        </ActionButton>
 			</View>
 		);
 	}, 
@@ -48,5 +61,10 @@ styles = StyleSheet.create({
 		flex: 1,
 		width: window.width, 
 		height: window.height, 
+	},
+	actionButtonIcon: {
+	    fontSize: 20,
+	    height: 22,
+	    color: 'white',
 	},
 });

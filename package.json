@@ -16,6 +16,7 @@
     "react-native-fbsdkshare": "0.0.7",
     "react-native-modal": "^0.3.10",
     "react-native-navbar": "^1.0.7",
-    "react-native-router-flux": "^0.3.4"
+    "react-native-router-flux": "^0.3.4",
+    "react-native-vector-icons": "^1.0.0"
   }
 }
