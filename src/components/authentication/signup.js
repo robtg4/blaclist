@@ -101,7 +101,7 @@ module.exports = React.createClass({
 				user.signUp(null, {
 				  //navigate to new component (.immediatelyResetRouteStack)
 				  //when doing so and we pass new views of app (routes)
-				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]); },
+				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]); },
 				  error: (user, error) => { this.setState({ errorMessage: error.message }); }
 			});
 		} else {

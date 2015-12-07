@@ -84,7 +84,7 @@ module.exports = React.createClass({
 		//log the user on, get eror if login information doesn't exist 
 		//we need to show the user that the error occured
 		Parse.User.logIn(this.state.username, this.state.password, {
-			  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]); },
+			  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]); },
 			  error: (data, error) => { this.setState({ errorMessage: error.message }); }
 		});
 	},
