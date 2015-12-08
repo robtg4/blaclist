@@ -56,9 +56,9 @@ class ActionButton extends Component {
     let position, offsetX, offsetY, size;
 
       position = 'right',
-      offsetX  = 30,
-      offsetY  = 30,
-      size     = 56;
+      offsetX  = 20,
+      offsetY  = 20,
+      size     = 50;
 
     this.state.position = this.props.position || position;
     this.state.offsetX  = this.props.offsetX  || offsetX ;
@@ -127,8 +127,11 @@ class ActionButton extends Component {
   _renderButton() {
     let btnSize = this.state.size;
     return (
-      <View style={this.getActionButtonStyles()}>
-        <TouchableOpacity activeOpacity={0.8} onPress={this.animateButton.bind(this)}>
+      <View style={this.getActionButtonStyles(), styles.touchOp}>
+        <TouchableOpacity 
+          style={styles.touchOp}
+          activeOpacity={0.2} 
+          onPress={this.props.onPress}>
           <Animated.View 
             style={[styles.btn, {
               width: btnSize,
@@ -219,12 +222,14 @@ var styles = StyleSheet.create({
     },
     shadowColor: '#444',
     shadowRadius: 1,
+    borderColor: 'red', 
+    borderWidth: 1,
+    opacity: 0.7,
   },
   btnText: {
-    marginTop: -4,
-    fontSize: 12,
+    marginTop: 2,
+    fontSize: 20,
     backgroundColor: 'transparent',
-    position: 'relative',
     color: 'white', 
     fontFamily: 'Bebas Neue', 
     fontWeight: 'bold',
@@ -234,6 +239,10 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: 'column',
   },
+  touchOp: {
+    alignItems: 'center', 
+    justifyContent: 'center'
+  }
 });
 
 module.exports = ActionButton;

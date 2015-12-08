@@ -14,17 +14,14 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<TouchableHighlight 
-				style={styles.keywordBox} 
-				onPress={this.keywordSelect()}
+				style={[styles.keywordBox, this.props.selected ? {backgroundColor: 'rgb(68,106,122, 0.6)'} : {backgroundColor: 'transparent'}]} 
+				onPress={this.props.onPress}
 				key={this.props.key}
-				underlayColor={'rgb(176,224,230, 0.6)'} >
+				underlayColor={'rgb(68,106,122, 0.6)'} >
 				<Text style={styles.keywordText}>{this.props.text}</Text>
 			</TouchableHighlight>
 		);
 	}, 
-	keywordSelect: function() {
-		
-	}
 });
 
 var styles = StyleSheet.create({
@@ -40,7 +37,7 @@ var styles = StyleSheet.create({
 	keywordBox: {
 		backgroundColor: 'transparent',
 		margin: 3, 
-		borderColor: 'rgb(176,224,230, 0.6)', 
+		borderColor: 'rgb(68,106,122, 0.6)', 
 	    borderWidth: 1,
 	},
 });

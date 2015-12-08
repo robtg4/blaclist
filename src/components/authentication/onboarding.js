@@ -11,6 +11,9 @@ var {
 //additional libraries
 var Parse = require('parse/react-native'); //parse for data storage
 Icon = require('react-native-vector-icons/Ionicons'); //vector icons
+var LinearGradient = require('react-native-linear-gradient'); //linear grad. over button
+
+//need react-addons-update to use immutability helpers*******
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -21,8 +24,14 @@ var ImageButton = require('../common/imageButton');
 var KeywordBox = require('./onboarding/keyword-box');
 var ActionButton = require('../common/ActionButton');
 
-module.exports = React.createClass({
+module.exports = React.createClass({ 
+	getInitialState: function() {
+		return {
+			keywords_array: Array.apply(null, Array(37)).map(Boolean.prototype.valueOf,false)
+		};
+	}, 
 	render: function() {
+		var newData = this.state.keywords_array;
 		return (
 			<View style={[styles.container]}>
 				<Image 
@@ -44,20 +53,21 @@ module.exports = React.createClass({
 							horizontal={false}
 							style={styles.footerWrapperNC}
 							contentContainerStyle={[styles.footerWrapper]}>
-							{this.renderKeywordBoxes()}
+							{this.renderKeywordBoxes(newData)}
 						</ScrollView>
 					</View>
 				</Image>
 				<ActionButton 
+					onPress={this.onNextPress}
 					buttonColor="rgba(0,0,0,0.7)" />
 			</View>
 		);
 	}, 
-	renderKeywordBoxes: function() {
+	renderKeywordBoxes: function(newData) {
 		//renders array of keywords in keyword.js
 		//and maps them onto custom component keywordbox to show in the onboarding
 		//component
-		var Keywords = ['LGBQT', '#BlackLivesMatter', 'Arts', 'Hip-Hop', 'History', 
+		var Keywords = ['LGBQT', 'BlackLivesMatter', 'Arts', 'Hip-Hop', 'History', 
 		'Politics', 'Fashion Trends', 'Entrepreneurship', 'Technology', 'Business', 
 		'World', 'Health', 'Trending', 'Music', 'Sports', 'Entertianment', 
 		'Mobile Games', 'Design', 'News', 'Humor', 'Happiness', 'Women of Color', 'Travel',
@@ -65,9 +75,36 @@ module.exports = React.createClass({
 		 'Celebrity News', 'Book Reviews', 'Marketing', 'Basketball', 'Film', 'Adventure Travel', 
 		 'Auto'];
 
+		 var that = this;
+
 		return Keywords.map(function(keyword, i) {
-			return <KeywordBox key={i} text={keyword} />
+
+			return <KeywordBox 
+				key={i} 
+				text={keyword} 
+				onPress={ () => { that.onKeywordPress(i, keyword, newData) }}
+				selected={newData[i]} />
 		});
+	}, 
+
+	onKeywordPress: function(i, keyword, newData) {
+		console.log(this.state.keywords_array);
+		console.log(keyword); 
+		console.log(newData); 
+
+		//change the state accordingly without doing so directly 
+		var array = newData;
+		array[i] = true; 
+		this.setState({
+		  keywords_array: array
+		});
+
+		console.log(array);
+		console.log(this.state.keywords_array);
+
+	}, 
+	onNextPress: function() {
+
 	}, 
 	//function that helps with laying out flexbox itmes 
 	//takes a color argument to construct border, this is an additional 
