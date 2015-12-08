@@ -25,7 +25,6 @@ module.exports = React.createClass({
 	    onFbSignupPress: React.PropTypes.func,
     },
 	componentWillMount: function(){
-	    var _this = this;
 	    FBLoginManager.getCredentials(function(error, data){
 	      if (!error) {
 	        console.log("Login data: ", data);
@@ -101,23 +100,50 @@ module.exports = React.createClass({
 		);
 	}, 
 	onFbSignupPress: function() {
+
+		var that=this;
+
 		//sign up/login via facebook and store credentials into parse
 		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
 	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile", "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"], function(error, data){
 		  if (!error) {
-		    console.log("Login data: ", data);
+		
 		    var authData = {
-			    id: data.userId,
-			    access_token: data.token,
-			    expiration_date: data.tokenExpirationDate,
+			    id: data.credentials.userId,
+			    access_token: data.credentials.token,
+			    expiration_date: data.credentials.tokenExpirationDate
 			 };
+			 //console indicating success
+			 console.log(authData.id);
+			 console.log(authData.access_token);
+			 console.log(authData.expiration_date);
+
 
 			 //sign up into parse db
-			 
-
+             Parse.FacebookUtils.logIn(authData, {
+              	success: function(user) {
+                    console.log('user '+user.getUsername()+' has been signed up successfully via facebook.');
+                    that.setState({loadingCurrentUser: false});
+                },
+                error: function(user, error) {
+                    console.log(JSON.stringify(error, null, " "));
+                    switch (error.code) {
+				        case Parse.Error.INVALID_SESSION_TOKEN:
+				          Parse.User.logOut().then(() => {
+				            this.handleLogin(credentials);
+				          });
+				          break;
+				        default:
+				          this.setState({loadingCurrentUser: false});
+				          alert(error.message);
+                	}
+                }
+             });
+			
 		  } else {
+		  	console.log('User did not succesfully log in');
 		  	console.log("Error: ", error);
-		    this.setState({errorMessage: error.message});
+		    that.setState({errorMessage: error.message});
 		  }
 		});
 	},
