@@ -134,7 +134,7 @@ module.exports = React.createClass({
 			          // login: nothing to do
 			          console.log('User Already Logged In');
 			          that.setState({loadingCurrentUser: false});
-			          that.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]);
+			          that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
 			        } else {
 			          // signup: update user data, e.g. email
 			          console.log('getting user additional information');
@@ -146,6 +146,7 @@ module.exports = React.createClass({
 			              // TODO: error
 			              this.setState({loadingCurrentUser: false});
 			            } else {
+			              console.log(result);
 			              var name = responseData.name;
 			              var email = responseData.email;
 
@@ -289,5 +290,6 @@ var styles = StyleSheet.create({
 		alignSelf:'center',
 		fontFamily: 'Bebas Neue', 
 		fontSize: 15,
+		color: 'red',
 	}
 });
