@@ -8,9 +8,16 @@ var {
 	TextInput,
 } = React;
 
-//additional libraries
+//additional libraries (FBSDK, Facebook Login, Parse React)
 var Parse = require('parse/react-native');
+var ParseReact = require('parse-react/react-native');
 var FBLoginManager = require('NativeModules').FBLoginManager;
+var FBSDKCore = require('react-native-fbsdkcore');
+var {
+  FBSDKGraphRequest,
+  FBSDKGraphRequestManager, 
+} = FBSDKCore;
+
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -121,24 +128,59 @@ module.exports = React.createClass({
 
 			 //sign up into parse db
              Parse.FacebookUtils.logIn(authData, {
-              	success: function(user) {
-                    console.log('user '+user.getUsername()+' has been signed up successfully via facebook.');
-                    that.setState({loadingCurrentUser: false});
-                },
-                error: function(user, error) {
-                    console.log(JSON.stringify(error, null, " "));
-                    switch (error.code) {
-				        case Parse.Error.INVALID_SESSION_TOKEN:
-				          Parse.User.logOut().then(() => {
-				            this.handleLogin(credentials);
-				          });
-				          break;
-				        default:
-				          this.setState({loadingCurrentUser: false});
-				          alert(error.message);
-                	}
-                }
-             });
+			      success: (user) => {
+			        if (user.existed()) {
+			          // login: nothing to do
+			          console.log('User Already Logged In');
+			          that.setState({loadingCurrentUser: false});
+			        } else {
+			          // signup: update user data, e.g. email
+			          console.log('getting user additional information');
+			          var data = user.get('authData').facebook;
+			          var api = 'https://graph.facebook.com/v2.3/'+data.id+'?fields=name,email&access_token='+data.access_token;
+
+			          var fetchProfile = new FBSDKGraphRequest((error, result) => {
+			            if (error) {
+			              // TODO: error
+			              this.setState({loadingCurrentUser: false});
+			            } else {
+			              var name = responseData.name;
+			              var email = responseData.email;
+
+			              // FIXME: https://github.com/ParsePlatform/ParseReact/issues/45
+			              var userId = {
+			                className: '_User',
+			                objectId: user.id
+			              };
+
+			              ParseReact.Mutation.Set(userId, {
+			                username: email,
+			                email: email,
+			                name: name
+			              }).dispatch();
+
+			              that.setState({loadingCurrentUser: false});
+			            }
+			          }, '/me?fields=name,email');
+			          // FIXME https://github.com/facebook/react-native-fbsdk/issues/20
+			          // fetchProfile.start();
+			          FBSDKGraphRequestManager.batchRequests([fetchProfile], function() {}, 10)
+			        }
+			      },
+			      error: (user, error) => {
+			      	console.log('Error', error.message);
+			        switch (error.code) {
+			          case Parse.Error.INVALID_SESSION_TOKEN:
+			            Parse.User.logOut().then(() => {
+			              this.onFacebookLogin(token);
+			            });
+			            break;
+			          default:
+			            // TODO: error
+			        }
+			        that.setState({loadingCurrentUser: false});
+			      }
+			    });
 			
 		  } else {
 		  	console.log('User did not succesfully log in');
