@@ -30,7 +30,7 @@ var KeywordData = require('../store/keywords');
 module.exports = React.createClass({ 
 	getInitialState: function() {
 		return {
-			keywords_array: Array.apply(null, Array(37)).map(Boolean.prototype.valueOf,false)
+			keywords_array: Array.apply(null, Array(53)).map(Boolean.prototype.valueOf,false)
 		};
 	}, 
 	render: function() {
