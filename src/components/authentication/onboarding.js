@@ -6,6 +6,7 @@ var {
 	StyleSheet,
 	Text, 
 	TouchableHighlight,
+	StatusBarIOS,
 } = React;
 
 //additional libraries
@@ -13,7 +14,8 @@ var Parse = require('parse/react-native'); //parse for data storage
 Icon = require('react-native-vector-icons/Ionicons'); //vector icons
 var LinearGradient = require('react-native-linear-gradient'); //linear grad. over button
 
-//need react-addons-update to use immutability helpers*******
+//status bar styling
+
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -104,7 +106,8 @@ module.exports = React.createClass({
 
 	}, 
 	onNextPress: function() {
-
+		//match the state array to the keywords array to find which
+		//words were selected to properly update and push them into parse
 	}, 
 	//function that helps with laying out flexbox itmes 
 	//takes a color argument to construct border, this is an additional 

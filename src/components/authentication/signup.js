@@ -287,5 +287,7 @@ var styles = StyleSheet.create({
 	error: {
 		alignItems: 'center', 
 		alignSelf:'center',
+		fontFamily: 'Bebas Neue', 
+		fontSize: 15,
 	}
 });
