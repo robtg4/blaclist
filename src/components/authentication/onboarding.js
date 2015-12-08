@@ -32,6 +32,13 @@ module.exports = React.createClass({
 	}, 
 	render: function() {
 		var newData = this.state.keywords_array;
+		var Keywords = ['LGBQT', 'BlackLivesMatter', 'Arts', 'Hip-Hop', 'History', 
+		'Politics', 'Fashion Trends', 'Entrepreneurship', 'Technology', 'Business', 
+		'World', 'Health', 'Trending', 'Music', 'Sports', 'Entertianment', 
+		'Mobile Games', 'Design', 'News', 'Humor', 'Happiness', 'Women of Color', 'Travel',
+		'Photography','Computers', 'Universe', 'Internet','Performing Arts','Management',
+		 'Celebrity News', 'Book Reviews', 'Marketing', 'Basketball', 'Film', 'Adventure Travel', 
+		 'Auto'];
 		return (
 			<View style={[styles.container]}>
 				<Image 
@@ -53,7 +60,7 @@ module.exports = React.createClass({
 							horizontal={false}
 							style={styles.footerWrapperNC}
 							contentContainerStyle={[styles.footerWrapper]}>
-							{this.renderKeywordBoxes(newData)}
+							{this.renderKeywordBoxes(newData, Keywords)}
 						</ScrollView>
 					</View>
 				</Image>
@@ -63,17 +70,10 @@ module.exports = React.createClass({
 			</View>
 		);
 	}, 
-	renderKeywordBoxes: function(newData) {
+	renderKeywordBoxes: function(newData, Keywords) {
 		//renders array of keywords in keyword.js
 		//and maps them onto custom component keywordbox to show in the onboarding
 		//component
-		var Keywords = ['LGBQT', 'BlackLivesMatter', 'Arts', 'Hip-Hop', 'History', 
-		'Politics', 'Fashion Trends', 'Entrepreneurship', 'Technology', 'Business', 
-		'World', 'Health', 'Trending', 'Music', 'Sports', 'Entertianment', 
-		'Mobile Games', 'Design', 'News', 'Humor', 'Happiness', 'Women of Color', 'Travel',
-		'Photography','Computers', 'Universe', 'Internet','Performing Arts','Management',
-		 'Celebrity News', 'Book Reviews', 'Marketing', 'Basketball', 'Film', 'Adventure Travel', 
-		 'Auto'];
 
 		 var that = this;
 
