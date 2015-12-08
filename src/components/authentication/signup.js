@@ -73,6 +73,7 @@ module.exports = React.createClass({
 					</View>
 					<View style={[styles.footer, this.border('blue')]} >
 						<View style={styles.footerWrapper} >
+							<Text style={styles.error}>{this.state.errorMessage}</Text>
 							<TextInput 
 								placeholder={'Email'}
 								style={styles.input} 
@@ -133,6 +134,7 @@ module.exports = React.createClass({
 			          // login: nothing to do
 			          console.log('User Already Logged In');
 			          that.setState({loadingCurrentUser: false});
+			          that.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]);
 			        } else {
 			          // signup: update user data, e.g. email
 			          console.log('getting user additional information');
@@ -160,6 +162,7 @@ module.exports = React.createClass({
 			              }).dispatch();
 
 			              that.setState({loadingCurrentUser: false});
+			              that.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]);
 			            }
 			          }, '/me?fields=name,email');
 			          // FIXME https://github.com/facebook/react-native-fbsdk/issues/20
@@ -179,6 +182,7 @@ module.exports = React.createClass({
 			            // TODO: error
 			        }
 			        that.setState({loadingCurrentUser: false});
+			        that.setState({errorMessage: error.message});
 			      }
 			    });
 			
@@ -280,4 +284,8 @@ var styles = StyleSheet.create({
 		height: (147/1095)*window.width/1.3,
 		margin: 3, 
 	}, 
+	error: {
+		alignItems: 'center', 
+		alignSelf:'center',
+	}
 });

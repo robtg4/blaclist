@@ -19,6 +19,7 @@ var window = Dimensions.get('window');
 //dynamic variable components
 var ImageButton = require('../common/imageButton');
 var KeywordBox = require('./onboarding/keyword-box');
+var ActionButton = require('../common/ActionButton');
 
 module.exports = React.createClass({
 	render: function() {
@@ -47,6 +48,8 @@ module.exports = React.createClass({
 						</ScrollView>
 					</View>
 				</Image>
+				<ActionButton 
+					buttonColor="rgba(0,0,0,0.7)" />
 			</View>
 		);
 	}, 
@@ -89,12 +92,13 @@ styles = StyleSheet.create({
 		marginTop: window.height/35,
 	},
 	onboardMsg: {
-		width: (window.width/1.1), 
-		height: (452/1287)*((window.width/1.1)),
+		width: (window.width/1.2), 
+		height: (452/1287)*((window.width/1.2)),
 	},
 	footer: {
 		flex: 7, 
 		marginTop: window.height/35,
+		marginLeft: window.width/30,
 	}, 
 	//container style wrapper for scrollview
 	footerWrapper: {
@@ -115,10 +119,5 @@ styles = StyleSheet.create({
 		flex: 1,
 		width: window.width, 
 		height: window.height, 
-	},
-	actionButtonIcon: {
-	    fontSize: 20,
-	    height: 22,
-	    color: 'white',
 	},
 });
