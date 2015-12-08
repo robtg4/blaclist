@@ -25,6 +25,7 @@ var window = Dimensions.get('window');
 var ImageButton = require('../common/imageButton');
 var KeywordBox = require('./onboarding/keyword-box');
 var ActionButton = require('../common/ActionButton');
+var KeywordData = require('../store/keywords');
 
 module.exports = React.createClass({ 
 	getInitialState: function() {
@@ -34,13 +35,7 @@ module.exports = React.createClass({
 	}, 
 	render: function() {
 		var newData = this.state.keywords_array;
-		var Keywords = ['LGBQT', 'BlackLivesMatter', 'Arts', 'Hip-Hop', 'History', 
-		'Politics', 'Fashion Trends', 'Entrepreneurship', 'Technology', 'Business', 
-		'World', 'Health', 'Trending', 'Music', 'Sports', 'Entertianment', 
-		'Mobile Games', 'Design', 'News', 'Humor', 'Happiness', 'Women of Color', 'Travel',
-		'Photography','Computers', 'Universe', 'Internet','Performing Arts','Management',
-		 'Celebrity News', 'Book Reviews', 'Marketing', 'Basketball', 'Film', 'Adventure Travel', 
-		 'Auto'];
+		var Keywords = KeywordData.Keywords;
 		return (
 			<View style={[styles.container]}>
 				<Image 
