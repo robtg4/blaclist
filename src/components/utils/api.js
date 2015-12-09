@@ -1,5 +1,5 @@
 //api connector to external data 
-
+var Fetch = require('whatwg-fetch');
 module.exports = {
 	
 	fbDataFetch: function(id, token) {
@@ -15,7 +15,7 @@ module.exports = {
 					username: json.name, 
 					email: json.email,
 				}
-		});
+		    });
 	}, 
 
 	//make request using fetch api, returns a promise

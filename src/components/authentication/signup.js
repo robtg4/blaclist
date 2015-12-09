@@ -17,7 +17,7 @@ var {
   FBSDKGraphRequest,
   FBSDKGraphRequestManager, 
 } = FBSDKCore;
-
+var Api = require('../utils/api.js');
 
 
 //dimensions
@@ -141,6 +141,8 @@ module.exports = React.createClass({
 			        if (user.existed()) {
 			          // login: nothing to do
 			          console.log('User Already Logged In');
+
+			          //set state that the user is done being loaded
 			          that.setState({loadingCurrentUser: false});
 			          that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
 			        } else {
@@ -155,8 +157,8 @@ module.exports = React.createClass({
 			              this.setState({loadingCurrentUser: false});
 			            } else {
 			              console.log(result);
-			              var name = responseData.name;
-			              var email = responseData.email;
+			              var name = result.name;
+			              var email = result.email;
 
 			              // FIXME: https://github.com/ParsePlatform/ParseReact/issues/45
 			              var userId = {
