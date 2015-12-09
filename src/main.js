@@ -15,6 +15,7 @@ var Launch = require('./components/authentication/launch');
 var Signup = require('./components/authentication/signup');
 var Home = require('./components/experience/home');
 var Onboarding = require('./components/authentication/onboarding');
+var Introduction = require('./components/authentication/introduction');
 
 //we have router flux enabled and react-native-navbar but we
 //need time to change a few things around to enable more customized 
@@ -25,8 +26,9 @@ var ROUTES ={
 	launch: Launch,
 	signin: Signin, 
 	signup: Signup,
+	introduction: Introduction,
+	onboarding: Onboarding,  
 	home: Home, 
-	onboarding: Onboarding, 
 }
 
 module.exports = React.createClass({

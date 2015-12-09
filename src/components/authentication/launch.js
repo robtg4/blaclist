@@ -21,12 +21,12 @@ module.exports = React.createClass({
 			<View style={[styles.container, this.border('green')]}>
 				<Image 
 					style={styles.bg} 
-					source={require('./img/login_bg1_3x.png')}>
+					source={require('../img/login_bg1_3x.png')}>
 					<View style={[styles.header, this.border('blue')]}>
 						<Image 
 							style={[styles.brand, this.border('orange')]} 
 							resizeMode={'contain'}
-							source={require('./img/login_brand_3x.png')} />
+							source={require('../img/login_brand_3x.png')} />
 					</View>
 					<View style={[styles.footer, this.border('red')]}>
 						<View style={[styles.loginTextWrapper, this.border('yellow')]}>
@@ -34,16 +34,16 @@ module.exports = React.createClass({
 								style={[styles.loginText]}
 								resizeMode={'contain'}
 								onPress={this.onPress}
-								source={require('./img/login_text_3x.png')} />
+								source={require('../img/login_text_3x.png')} />
 							<Image 
 								style={[styles.loginBar]} 
 								resizeMode={'contain'}
-								source={require('./img/login_bar_3x.png')} />
+								source={require('../img/login_bar_3x.png')} />
 							<ImageButton
 								style={styles.signupText} 
 								resizeMode={'contain'}
 								onPress={this.onSignupPress}
-								source={require('./img/signin_text_3x.png')} />
+								source={require('../img/signin_text_3x.png')} />
 						</View>
 					</View>
 				</Image>

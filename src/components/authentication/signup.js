@@ -51,26 +51,26 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		return (
-			<View style={[styles.container]}>
+			<View style={styles.container}>
 				<Image 
-					style={styles.bg} 
-					source={require('./img/login_bg1_3x.png')}>
+					style={styles.bg}
+					source={require('../img/login_bg1_3x.png')}>
 					<View style={[styles.header, this.border('red')]} >
 						<View style={styles.headerWrapper} >
 							<Image 
 								style={[styles.login_brand]}
 								resizeMode={"contain"}
-								source={require('./img/signup_brand.png')} />
+								source={require('../img/signup_brand.png')} />
 							<ImageButton
 								style={[styles.fb_btn]}
 								resizeMode={'contain'}
 								onPress={this.onFbSignupPress}
-								source={require('./img/fb_signup_btn.png')} />
+								source={require('../img/fb_signup_btn.png')} />
 							<Image 
 								style={[styles.loginBar]}
 								style={[styles.loginBar]} 
 								resizeMode={'contain'}
-								source={require('./img/login_bar_3x.png')} />
+								source={require('../img/login_bar_3x.png')} />
 						</View>
 					</View>
 					<View style={[styles.footer, this.border('blue')]} >
@@ -97,12 +97,12 @@ module.exports = React.createClass({
 								style={[styles.email_btn]}
 								resizeMode={'contain'}
 								onPress={this.onCreateAcctPress}
-								source={require('./img/get_started_btn.png')} />
+								source={require('../img/get_started_btn.png')} />
 							<ImageButton
 								style={[styles.email_btn]}
 								resizeMode={'contain'}
 								onPress={this.onAlreadyAcctPress}
-								source={require('./img/already_acct_btn.png')} />
+								source={require('../img/already_acct_btn.png')} />
 						</View>
 					</View>
 				</Image>
@@ -144,7 +144,7 @@ module.exports = React.createClass({
 
 			          //set state that the user is done being loaded
 			          that.setState({loadingCurrentUser: false});
-			          that.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]);
+			          that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
 			        } else {
 			          // signup: update user data, e.g. email
 			          console.log('getting user additional information');
@@ -173,7 +173,7 @@ module.exports = React.createClass({
 			              }).dispatch();
 
 			              that.setState({loadingCurrentUser: false});
-			              that.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]);
+			              that.props.navigator.immediatelyResetRouteStack([{ name: 'introduction'}]);
 			            }
 			          }, '/me?fields=name,email');
 			          // FIXME https://github.com/facebook/react-native-fbsdk/issues/20
@@ -216,7 +216,7 @@ module.exports = React.createClass({
 				user.signUp(null, {
 				  //navigate to new component (.immediatelyResetRouteStack)
 				  //when doing so and we pass new views of app (routes)
-				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]); },
+				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'introduction'}]); },
 				  error: (user, error) => { this.setState({ errorMessage: error.message }); }
 			});
 		} else {
@@ -226,10 +226,7 @@ module.exports = React.createClass({
 	onAlreadyAcctPress: function() {
 		this.props.navigator.pop();
 	},
-	 //function that helps with laying out flexbox itmes 
-	 //takes a color argument to construct border, this is an additional 
-	 //style because we dont want to mess up our real styling 
-	 border: function(color) {
+	border: function(color) {
 	    return {
 	      //borderColor: color, 
 	      //borderWidth: 4,

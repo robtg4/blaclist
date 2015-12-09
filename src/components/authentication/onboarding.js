@@ -48,13 +48,13 @@ module.exports = React.createClass({
 			<View style={[styles.container]}>
 				<Image 
 					style={styles.bg} 
-					source={require('./img/login_bg1_3x.png')}>
+					source={require('../img/login_bg1_3x.png')}>
 					<View style={[styles.header, this.border('red')]}>
 						<View style={[styles.headerWrapper]} >
 							<Image 
 								resizeMode={'contain'}
 								style={[styles.onboardMsg]}
-								source={require('./img/onboard_msg.png')} >
+								source={require('../img/onboard_msg.png')} >
 							</Image>
 						</View>
 					</View>
@@ -123,14 +123,15 @@ module.exports = React.createClass({
 	onNextPress: function() {
 		//match the state array to the keywords array to find which
 		//words were selected to properly update and push them into parse
+		var that=this;
 		console.log("Next Button Pressed");
 		if (this.state.enoughSelections)
 		{
 			//console.log(this.state.user); 
 			//console.log(KeywordData.Keywords);
 			//map array back to state array to find words selected
-			console.log(this.state.keywords_array);
-			var array = this.state.keywords_array; 
+			console.log(that.state.keywords_array);
+			var array = that.state.keywords_array; 
 			var selected_words = [];
 			for (var i = 0; i < array.length; i++)
 			{
@@ -145,13 +146,14 @@ module.exports = React.createClass({
 			//selected words to store in parse (pointer class)
 			var Onboarding = Parse.Object.extend("Onboarding");
 			var user_words = new Onboarding();
-				user_words.set("userObjectId", { __type: "Pointer", className: "_User", objectId: this.state.user.id });
+				user_words.set("userObjectId", { __type: "Pointer", className: "_User", objectId: that.state.user.id });
 				user_words.set("interests", selected_words);
 
 			//check for entry errors
 			user_words.save({
 			  success: function(user_words) {
 			    console.log("The save was successful.");
+			    that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
 			  },
 			  error: function(user_words, error) {
 			    console.log(error);

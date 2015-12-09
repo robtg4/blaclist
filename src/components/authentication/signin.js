@@ -51,23 +51,23 @@ module.exports = React.createClass({
 			<View style={[styles.container]}>
 				<Image 
 					style={styles.bg} 
-					source={require('./img/login_bg1_3x.png')}>
+					source={require('../img/login_bg1_3x.png')}>
 					<View style={[styles.header, this.border('red')]} >
 						<View style={styles.headerWrapper} >
 							<Image 
 								style={[styles.login_brand]}
 								resizeMode={"contain"}
-								source={require('./img/login_brand_2.png')} />
+								source={require('../img/login_brand_2.png')} />
 							<ImageButton
 								style={[styles.fb_btn]}
 								resizeMode={'contain'}
 								onPress={this.onFbLoginPress}
-								source={require('./img/fb_login.png')} />
+								source={require('../img/fb_login.png')} />
 							<Image 
 								style={[styles.loginBar]}
 								style={[styles.loginBar]} 
 								resizeMode={'contain'}
-								source={require('./img/login_bar_3x.png')} />
+								source={require('../img/login_bar_3x.png')} />
 						</View>
 					</View>
 					<View style={[styles.footer, this.border('blue')]} >
@@ -88,12 +88,12 @@ module.exports = React.createClass({
 								style={[styles.email_btn]}
 								resizeMode={'contain'}
 								onPress={this.onEmailLoginPress}
-								source={require('./img/email_login_btn.png')} />
+								source={require('../img/email_login_btn.png')} />
 							<ImageButton
 								style={[styles.email_btn]}
 								resizeMode={'contain'}
 								onPress={this.onCreateAcctPress}
-								source={require('./img/create_acct_btn.png')} />
+								source={require('../img/create_acct_btn.png')} />
 						</View>
 					</View>
 				</Image>
