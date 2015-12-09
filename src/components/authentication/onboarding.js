@@ -103,17 +103,8 @@ module.exports = React.createClass({
 		this.setState({ keywords_array: array });
 
 		//check if there at least 5 keywords selected
-		var count = 0;
-		for(var i = 0; i < array.length; ++i){
-		    if(array[i] == true)
-		    {
-		    	count++;
-		    }
-		}
-
-		if (count >= 5)
-		{
-			this.setState({ enoughSelections: true });
+		if(array.filter(function(val) { return val }).length > 4) {
+  			this.setState({enoughSelections: true})
 		}
 
 		//console.log(array);
@@ -133,6 +124,7 @@ module.exports = React.createClass({
 			console.log(that.state.keywords_array);
 			var array = that.state.keywords_array; 
 			var selected_words = [];
+
 			for (var i = 0; i < array.length; i++)
 			{
 				if (array[i])
