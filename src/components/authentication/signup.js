@@ -42,6 +42,7 @@ module.exports = React.createClass({
 	getInitialState: function() {
 		return {
 			username: '', 
+			email: '',
 			password: '', 
 			errorMessage: '',
 			passwordConfirmation: '',
@@ -132,7 +133,7 @@ module.exports = React.createClass({
 			 //set authData state
 			 that.setState({
 			 	authData: authData,
-			 })
+			 });
 
 
 			 //sign up into parse db
@@ -141,6 +142,39 @@ module.exports = React.createClass({
 			        if (user.existed()) {
 			          // login: nothing to do
 			          console.log('User Already Logged In');
+
+			          //check if all necessary data in db via parse query
+			          if (user.get('email') === 'undefined' || (user.get('username').indexOf(" ") === -1))
+			          {
+			          		//get remaining data via api
+			          		var email = "";
+			          		var name = "";
+					        var a_token = user.get('authData').facebook.access_token;
+					        var user_id = user.get('authData').facebook.id;
+
+					        console.log(Parse.User.current().id);
+
+					        Api.fbDataFetch(user_id, a_token)
+					        	.then((data) => {
+							        console.log(data);
+							        console.log(data.username);
+							        console.log(data.email);
+							        Parse.User.current().setUsername("username", data.username);
+									Parse.User.current().setEmail("email", data.email);
+									Parse.User.current().save(null, {
+								        success: function(currentUser) {
+								        	console.log('Success');
+								            currentUser = Parse.User.current();
+								            getPlayerDataAndGraph ();   
+								        },
+								        error: function(error) {
+								            console.log("Error: ", error);
+								        }
+								    });
+
+							    });
+
+			          }
 
 			          //set state that the user is done being loaded
 			          that.setState({loadingCurrentUser: false});
