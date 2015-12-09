@@ -144,7 +144,7 @@ module.exports = React.createClass({
 
 			          //set state that the user is done being loaded
 			          that.setState({loadingCurrentUser: false});
-			          that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
+			          that.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]);
 			        } else {
 			          // signup: update user data, e.g. email
 			          console.log('getting user additional information');
@@ -216,7 +216,7 @@ module.exports = React.createClass({
 				user.signUp(null, {
 				  //navigate to new component (.immediatelyResetRouteStack)
 				  //when doing so and we pass new views of app (routes)
-				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'onboarding'}]); },
+				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]); },
 				  error: (user, error) => { this.setState({ errorMessage: error.message }); }
 			});
 		} else {

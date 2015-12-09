@@ -29,9 +29,16 @@ var ActionButton = require('../common/ActionButton');
 var KeywordData = require('../store/keywords');
 
 module.exports = React.createClass({ 
+	componentWillMount: function() {
+		Parse.User.currentAsync()
+			.then((user) => { this.setState({user: user}); })
+	},
 	getInitialState: function() {
 		return {
-			keywords_array: Array.apply(null, Array(53)).map(Boolean.prototype.valueOf,false)
+			keywords_array: Array.apply(null, Array(53)).map(Boolean.prototype.valueOf,false), 
+			enoughSelections: false, 
+			user: null, 
+			errorMessage: '', 
 		};
 	}, 
 	render: function() {
@@ -63,6 +70,7 @@ module.exports = React.createClass({
 					</View>
 				</Image>
 				<ActionButton 
+					selected={this.state.enoughSelections}
 					onPress={this.onNextPress}
 					buttonColor="rgba(0,0,0,0.7)" />
 			</View>
@@ -84,26 +92,73 @@ module.exports = React.createClass({
 				selected={newData[i]} />
 		});
 	}, 
-
 	onKeywordPress: function(i, keyword, newData) {
-		console.log(this.state.keywords_array);
+		//console.log(this.state.keywords_array);
 		console.log(keyword); 
-		console.log(newData); 
+		//console.log(newData); 
 
 		//change the state accordingly without doing so directly 
 		var array = newData;
 		array[i] = true; 
-		this.setState({
-		  keywords_array: array
-		});
+		this.setState({ keywords_array: array });
 
-		console.log(array);
-		console.log(this.state.keywords_array);
+		//check if there at least 5 keywords selected
+		var count = 0;
+		for(var i = 0; i < array.length; ++i){
+		    if(array[i] == true)
+		    {
+		    	count++;
+		    }
+		}
+
+		if (count >= 5)
+		{
+			this.setState({ enoughSelections: true });
+		}
+
+		//console.log(array);
+		//console.log(this.state.keywords_array);
 
 	}, 
 	onNextPress: function() {
 		//match the state array to the keywords array to find which
 		//words were selected to properly update and push them into parse
+		console.log("Next Button Pressed");
+		if (this.state.enoughSelections)
+		{
+			//console.log(this.state.user); 
+			//console.log(KeywordData.Keywords);
+			//map array back to state array to find words selected
+			console.log(this.state.keywords_array);
+			var array = this.state.keywords_array; 
+			var selected_words = [];
+			for (var i = 0; i < array.length; i++)
+			{
+				if (array[i])
+				{	
+					console.log(KeywordData.Keywords[i]);
+					selected_words.push(KeywordData.Keywords[i]);
+				}
+			}
+
+			//now we need to cross use our parse user data and 
+			//selected words to store in parse (pointer class)
+			var Onboarding = Parse.Object.extend("Onboarding");
+			var user_words = new Onboarding();
+				user_words.set("userObjectId", { __type: "Pointer", className: "_User", objectId: this.state.user.id });
+				user_words.set("interests", selected_words);
+
+			//check for entry errors
+			user_words.save({
+			  success: function(user_words) {
+			    console.log("The save was successful.");
+			  },
+			  error: function(user_words, error) {
+			    console.log(error);
+			  }
+			});
+				
+		} 
 	}, 
 	//function that helps with laying out flexbox itmes 
 	//takes a color argument to construct border, this is an additional 
@@ -156,4 +211,12 @@ styles = StyleSheet.create({
 		width: window.width, 
 		height: window.height, 
 	},
+	error: {
+		alignItems: 'center', 
+		alignSelf:'center',
+		fontFamily: 'Bebas Neue', 
+		fontSize: 15,
+		color: 'red',
+		margin: 5
+	}, 
 });

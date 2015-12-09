@@ -118,30 +118,19 @@ class ActionButton extends Component {
   render() {
     return (
       <View style={this.getContainerStyles()}>
-        {this._renderActions()}
         {this._renderButton()}
       </View>
     );
   }
 
   _renderButton() {
-    let btnSize = this.state.size;
     return (
       <View style={this.getActionButtonStyles(), styles.touchOp}>
         <TouchableOpacity 
-          style={styles.touchOp}
           activeOpacity={0.2} 
           onPress={this.props.onPress}>
           <Animated.View 
-            style={[styles.btn, {
-              width: btnSize,
-              height: btnSize,
-              borderRadius: btnSize/2,
-              backgroundColor: this.state.anim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [this.state.buttonColor, this.state.btnOutRange]
-              }),
-            }]}>
+            style={[styles.btn, this.props.selected ? {backgroundColor: 'black'} : {backgroundColor: 'transparent'}]}>
             <Animated.Text style={[styles.btnText]}>
               Next
             </Animated.Text>
@@ -151,52 +140,7 @@ class ActionButton extends Component {
     );
   }
 
-  _renderActions() {
-    if (!this.state.active) return;
 
-    return (
-      <Animated.View style={[styles.overlay, { opacity: this.state.anim }]}>
-        <TouchableOpacity activeOpacity={1} onPress={this.reset.bind(this)} 
-          style={this.getActionsStyle()}>
-        </TouchableOpacity>
-      </Animated.View>
-    );
-  }
-
-
-  //////////////////////
-  // Animation Methods
-  //////////////////////
-
-  animateButton() {
-    if(!this.state.active) {
-      Animated.spring(
-        this.state.anim,
-        {
-          toValue: 1,
-          duration: 350,
-        }
-      ).start();
-
-      this.setState({ active: true });
-    } else {
-      this.reset();
-    }
-  }
-
-  reset() {
-    Animated.spring(
-      this.state.anim,
-      {
-        toValue: 0,
-        duration: 450,
-      }
-    ).start();
-
-    setTimeout(() => {
-      this.setState({ active: false });
-    }, 450)
-  }
 }
 
 
@@ -221,10 +165,13 @@ var styles = StyleSheet.create({
       width: 0, height: 1,
     },
     shadowColor: '#444',
-    shadowRadius: 1,
-    borderColor: 'red', 
+    shadowRadius: 1, 
     borderWidth: 1,
-    opacity: 0.7,
+    opacity: 0.6,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderColor: 'red', 
   },
   btnText: {
     marginTop: 2,
@@ -239,10 +186,6 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: 'column',
   },
-  touchOp: {
-    alignItems: 'center', 
-    justifyContent: 'center'
-  }
 });
 
 module.exports = ActionButton;
