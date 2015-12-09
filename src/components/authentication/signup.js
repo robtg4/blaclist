@@ -19,6 +19,7 @@ var {
 } = FBSDKCore;
 
 
+
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
@@ -45,6 +46,7 @@ module.exports = React.createClass({
 			errorMessage: '',
 			passwordConfirmation: '',
 			loadingCurrentUser: true, 
+			authData: null,
 		};
 	},
 	render: function() {
@@ -113,9 +115,10 @@ module.exports = React.createClass({
 
 		//sign up/login via facebook and store credentials into parse
 		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
-	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile", "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"], function(error, data){
+	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile"], function(error, data){
 		  if (!error) {
-		
+			
+			console.log('No error');
 		    var authData = {
 			    id: data.credentials.userId,
 			    access_token: data.credentials.token,
@@ -125,6 +128,11 @@ module.exports = React.createClass({
 			 console.log(authData.id);
 			 console.log(authData.access_token);
 			 console.log(authData.expiration_date);
+
+			 //set authData state
+			 that.setState({
+			 	authData: authData,
+			 })
 
 
 			 //sign up into parse db
@@ -172,7 +180,8 @@ module.exports = React.createClass({
 			        }
 			      },
 			      error: (user, error) => {
-			      	console.log('Error', error.message);
+			      	console.log('Error', error);
+			      	console.log(user.token);
 			        switch (error.code) {
 			          case Parse.Error.INVALID_SESSION_TOKEN:
 			            Parse.User.logOut().then(() => {
@@ -291,5 +300,6 @@ var styles = StyleSheet.create({
 		fontFamily: 'Bebas Neue', 
 		fontSize: 15,
 		color: 'red',
+		margin: 5
 	}
 });

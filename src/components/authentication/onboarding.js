@@ -14,6 +14,7 @@ var Parse = require('parse/react-native'); //parse for data storage
 Icon = require('react-native-vector-icons/Ionicons'); //vector icons
 var LinearGradient = require('react-native-linear-gradient'); //linear grad. over button
 
+
 //status bar styling
 
 

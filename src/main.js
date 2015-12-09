@@ -34,6 +34,7 @@ module.exports = React.createClass({
 		//executed when component shows on screen
 		//tells app to initialize parse and facebook js sdk
 		Parse.initialize("jspeQAWhXjb9QAIKxfVbxnggnMv3Y4RuRJ13YLDY", "1IlLlb7x3mHq1vm80zlFlqcoydFuZUQqmjvvmXze");
+		//Parse.User.enableRevocableSession();
 		return StatusBarIOS.setStyle(1);
 	}, 
 	renderScene: function(route, navigator) {
