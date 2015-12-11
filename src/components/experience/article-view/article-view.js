@@ -25,12 +25,21 @@ var KeywordBox = require('../../authentication/onboarding/keyword-box');
 module.exports = React.createClass({
   //onPress function that triggers when button pressed
   //this.props.text is property that can be dynamically filled within button 
+  /* following props:
+    - source={this.props.source}
+    - onPress={this.props.onPress}
+    - {this.props.text}
+    - {this.props.heartText}
+    - key={this.props.key} 
+    - text={this.props.category} 
+    - this.props.selected
+  */
   render: function() {
     return (
       <TouchableHighlight 
         underlayColor={'transparent'}
         onPress={this.props.onPress} >
-          <Image source={this.props.source} resizeMode={this.props.resize} style={[styles.articlePreview, this.border('red')]}>
+          <Image source={this.props.source} style={[styles.articlePreview, this.border('red')]}>
                   <View style={[styles.container, this.border('organge')]}>
                       <View style={[styles.header, this.border('blue')]}>
                           <Text style={[styles.previewText]}>{this.props.text}</Text>

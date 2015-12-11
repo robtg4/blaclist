@@ -33,7 +33,10 @@ module.exports = React.createClass({
 
 		//get the latest articles on page load
 		//this will pre-fill out articles state 
-		this.setState({ articles: FeedStore.getArticles() });
+		FeedStore.getArticles()
+			.then((data) => {
+		        this.setState({ articles: data });
+		  	});
 	}, 
 	getInitialState: function() {
 		return {
@@ -43,14 +46,8 @@ module.exports = React.createClass({
 		}
 	},
 	render: function() {
-		if (!this.state.user)
-		{
-			return <Text style={styles.label}>Loading...</Text>
-		} else 
-		{
-			var username = this.state.user.get('username');
-			console.log(this.state.username);
-		}
+
+		var readings = this.state.articles; 
 
 		return (
 			<ScrollView>
@@ -58,48 +55,55 @@ module.exports = React.createClass({
 					category={'Comedy'}
 					key={1}
 					heartText={'2.9k'}
-					categoryPress={this.articleFeed}
+					categoryPress={this.dummy}
 					selected={false}
 					source={require('../img/test_view_1.png')}
 					text={'These 3 black comedians are finally being honored for the ways they paved & the history they made'}
-					onPress={this.articleFeed} />
+					onPress={this.dummy} />
 				<ArticleView
 					category={'City Life'}
 					key={2}
 					heartText={'299'}
-					categoryPress={this.articleFeed}
+					categoryPress={this.dummy}
 					selected={false}
 					source={require('../img/test_view_2.png')}
 					text={'portland forecast: approaching weekend storm could rival halloween deluge'}
-					onPress={this.articleFeed} />
+					onPress={this.dummy} />
 				<ArticleView
 					category={'Music'}
 					key={3}
 					heartText={'250k'}
-					categoryPress={this.articleFeed}
+					categoryPress={this.dummy}
 					selected={false}
 					source={require('../img/test_view_3.png')}
 					text={'kendrick lamar answers furgeson criticism with new song'}
-					onPress={this.articleFeed} />
+					onPress={this.dummy} />
+				{this.renderArticleFeed(readings)}
 			</ScrollView>
 		);
 	}, 
-	articleFeed: function() {
-		//var that = this;
+	renderArticleFeed: function(readings) {
+		var that = this;
 		//call to api to get articles from rss/api var Articles = 
-		/* 
-		return Keywords.map(function(keyword, i) {
+		return readings.slice(0,4).map(function(article, i) {
+        	console.log("========================");
+        	console.log(article.title);
+        	console.log(article.mediaGroups[0].contents[0].thumbnails[0].url);
 
-			return <KeywordBox 
-				key={i} 
-				text={keyword} 
-				onPress={ () => { that.onKeywordPress(i, keyword, newData) }}
-				selected={newData[i]} />
+			return <ArticleView
+					category={'Music'}
+					key={i}
+					heartText={'2.9k'}
+					categoryPress={() => { that.dummy }}
+					selected={false}
+					source={{uri: article.mediaGroups[0].contents[0].thumbnails[0].url }}
+					text={article.title}
+					onPress={() => { that.dummy }} />
 		});
-		*/
+		
+	}, 
+	dummy: function() {
 
-		//test to get rss feed data on console 
-		console.log(this.state.articles);
 	}, 
 	/*
 	onChange: function(event, articles) {
