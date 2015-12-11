@@ -26,7 +26,7 @@ var window = Dimensions.get('window');
 var ImageButton = require('../common/imageButton');
 var KeywordBox = require('./onboarding/keyword-box');
 var ActionButton = require('../common/ActionButton');
-var KeywordData = require('../store/keywords');
+var KeywordData = require('../stores/keywords');
 
 module.exports = React.createClass({ 
 	componentWillMount: function() {
