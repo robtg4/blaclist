@@ -7,6 +7,7 @@ var {
 	ScrollView, 
 	ActivityIndicatorIOS, 
 	ListView, 
+	TouchableHighlight, 
 } = React;
 
 //additional libraries
@@ -14,7 +15,7 @@ var Parse = require('parse/react-native');
 //var Reflux = require('reflux');
 
 //dynamic component references
-var ArticleView = require('./article-view/article-view');
+var ArticleView = require('./exp_base_components/article-view');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 //var Actions = require('../../actions');
@@ -31,12 +32,12 @@ module.exports = React.createClass({
 	getInitialState: function() {
 
 	    var getSectionData = (dataBlob, sectionID) => {
-	    	console.log("SectionID GIS, getSectionData: " + sectionID);
+	    	//console.log("SectionID GIS, getSectionData: " + sectionID);
             return dataBlob[sectionID];
         }
 
         var getRowData = (dataBlob, sectionID, rowID) => {
-        	console.log("RowID GIS, getRowData: " + rowID);
+        	//console.log("RowID GIS, getRowData: " + rowID);
             return dataBlob[sectionID + ':' + rowID];
         }
 
@@ -60,10 +61,12 @@ module.exports = React.createClass({
 		//this will pre-fill out articles state 
 		FeedStore.getArticles()
 			.then((data) => {
+				/* TEST
 				console.log("================");
 				console.log("data is at home");
 				console.log(data);
 				console.log("================");
+				*/
 				
 				var entries = data, 
 				length = entries.length,
@@ -74,29 +77,29 @@ module.exports = React.createClass({
 	            sectionID, 
 	            rowID, 
 	            i; 
-	            console.log(entries.length);
+	            //console.log(entries.length);
 		        for (i = 0; i < length; i++)
 		        {
 		        	entry = entries[i]; 
-		        	console.log(entry);
+		        	//console.log(entry);
 
 		        	//add section/row to section id array
 
 		        	//mapping section id array for section data 
 		        	sectionID = entry.title.replace(/\s+/g, '').toLowerCase() + i; 
-		        	console.log("SectionID = " + sectionID);
+		        	//console.log("SectionID = " + sectionID);
 		        	sectionIDs.push(sectionID);
 		        	dataBlob[sectionID] = entry.title; 
 
 		        	//mapping row id array for row data 
 		        	rowIDs[i] = []
 		        	rowID = sectionID;
-		        	console.log("RowID = " + rowID);
+		        	// console.log("RowID = " + rowID); 
 		        	rowIDs[i].push(rowID);
 		        	dataBlob[sectionID + ':' + rowID] = entry; 
 		        }
 
-		        console.log(dataBlob);
+		        //console.log(dataBlob);
 
 		        this.setState({
 		            dataSource : this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
@@ -128,32 +131,38 @@ module.exports = React.createClass({
             <View style={styles.container}>
                 <ListView
                     dataSource = {this.state.dataSource}
-                    initialListSize = {4}
-                    pageSize={4}
+                    initialListSize = {5}
+                    pageSize={5}
                     renderRow  = {this.renderRow} />
             </View>
         );
     }, 
     renderRow: function (rowData, sectionID, rowID) {
+		/* TEST
 		console.log("Getting my rows on");
 		console.log(rowID);
 		console.log(rowData);
-
-		var that = this;
+		*/
 		//call to api to get articles from rss/api var Articles 
 		return <ArticleView
 				category={'Music'}
 				key={sectionID}
 				heartText={'2.9k'}
-				categoryPress={() => { that.dummy }}
+				categoryPress={() => { this.onCategoryDetailsPress }}
 				selected={false}
 				source={{uri: rowData.mediaGroups[0].contents[0].url }}
 				text={rowData.title}
-				onPress={() => { that.dummy }} />
+				onPress={() => { this.onArticleDetailsPress }} />
 			
 	},
-	dummy: function() {
-
+	onCategoryDetailsPress: function() {
+		//forward to sytled web view of categorical article feed
+		console.log(onCategoryDetailsPress); 
+	}, 
+	onArticleDetailsPress: function() {
+		//forward to sytled web view of article details given link
+		console.log(onArticleDetailsPress); 
+		this.props.navigator.push({name: 'articledetails'});
 	}, 
 	/*
 	onChange: function(event, articles) {
