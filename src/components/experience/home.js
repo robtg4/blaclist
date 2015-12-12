@@ -5,6 +5,8 @@ var {
 	StyleSheet,
 	Text, 
 	ScrollView, 
+	ActivityIndicatorIOS, 
+	ListView, 
 } = React;
 
 //additional libraries
@@ -21,87 +23,135 @@ var FeedStore = require('../stores/feed-store');
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
-module.exports = React.createClass({
-	/*
-	mixins : [
-		Reflux.listenTo(FeedStore, 'onChange')
-	],
-	*/
+module.exports = React.createClass({ 
 	componentWillMount: function() {
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
+	},  
+	getInitialState: function() {
 
+	    var getSectionData = (dataBlob, sectionID) => {
+	    	console.log("SectionID GIS, getSectionData: " + sectionID);
+            return dataBlob[sectionID];
+        }
+
+        var getRowData = (dataBlob, sectionID, rowID) => {
+        	console.log("RowID GIS, getRowData: " + rowID);
+            return dataBlob[sectionID + ':' + rowID];
+        }
+
+		return {
+			user: null, 
+			isLoaded: false, 
+			dataSource : new ListView.DataSource({
+                getSectionData          : getSectionData,
+                getRowData              : getRowData,
+                rowHasChanged           : (row1, row2) => row1 !== row2,
+                sectionHeaderHasChanged : (s1, s2) => s1 !== s2
+            })
+		}
+	},
+	componentDidMount: function() {
+		this.organizeData(); 
+	},
+	organizeData: function() {
+		var data_store = null; 
 		//get the latest articles on page load
 		//this will pre-fill out articles state 
 		FeedStore.getArticles()
 			.then((data) => {
-		        this.setState({ articles: data });
-		  	});
+				console.log("================");
+				console.log("data is at home");
+				console.log(data);
+				console.log("================");
+				
+				var entries = data, 
+				length = entries.length,
+	            dataBlob = {},
+	            sectionIDs = [],
+	            rowIDs = [],
+	            entry,
+	            sectionID, 
+	            rowID, 
+	            i; 
+	            console.log(entries.length);
+		        for (i = 0; i < length; i++)
+		        {
+		        	entry = entries[i]; 
+		        	console.log(entry);
+
+		        	//add section/row to section id array
+
+		        	//mapping section id array for section data 
+		        	sectionID = entry.title.replace(/\s+/g, '').toLowerCase() + i; 
+		        	console.log("SectionID = " + sectionID);
+		        	sectionIDs.push(sectionID);
+		        	dataBlob[sectionID] = entry.title; 
+
+		        	//mapping row id array for row data 
+		        	rowIDs[i] = []
+		        	rowID = sectionID;
+		        	console.log("RowID = " + rowID);
+		        	rowIDs[i].push(rowID);
+		        	dataBlob[sectionID + ':' + rowID] = entry; 
+		        }
+
+		        console.log(dataBlob);
+
+		        this.setState({
+		            dataSource : this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
+		            isLoaded   : true, 
+		        });
+
+		  	}).done();
 	}, 
-	getInitialState: function() {
-		return {
-			user: null, 
-			username: null, 
-			articles: [], 
-		}
-	},
 	render: function() {
 
-		var readings = this.state.articles; 
+		if (!this.state.isLoaded) {
+            return this.renderLoadingView();
+        }
 
-		return (
-			<ScrollView>
-				<ArticleView
-					category={'Comedy'}
-					key={1}
-					heartText={'2.9k'}
-					categoryPress={this.dummy}
-					selected={false}
-					source={require('../img/test_view_1.png')}
-					text={'These 3 black comedians are finally being honored for the ways they paved & the history they made'}
-					onPress={this.dummy} />
-				<ArticleView
-					category={'City Life'}
-					key={2}
-					heartText={'299'}
-					categoryPress={this.dummy}
-					selected={false}
-					source={require('../img/test_view_2.png')}
-					text={'portland forecast: approaching weekend storm could rival halloween deluge'}
-					onPress={this.dummy} />
-				<ArticleView
-					category={'Music'}
-					key={3}
-					heartText={'250k'}
-					categoryPress={this.dummy}
-					selected={false}
-					source={require('../img/test_view_3.png')}
-					text={'kendrick lamar answers furgeson criticism with new song'}
-					onPress={this.dummy} />
-				{this.renderArticleFeed(readings)}
-			</ScrollView>
-		);
+        return this.renderListView();
 	}, 
-	renderArticleFeed: function(readings) {
+	renderLoadingView: function() {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicatorIOS
+                    animating={!this.state.isLoaded}
+                    style={[styles.activityIndicator, {height: 80}]}
+                    size="large" />
+            </View>
+        );
+    }, 
+	renderListView: function() {
+        return (
+            <View style={styles.container}>
+                <ListView
+                    dataSource = {this.state.dataSource}
+                    initialListSize = {4}
+                    pageSize={4}
+                    renderRow  = {this.renderRow} />
+            </View>
+        );
+    }, 
+    renderRow: function (rowData, sectionID, rowID) {
+		console.log("Getting my rows on");
+		console.log(rowID);
+		console.log(rowData);
+
 		var that = this;
-		//call to api to get articles from rss/api var Articles = 
-		return readings.slice(0,4).map(function(article, i) {
-        	console.log("========================");
-        	console.log(article.title);
-        	console.log(article.mediaGroups[0].contents[0].thumbnails[0].url);
-
-			return <ArticleView
-					category={'Music'}
-					key={i}
-					heartText={'2.9k'}
-					categoryPress={() => { that.dummy }}
-					selected={false}
-					source={{uri: article.mediaGroups[0].contents[0].thumbnails[0].url }}
-					text={article.title}
-					onPress={() => { that.dummy }} />
-		});
-		
-	}, 
+		//call to api to get articles from rss/api var Articles 
+		return <ArticleView
+				category={'Music'}
+				key={sectionID}
+				heartText={'2.9k'}
+				categoryPress={() => { that.dummy }}
+				selected={false}
+				source={{uri: rowData.mediaGroups[0].contents[0].url }}
+				text={rowData.title}
+				onPress={() => { that.dummy }} />
+			
+	},
 	dummy: function() {
 
 	}, 
@@ -113,10 +163,15 @@ module.exports = React.createClass({
 
 });
 
+
 styles = StyleSheet.create({
 	container: {
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center',
-	}
+	}, 
+	activityIndicator: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

@@ -17,6 +17,8 @@ module.exports = {
 
         if(res.responseStatus == 200) 
         {
+          console.log("Code 200 Success!");
+          console.log(res);
           //get initial set of entries 
           return res.responseData.feed.entries;
           //this.triggerChange();
