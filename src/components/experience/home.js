@@ -15,7 +15,7 @@ var Parse = require('parse/react-native');
 //var Reflux = require('reflux');
 
 //dynamic component references
-var ArticleView = require('./exp_base_components/article-view');
+var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 //var Actions = require('../../actions');
@@ -143,26 +143,27 @@ module.exports = React.createClass({
 		console.log(rowID);
 		console.log(rowData);
 		*/
+		var that = this;
 		//call to api to get articles from rss/api var Articles 
-		return <ArticleView
+		return <ArticlePreview
 				category={'Music'}
 				key={sectionID}
 				heartText={'2.9k'}
-				categoryPress={() => { this.onCategoryDetailsPress }}
+				categoryPress={that.onCategoryDetailsPress}
 				selected={false}
 				source={{uri: rowData.mediaGroups[0].contents[0].url }}
 				text={rowData.title}
-				onPress={() => { this.onArticleDetailsPress }} />
+				onPress={that.onArticleDetailsPress} />
 			
 	},
 	onCategoryDetailsPress: function() {
 		//forward to sytled web view of categorical article feed
-		console.log(onCategoryDetailsPress); 
+		console.log("onCategoryDetailsPress"); 
 	}, 
 	onArticleDetailsPress: function() {
 		//forward to sytled web view of article details given link
-		console.log(onArticleDetailsPress); 
-		this.props.navigator.push({name: 'articledetails'});
+		console.log("onArticleDetailsPress"); 
+		//this.props.navigator.push({name: 'articledetails'});
 	}, 
 	/*
 	onChange: function(event, articles) {

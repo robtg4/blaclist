@@ -36,7 +36,7 @@ module.exports = React.createClass({
 	}, 
 	render: function() {
 		return (
-			<View></View>
+			<View>{this.props.entry.title}</View>
 		);
 	}, 
 
