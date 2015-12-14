@@ -18,6 +18,7 @@ var Parse = require('parse/react-native');
 var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
+var ArticleDetails = require('./exp_base_components/article-details');
 //var Actions = require('../../actions');
 
 //dimensions
@@ -49,24 +50,43 @@ module.exports = React.createClass({
                 getRowData              : getRowData,
                 rowHasChanged           : (row1, row2) => row1 !== row2,
                 sectionHeaderHasChanged : (s1, s2) => s1 !== s2
-            })
+            }), 
 		}
 	},
 	componentDidMount: function() {
-		this.organizeData(); 
+		//console.log(this.state.user);
+		var personalFeed = null; 
+		var Onboarding = Parse.Object.extend("Onboarding");
+		var query = new Parse.Query(Onboarding);
+		query.equalTo("userObjectId", Parse.User.current());
+		var that = this;
+		query.find({
+		  success: function(result) {
+		    console.log("Successfully retrieved " + result.length + " users!");
+		    var object = result[0];
+		    console.log(object.id);
+		    // Do something with the returned Parse.Object values
+		    console.log(object.get('interests'));
+		    that.organizeData(object.get('interests')); 
+		  },
+		  error: function(error) {
+		    console.log("Error: " + error.code + " " + error.message);
+		  }
+		});
+
 	},
-	organizeData: function() {
+	organizeData: function(personalFeed) {
 		var data_store = null; 
 		//get the latest articles on page load
 		//this will pre-fill out articles state 
-		FeedStore.getArticles()
+		FeedStore.getArticles(personalFeed)
 			.then((data) => {
-				/* TEST
+
 				console.log("================");
 				console.log("data is at home");
 				console.log(data);
 				console.log("================");
-				*/
+
 				
 				var entries = data, 
 				length = entries.length,
@@ -77,7 +97,8 @@ module.exports = React.createClass({
 	            sectionID, 
 	            rowID, 
 	            i; 
-	            //console.log(entries.length);
+
+	            console.log(entries.length);
 		        for (i = 0; i < length; i++)
 		        {
 		        	entry = entries[i]; 
@@ -143,17 +164,32 @@ module.exports = React.createClass({
 		console.log(rowID);
 		console.log(rowData);
 		*/
-		var that = this;
 		//call to api to get articles from rss/api var Articles 
-		return <ArticlePreview
-				category={'Music'}
+
+		//check for images 
+		if (typeof rowData.mediaGroups === 'undefined')
+		{
+			return <ArticlePreview
+				category={rowData.categories[0]}
 				key={sectionID}
 				heartText={'2.9k'}
-				categoryPress={that.onCategoryDetailsPress}
+				categoryPress={this.onCategoryDetailsPress}
+				selected={false}
+				source={require('../img/stock_image.png')}
+				text={rowData.title.toLowerCase().replace('&nbsp;','')}
+				onPress={this.onArticleDetailsPress} />
+		} else 
+		{
+			return <ArticlePreview
+				category={rowData.categories[0]}
+				key={sectionID}
+				heartText={'2.9k'}
+				categoryPress={this.onCategoryDetailsPress}
 				selected={false}
 				source={{uri: rowData.mediaGroups[0].contents[0].url }}
-				text={rowData.title}
-				onPress={that.onArticleDetailsPress} />
+				text={rowData.title.toLowerCase().replace('&nbsp;','')}
+				onPress={this.onArticleDetailsPress} />
+		}
 			
 	},
 	onCategoryDetailsPress: function() {
@@ -163,7 +199,12 @@ module.exports = React.createClass({
 	onArticleDetailsPress: function() {
 		//forward to sytled web view of article details given link
 		console.log("onArticleDetailsPress"); 
-		//this.props.navigator.push({name: 'articledetails'});
+		/*this.props.navigator.push({
+			name: 'articledetails', 
+			passProps: {
+				entry: rowData
+			}
+		});*/
 	}, 
 	/*
 	onChange: function(event, articles) {

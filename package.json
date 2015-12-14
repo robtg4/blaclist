@@ -6,8 +6,11 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
+    "bluebird": "^3.0.6",
+    "combine-rss": "0.0.3",
     "flux-utils": "^1.0.2",
     "lodash": "^3.10.1",
+    "node-bing-api": "^2.3.0",
     "parse": "^1.6.9",
     "parse-react": "^0.5.0",
     "react": "^0.14.3",
