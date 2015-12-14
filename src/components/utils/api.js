@@ -1,7 +1,7 @@
 //api connector to external data 
 var React = require('react-native');
 
-//ibraries
+//libraries
 var RSS = require('../stores/rss-feeds');
 
 module.exports = {
@@ -71,7 +71,7 @@ module.exports = {
 	    return RSS_custom; 
 	},
 	imageSearch: function(query) {
-
+		
 	} 
 
 

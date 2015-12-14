@@ -19,6 +19,7 @@ var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 var ArticleDetails = require('./exp_base_components/article-details');
+var Spinner = require('react-native-spinkit');
 //var Actions = require('../../actions');
 
 //dimensions
@@ -138,12 +139,13 @@ module.exports = React.createClass({
         return this.renderListView();
 	}, 
 	renderLoadingView: function() {
-        return (
-            <View style={styles.container}>
-                <ActivityIndicatorIOS
+		/*<ActivityIndicatorIOS
                     animating={!this.state.isLoaded}
                     style={[styles.activityIndicator, {height: 80}]}
-                    size="large" />
+                    size="large" />*/
+        return (
+            <View style={styles.container}>
+            	<Spinner style={styles.spinner} isVisible={!this.state.isLoaded} size={50} type={'Arc'} color={'#FF0000'}/>
             </View>
         );
     }, 
@@ -161,9 +163,9 @@ module.exports = React.createClass({
     renderRow: function (rowData, sectionID, rowID) {
 		/* TEST
 		console.log("Getting my rows on");
-		console.log(rowID);
-		console.log(rowData);
-		*/
+		console.log(rowID);*/
+		//console.log(rowData);
+
 		//call to api to get articles from rss/api var Articles 
 
 		//check for images 
@@ -179,14 +181,19 @@ module.exports = React.createClass({
 				text={rowData.title.toLowerCase().replace('&nbsp;','')}
 				onPress={this.onArticleDetailsPress} />
 		} else 
-		{
+		{ 
+			var url = rowData.mediaGroups[0].contents[0].url; 
+			if (url.indexOf('w=150') > -1)
+			{
+				url.replace("w=150", "w=500");
+			}
 			return <ArticlePreview
 				category={rowData.categories[0]}
 				key={sectionID}
 				heartText={'2.9k'}
 				categoryPress={this.onCategoryDetailsPress}
 				selected={false}
-				source={{uri: rowData.mediaGroups[0].contents[0].url }}
+				source={{uri: url }}
 				text={rowData.title.toLowerCase().replace('&nbsp;','')}
 				onPress={this.onArticleDetailsPress} />
 		}
@@ -220,9 +227,13 @@ styles = StyleSheet.create({
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center',
+		backgroundColor: '#000000', 
 	}, 
 	activityIndicator: {
         alignItems: 'center',
         justifyContent: 'center',
     },
+    spinner: {
+    	marginBottom: 50,
+  	},
 });

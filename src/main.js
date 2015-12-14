@@ -1,6 +1,7 @@
 //register on both android and ios index.js files
 var React = require('react-native');
 var Parse = require('parse/react-native');
+var SplashScreen = require('@remobile/react-native-splashscreen');
 var {
 	View, 
 	StyleSheet, 
@@ -40,6 +41,9 @@ module.exports = React.createClass({
 		Parse.initialize("jspeQAWhXjb9QAIKxfVbxnggnMv3Y4RuRJ13YLDY", "1IlLlb7x3mHq1vm80zlFlqcoydFuZUQqmjvvmXze");
 		//Parse.User.enableRevocableSession();
 		return StatusBarIOS.setStyle(1);
+	}, 
+	componentDidMount: function() {
+		//SplashScreen.hide();
 	}, 
 	renderScene: function(route, navigator) {
 		//when navigator is initially shown it has to render initial route 

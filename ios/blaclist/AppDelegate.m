@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 #import "RCTRootView.h"
-
+#import "RCTSplashScreen.h" //<--- import
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -49,12 +49,18 @@
                                                       moduleName:@"blaclist"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
+  [RCTSplashScreen show:rootView]; //<--- add show SplashScreen
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [[UIViewController alloc] init];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  UIImageView *launchScreenView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LaunchImage"]];
+  launchScreenView.frame = self.window.bounds;
+  launchScreenView.contentMode = UIViewContentModeScaleAspectFill;
+  rootView.loadingView = launchScreenView;
   
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];

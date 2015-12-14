@@ -3,7 +3,7 @@
 module.exports = {
   Keywords:['LGBQT', 'BlackLivesMatter', 'Arts', 'Hip-Hop', 'History', 
 		'Politics', 'Fashion Trends', 'Entrepreneurship', 'Technology', 'Business', 
-		'Black Buzzfeed','Poetry Slam','World', 'Health', 'Trending', 'Music', 'Sports', 'Entertianment', 
+		'Black Buzzfeed','Poetry Slam','World', 'Mens Health','Womens Health','Trending', 'Music', 'Sports', 'Entertianment', 
 		'Gaming', 'Design', 'News', 'Humor','Men of Color', 'Happiness', 'Women of Color', 'Travel',
 		'Photography','Computers', 'Universe', 'Internet','Love & Hip-Hop','Performing Arts','Management',
 		 'Celebrity News', 'Book Reviews', 'Marketing', 'Basketball', 'Film', 'Adventure Travel', 

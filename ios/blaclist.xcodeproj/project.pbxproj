@@ -17,7 +17,6 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -62,6 +61,8 @@
 		889809E51C1AB8D500D8EBB7 /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 889809D11C1AB8D500D8EBB7 /* SF-Compact-Text-Regular.otf */; settings = {ASSET_TAGS = (); }; };
 		889809E61C1AB8D500D8EBB7 /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 889809D21C1AB8D500D8EBB7 /* SF-Compact-Text-Semibold.otf */; settings = {ASSET_TAGS = (); }; };
 		889809E71C1AB8D500D8EBB7 /* SF-Compact-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 889809D31C1AB8D500D8EBB7 /* SF-Compact-Text-SemiboldItalic.otf */; settings = {ASSET_TAGS = (); }; };
+		889809EE1C1ECAE800D8EBB7 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 889809ED1C1ECAD800D8EBB7 /* libRNSpinkit.a */; };
+		889809F51C1ED60900D8EBB7 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 889809F41C1ED60000D8EBB7 /* libRCTSplashScreen.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +192,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNOverlay;
 		};
+		889809EC1C1ECAD800D8EBB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 889809E81C1ECAD800D8EBB7 /* RNSpinkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
+			remoteInfo = RNSpinkit;
+		};
+		889809F31C1ED60000D8EBB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTSplashScreen;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -208,7 +223,6 @@
 		13B07F961A680F5B00A75B9A /* blaclist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blaclist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = blaclist/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = blaclist/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = blaclist/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = blaclist/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = blaclist/main.m; sourceTree = "<group>"; };
@@ -255,6 +269,8 @@
 		889809D11C1AB8D500D8EBB7 /* SF-Compact-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-Regular.otf"; path = "../../../../../Volumes/Data/Users/robertgreenfield/Downloads/San_Francisco_Fonts/SF-Compact/SF-Compact-Text-Regular.otf"; sourceTree = "<group>"; };
 		889809D21C1AB8D500D8EBB7 /* SF-Compact-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-Semibold.otf"; path = "../../../../../Volumes/Data/Users/robertgreenfield/Downloads/San_Francisco_Fonts/SF-Compact/SF-Compact-Text-Semibold.otf"; sourceTree = "<group>"; };
 		889809D31C1AB8D500D8EBB7 /* SF-Compact-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-SemiboldItalic.otf"; path = "../../../../../Volumes/Data/Users/robertgreenfield/Downloads/San_Francisco_Fonts/SF-Compact/SF-Compact-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		889809E81C1ECAD800D8EBB7 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
+		889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,7 +290,9 @@
 				8877EC301C1551A2005EB156 /* FBSDKLoginKit.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				8877EC221C154F29005EB156 /* libRNVectorIcons.a in Frameworks */,
+				889809F51C1ED60900D8EBB7 /* libRCTSplashScreen.a in Frameworks */,
 				8877EC2E1C1551A2005EB156 /* FBSDKShareKit.framework in Frameworks */,
+				889809EE1C1ECAE800D8EBB7 /* libRNSpinkit.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				8877EC431C1562B9005EB156 /* libRCTFBSDKShare.a in Frameworks */,
 				8877EC611C169DCD005EB156 /* libBVLinearGradient.a in Frameworks */,
@@ -376,7 +394,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = blaclist;
@@ -401,6 +418,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */,
+				889809E81C1ECAD800D8EBB7 /* RNSpinkit.xcodeproj */,
 				889809B71C1A505D00D8EBB7 /* RNOverlay.xcodeproj */,
 				8877EC5B1C16986F005EB156 /* BVLinearGradient.xcodeproj */,
 				8877EC3D1C1562AB005EB156 /* RCTFBSDKShare.xcodeproj */,
@@ -556,6 +575,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		889809E91C1ECAD800D8EBB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				889809ED1C1ECAD800D8EBB7 /* libRNSpinkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		889809F01C1ED60000D8EBB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				889809F41C1ED60000D8EBB7 /* libRCTSplashScreen.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -607,6 +642,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 693A678H9N;
 					};
 				};
 			};
@@ -667,6 +705,10 @@
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
 				{
+					ProductGroup = 889809F01C1ED60000D8EBB7 /* Products */;
+					ProjectRef = 889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */;
+				},
+				{
 					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
 					ProjectRef = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
 				},
@@ -685,6 +727,10 @@
 				{
 					ProductGroup = 889809B81C1A505D00D8EBB7 /* Products */;
 					ProjectRef = 889809B71C1A505D00D8EBB7 /* RNOverlay.xcodeproj */;
+				},
+				{
+					ProductGroup = 889809E91C1ECAD800D8EBB7 /* Products */;
+					ProjectRef = 889809E81C1ECAD800D8EBB7 /* RNSpinkit.xcodeproj */;
 				},
 				{
 					ProductGroup = 8877EC1D1C154F22005EB156 /* Products */;
@@ -819,6 +865,20 @@
 			remoteRef = 889809BB1C1A505D00D8EBB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		889809ED1C1ECAD800D8EBB7 /* libRNSpinkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSpinkit.a;
+			remoteRef = 889809EC1C1ECAD800D8EBB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		889809F41C1ED60000D8EBB7 /* libRCTSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTSplashScreen.a;
+			remoteRef = 889809F31C1ED60000D8EBB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -845,7 +905,6 @@
 				889809D81C1AB8D500D8EBB7 /* SF-Compact-Display-Medium.otf in Resources */,
 				889809E01C1AB8D500D8EBB7 /* SF-Compact-Text-HeavyItalic.otf in Resources */,
 				889809E51C1AB8D500D8EBB7 /* SF-Compact-Text-Regular.otf in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				889809DA1C1AB8D500D8EBB7 /* SF-Compact-Display-Semibold.otf in Resources */,
 				889809DD1C1AB8D500D8EBB7 /* SF-Compact-Text-Bold.otf in Resources */,
 				889809D51C1AB8D500D8EBB7 /* SF-Compact-Display-Bold.otf in Resources */,
@@ -915,18 +974,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = blaclist;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -969,18 +1016,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen",
 				);
 				INFOPLIST_FILE = blaclist/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = blaclist;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -988,17 +1040,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen",
 				);
 				INFOPLIST_FILE = blaclist/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = blaclist;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

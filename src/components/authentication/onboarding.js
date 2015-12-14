@@ -7,6 +7,7 @@ var {
 	Text, 
 	TouchableHighlight,
 	StatusBarIOS,
+	AlertIOS, 
 } = React;
 
 //additional libraries
@@ -99,7 +100,7 @@ module.exports = React.createClass({
 
 		//change the state accordingly without doing so directly 
 		var array = newData;
-		array[i] = true; 
+		array[i] = !array[i]; 
 		this.setState({ keywords_array: array });
 
 		//check if there at least 5 keywords selected

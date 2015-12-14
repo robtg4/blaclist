@@ -273,5 +273,6 @@ var styles = StyleSheet.create({
 		alignSelf:'center',
 		fontFamily: 'Bebas Neue', 
 		fontSize: 15,
+		color:'red',
 	},
 });

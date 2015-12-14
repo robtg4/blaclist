@@ -1,3 +1,4 @@
+
 //fetch data from api 
 var Api = require('../utils/api');
 var Promise = require("bluebird");
@@ -25,12 +26,13 @@ module.exports = {
     //their fine 
     for (var i = 0; i < RSS_custom.length; i++)
     {
-        console.log("Processing through the following custom feed: " + RSS_custom[i] + ": Repo #" + i);
+        //console.log("Processing through the following custom feed: " + RSS_custom[i] + ": Repo #" + i);
         //processing url 1 by 1 to maintain global scope for all repos 
         rss_feeds.push(this.fetchEntries(RSS_custom[i]));
     }
 
     console.log("Done processing repos. Combining promises");
+    console.log(rss_feeds);
     //combining promises
     var that = this; 
     return Promise.all(rss_feeds)
@@ -42,10 +44,10 @@ module.exports = {
               final_array.push(res[q][a]);
             }
           }
-          console.log('The following array of objects was constructed and is now being shuffled');
-          console.log(final_array.length);
+          //console.log('The following array of objects was constructed and is now being shuffled');
+          //console.log(final_array.length);
           that.shuffle(final_array);
-          console.log(final_array);
+          //console.log(final_array);
           return final_array;
       });
     
@@ -55,11 +57,11 @@ module.exports = {
     return fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
-        console.log("Processing the custom feed");
+        //console.log("Processing the custom feed");
         //check if the rss feed is up 
         if (that.responseValidator(responseData)) 
         {
-          console.log("The repo is up! Now processing the entries within the data");
+          //console.log("The repo is up! Now processing the entries within the data");
           //if it is indeed up we need to return the objects 1 by 1 
           //store in new array that is 
           //indicative of working feeds 
@@ -71,18 +73,20 @@ module.exports = {
             //one by one so that we can randomize the array's contents 
             working_feeds.push(responseData.responseData.feed.entries[x]);
           }
-          console.log(working_feeds);
+          //console.log(working_feeds);
           return working_feeds; 
-        }
+        } 
       });
   }, 
   responseValidator: function(responseData) {
-    console.log("Verifying data to see if repo is up");
-    console.log(responseData);
+    //console.log("Verifying data to see if repo is up");
+    /*console.log(responseData);
+    console.log(responseData.responseData.feed.entries[0].mediaGroups);
+    console.log(typeof responseData.responseData.feed.entries[0].mediaGroups);*/
       if(responseData.responseStatus == 200) 
       {
         console.log("Code 200 Success!");
-        //console.log(responseData);
+        console.log(responseData);
         return true; 
       } else {
         return false; 

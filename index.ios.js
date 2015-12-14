@@ -5,4 +5,5 @@ var {
 } = React;
 var Main = require('./src/main');
 
+
 AppRegistry.registerComponent('blaclist', () => Main);
