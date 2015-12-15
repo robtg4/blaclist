@@ -39,7 +39,9 @@ module.exports = React.createClass({
       <TouchableHighlight 
         underlayColor={'transparent'}
         onPress={this.props.onPress} >
-          <Image source={this.props.source} style={[styles.articlePreview, this.border('red')]}>
+          <Image 
+            source={this.props.source} 
+            style={[styles.articlePreview, this.border('red')]}>
                   <View style={[styles.container, this.border('organge')]}>
                       <View style={[styles.header, this.border('blue')]}>
                           <Text style={[styles.previewText]}>{this.props.text}</Text>
