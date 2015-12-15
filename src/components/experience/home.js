@@ -4,8 +4,6 @@ var {
 	Image,
 	StyleSheet,
 	Text, 
-	ScrollView, 
-	ActivityIndicatorIOS, 
 	ListView, 
 	TouchableHighlight, 
 } = React;
@@ -32,25 +30,12 @@ module.exports = React.createClass({
 			.then((user) => { this.setState({user: user}); })
 	},  
 	getInitialState: function() {
-
-	    var getSectionData = (dataBlob, sectionID) => {
-	    	//console.log("SectionID GIS, getSectionData: " + sectionID);
-            return dataBlob[sectionID];
-        }
-
-        var getRowData = (dataBlob, sectionID, rowID) => {
-        	//console.log("RowID GIS, getRowData: " + rowID);
-            return dataBlob[sectionID + ':' + rowID];
-        }
-
 		return {
 			user: null, 
+			personalFeed: null, 
 			isLoaded: false, 
-			dataSource : new ListView.DataSource({
-                getSectionData          : getSectionData,
-                getRowData              : getRowData,
-                rowHasChanged           : (row1, row2) => row1 !== row2,
-                sectionHeaderHasChanged : (s1, s2) => s1 !== s2
+			dataSource: new ListView.DataSource({
+               rowHasChanged: (row1, row2) => row1 !== row2,
             }), 
 		}
 	},
@@ -68,7 +53,7 @@ module.exports = React.createClass({
 		    console.log(object.id);
 		    // Do something with the returned Parse.Object values
 		    console.log(object.get('interests'));
-		    that.organizeData(object.get('interests')); 
+		    that.fetchData(object.get('interests'));
 		  },
 		  error: function(error) {
 		    console.log("Error: " + error.code + " " + error.message);
@@ -76,58 +61,15 @@ module.exports = React.createClass({
 		});
 
 	},
-	organizeData: function(personalFeed) {
-		var data_store = null; 
-		//get the latest articles on page load
-		//this will pre-fill out articles state 
-		FeedStore.getArticles(personalFeed)
+	fetchData: function(personalFeed) {
+		var that = this; 
+	    FeedStore.getArticles(personalFeed)
 			.then((data) => {
-
-				console.log("================");
-				console.log("data is at home");
-				console.log(data);
-				console.log("================");
-
-				
-				var entries = data, 
-				length = entries.length,
-	            dataBlob = {},
-	            sectionIDs = [],
-	            rowIDs = [],
-	            entry,
-	            sectionID, 
-	            rowID, 
-	            i; 
-
-	            console.log(entries.length);
-		        for (i = 0; i < length; i++)
-		        {
-		        	entry = entries[i]; 
-		        	//console.log(entry);
-
-		        	//add section/row to section id array
-
-		        	//mapping section id array for section data 
-		        	sectionID = entry.title.replace(/\s+/g, '').toLowerCase() + i; 
-		        	//console.log("SectionID = " + sectionID);
-		        	sectionIDs.push(sectionID);
-		        	dataBlob[sectionID] = entry.title; 
-
-		        	//mapping row id array for row data 
-		        	rowIDs[i] = []
-		        	rowID = sectionID;
-		        	// console.log("RowID = " + rowID); 
-		        	rowIDs[i].push(rowID);
-		        	dataBlob[sectionID + ':' + rowID] = entry; 
-		        }
-
-		        //console.log(dataBlob);
-
-		        this.setState({
-		            dataSource : this.state.dataSource.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs),
+				var entries = data; 
+		        that.setState({
+		        	dataSource : that.state.dataSource.cloneWithRows(entries),
 		            isLoaded   : true, 
 		        });
-
 		  	}).done();
 	}, 
 	render: function() {
@@ -135,14 +77,9 @@ module.exports = React.createClass({
 		if (!this.state.isLoaded) {
             return this.renderLoadingView();
         }
-
         return this.renderListView();
 	}, 
 	renderLoadingView: function() {
-		/*<ActivityIndicatorIOS
-                    animating={!this.state.isLoaded}
-                    style={[styles.activityIndicator, {height: 80}]}
-                    size="large" />*/
         return (
             <View style={styles.container}>
             	<Spinner style={styles.spinner} isVisible={!this.state.isLoaded} size={50} type={'Arc'} color={'#FF0000'}/>
@@ -156,46 +93,48 @@ module.exports = React.createClass({
                     dataSource = {this.state.dataSource}
                     initialListSize = {5}
                     pageSize={5}
-                    renderRow  = {this.renderRow} />
+                    renderRow  = {this.renderEntry} />
             </View>
         );
     }, 
-    renderRow: function (rowData, sectionID, rowID) {
-		/* TEST
-		console.log("Getting my rows on");
-		console.log(rowID);*/
-		//console.log(rowData);
+    renderEntry: function(entry) {
 
-		//call to api to get articles from rss/api var Articles 
-
-		//check for images 
-		if (typeof rowData.mediaGroups === 'undefined')
+		if (typeof entry.mediaGroups === 'undefined')
 		{
-			return <ArticlePreview
-				category={rowData.categories[0]}
-				key={sectionID}
-				heartText={'2.9k'}
-				categoryPress={this.onCategoryDetailsPress}
-				selected={false}
-				source={require('../img/stock_image.png')}
-				text={rowData.title.toLowerCase().replace('&nbsp;','')}
-				onPress={this.onArticleDetailsPress} />
+			return (
+				<ArticlePreview
+					category={entry.categories[0]}
+					key={entry.title}
+					heartText={'2.9k'}
+					categoryPress={this.onCategoryDetailsPress}
+					selected={false}
+					source={require('../img/stock_image.png')}
+					text={entry.title.toLowerCase().replace('&nbsp;','')}
+					onPress={() => this.onArticleDetailsPress(entry)} />
+			);
 		} else 
 		{ 
-			var url = rowData.mediaGroups[0].contents[0].url; 
+			var url = entry.mediaGroups[0].contents[0].url; 
 			if (url.indexOf('w=150') > -1)
 			{
 				url.replace("w=150", "w=500");
 			}
-			return <ArticlePreview
-				category={rowData.categories[0]}
-				key={sectionID}
-				heartText={'2.9k'}
-				categoryPress={this.onCategoryDetailsPress}
-				selected={false}
-				source={{uri: url }}
-				text={rowData.title.toLowerCase().replace('&nbsp;','')}
-				onPress={this.onArticleDetailsPress} />
+			var catsource = entry.categories[0]; 
+			if (typeof catsource == "undefined")
+			{
+				catsource = "News";
+			}
+			return (
+				<ArticlePreview
+					category={catsource}
+					key={entry.title}
+					heartText={'2.9k'}
+					categoryPress={this.onCategoryDetailsPress}
+					selected={false}
+					source={{uri: url }}
+					text={entry.title.toLowerCase().replace('&nbsp;','')}
+					onPress={() => this.onArticleDetailsPress(entry)} />
+			);
 		}
 			
 	},
@@ -203,15 +142,15 @@ module.exports = React.createClass({
 		//forward to sytled web view of categorical article feed
 		console.log("onCategoryDetailsPress"); 
 	}, 
-	onArticleDetailsPress: function() {
+	onArticleDetailsPress: function(entry) {
 		//forward to sytled web view of article details given link
 		console.log("onArticleDetailsPress"); 
-		/*this.props.navigator.push({
-			name: 'articledetails', 
-			passProps: {
-				entry: rowData
-			}
-		});*/
+		console.log(entry);
+
+		this.props.navigator.immediatelyResetRouteStack([{
+			name: 'articledetails',
+            passProps: {entry: entry},
+		}]);
 	}, 
 	/*
 	onChange: function(event, articles) {

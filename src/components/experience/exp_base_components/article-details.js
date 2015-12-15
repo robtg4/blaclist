@@ -4,7 +4,8 @@ var {
 	Image,
 	StyleSheet,
 	Text, 
-	ScrollView, 
+	ScrollView,
+	WebView,  
 } = React;
 
 //additional libraries
@@ -25,18 +26,31 @@ module.exports = React.createClass({
 	},  
 	getInitialState: function() {
 		return {
-
+			entry: null, 
 		}
 	},
-	componentDidMount: function() {
-		this.organizeData(); 
-	},
-	organizeData: function() {
-		
-	}, 
 	render: function() {
+		console.log(this.props.article);
+		var article = this.props.article; 
 		return (
-			<View>{this.props.entry.title}</View>
+			<View style={styles.container}>
+				<View styles={styles.header}>
+					<Image
+						source={entry.mediaGroups[0].contents[0].url}
+						resizeMode={'contain'} 
+						style={styles.entryImage} />
+				</View>
+				<View styles={styles.middle}>
+				</View>
+				<ScrollView style={styles.footer}>
+					<WebView
+					  automaticallyAdjustContentInsets={true}
+			          style={styles.webView}
+			          html={entry.content}
+			          javaScriptEnabledAndroid={true}
+			          onNavigationStateChange={this.onNavigationStateChange}/>    
+				</ScrollView>
+			</View>
 		);
 	}, 
 
@@ -48,5 +62,19 @@ styles = StyleSheet.create({
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center',
+	}, 
+	footer: {
+		flex: 1,
+		backgroundColor: 'black',  
+	}, 
+	middle: {
+		flex: 1,
+	}, 
+	header: {
+		flex: 2, 
+	}, 
+	articleImage: {
+		height: window.height/3,
+		width: window.width, 
 	}, 
 });

@@ -57,11 +57,6 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   
-  UIImageView *launchScreenView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LaunchImage"]];
-  launchScreenView.frame = self.window.bounds;
-  launchScreenView.contentMode = UIViewContentModeScaleAspectFill;
-  rootView.loadingView = launchScreenView;
-  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }

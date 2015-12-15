@@ -63,6 +63,8 @@
 		889809E71C1AB8D500D8EBB7 /* SF-Compact-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 889809D31C1AB8D500D8EBB7 /* SF-Compact-Text-SemiboldItalic.otf */; settings = {ASSET_TAGS = (); }; };
 		889809EE1C1ECAE800D8EBB7 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 889809ED1C1ECAD800D8EBB7 /* libRNSpinkit.a */; };
 		889809F51C1ED60900D8EBB7 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 889809F41C1ED60000D8EBB7 /* libRCTSplashScreen.a */; };
+		889809FB1C1F248700D8EBB7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889809F91C1F248700D8EBB7 /* LaunchScreen.xib */; settings = {ASSET_TAGS = (); }; };
+		889809FE1C1F24F900D8EBB7 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 889809FD1C1F24F900D8EBB7 /* splash.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +273,8 @@
 		889809D31C1AB8D500D8EBB7 /* SF-Compact-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-SemiboldItalic.otf"; path = "../../../../../Volumes/Data/Users/robertgreenfield/Downloads/San_Francisco_Fonts/SF-Compact/SF-Compact-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		889809E81C1ECAD800D8EBB7 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
+		889809F91C1F248700D8EBB7 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		889809FD1C1F24F900D8EBB7 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = ../../../../../../src/components/img/splash.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +399,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				889809F81C1F248700D8EBB7 /* SplashScreenResource */,
 			);
 			name = blaclist;
 			sourceTree = "<group>";
@@ -589,6 +594,16 @@
 				889809F41C1ED60000D8EBB7 /* libRCTSplashScreen.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		889809F81C1F248700D8EBB7 /* SplashScreenResource */ = {
+			isa = PBXGroup;
+			children = (
+				889809F91C1F248700D8EBB7 /* LaunchScreen.xib */,
+				889809FD1C1F24F900D8EBB7 /* splash.png */,
+			);
+			name = SplashScreenResource;
+			path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen/SplashScreenResource";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -899,6 +914,7 @@
 				889809E61C1AB8D500D8EBB7 /* SF-Compact-Text-Semibold.otf in Resources */,
 				889809BF1C1AB4C500D8EBB7 /* SF-Compact-Text-Medium.otf in Resources */,
 				889809DE1C1AB8D500D8EBB7 /* SF-Compact-Text-BoldItalic.otf in Resources */,
+				889809FE1C1F24F900D8EBB7 /* splash.png in Resources */,
 				8877EC561C1600F6005EB156 /* BebasNeue Light.ttf in Resources */,
 				8877EC101C154EA4005EB156 /* FontAwesome.ttf in Resources */,
 				889809E41C1AB8D500D8EBB7 /* SF-Compact-Text-MediumItalic.otf in Resources */,
@@ -921,6 +937,7 @@
 				8877EC111C154EA4005EB156 /* Foundation.ttf in Resources */,
 				889809DC1C1AB8D500D8EBB7 /* SF-Compact-Display-Ultralight.otf in Resources */,
 				889809D91C1AB8D500D8EBB7 /* SF-Compact-Display-Regular.otf in Resources */,
+				889809FB1C1F248700D8EBB7 /* LaunchScreen.xib in Resources */,
 				8877EC0F1C154EA4005EB156 /* Ionicons.ttf in Resources */,
 				8877EC591C1600F6005EB156 /* BebasNeue Thin.ttf in Resources */,
 				8877EC0E1C154EA4005EB156 /* MaterialIcons.ttf in Resources */,
@@ -1015,8 +1032,6 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
@@ -1039,8 +1054,6 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-facebook-login/FacebookSDK";

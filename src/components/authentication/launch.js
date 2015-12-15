@@ -1,5 +1,6 @@
 //component that opens up app to login screen
 var React = require('react-native');
+var SplashScreen = require('@remobile/react-native-splashscreen');
 var {
 	View, 
 	Text, 

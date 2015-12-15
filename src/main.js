@@ -43,7 +43,7 @@ module.exports = React.createClass({
 		return StatusBarIOS.setStyle(1);
 	}, 
 	componentDidMount: function() {
-		//SplashScreen.hide();
+		SplashScreen.hide();
 	}, 
 	renderScene: function(route, navigator) {
 		//when navigator is initially shown it has to render initial route 

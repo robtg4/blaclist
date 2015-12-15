@@ -50,6 +50,15 @@ module.exports = {
 				}
 			}
 		}
+
+		//always add default array
+		for (i = 0; i < RSS.FEEDS[RSS.FEEDS.length-1]; i++)
+		{
+			for (x = 0; x < RSS.FEEDS[i].length; x++)
+			{
+				RSS_custom.push(RSS.FEEDS[i][x]);
+			}
+		}
 	
 		//clean customized array of urls 
 		for (var z = 0; z < RSS_custom.length; z++)
