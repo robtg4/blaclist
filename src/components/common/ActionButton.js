@@ -1,5 +1,6 @@
 'use strict';
-
+//component for floating onboarding next button 
+//based on this: https://github.com/mastermoo/react-native-action-button
 var React = require('react-native');
 var {
   Component,

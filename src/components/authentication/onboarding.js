@@ -30,10 +30,13 @@ var ActionButton = require('../common/ActionButton');
 var KeywordData = require('../stores/keywords');
 
 module.exports = React.createClass({ 
+	//getting correct parse user to add more info
+	//to their db row
 	componentWillMount: function() {
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
 	},
+	//state of component 
 	getInitialState: function() {
 		return {
 			keywords_array: Array.apply(null, Array(53)).map(Boolean.prototype.valueOf,false), 
@@ -42,6 +45,7 @@ module.exports = React.createClass({
 			errorMessage: '', 
 		};
 	}, 
+	//render component 
 	render: function() {
 		var newData = this.state.keywords_array;
 		var Keywords = KeywordData.Keywords;
@@ -78,6 +82,7 @@ module.exports = React.createClass({
 			</View>
 		);
 	}, 
+	//render the keywords on the onboarding component 
 	renderKeywordBoxes: function(newData, Keywords) {
 		//renders array of keywords in keyword.js
 		//and maps them onto custom component keywordbox to show in the onboarding
@@ -94,6 +99,7 @@ module.exports = React.createClass({
 				selected={newData[i]} />
 		});
 	}, 
+	//press keyword and toggle 
 	onKeywordPress: function(i, keyword, newData) {
 		//console.log(this.state.keywords_array);
 		console.log(keyword); 
@@ -113,6 +119,7 @@ module.exports = React.createClass({
 		//console.log(this.state.keywords_array);
 
 	}, 
+	//commit pressed keywords to user parse db and go to next frame
 	onNextPress: function() {
 		//match the state array to the keywords array to find which
 		//words were selected to properly update and push them into parse

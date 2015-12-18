@@ -36,6 +36,7 @@ module.exports = React.createClass({
   onLeftButtonPress: function() {
     this.context.menuActions.toggle();
   },
+  //render menu through SideMenu component 
   render: function() {
     return <View style={styles.container}>
       <View style={styles.top}>
@@ -78,18 +79,23 @@ module.exports = React.createClass({
       <View style={styles.bottom} />
     </View>
   }, 
+  //for menu Home icon press
   onHomePress: function() {
 
   }, 
+  //for Hash-tage icon press
   onTrendPress: function() {
 
   }, 
+  //for List icon press
   onListPress: function() {
 
   }, 
+  //for setting icon press
   onSettingPress: function() {
 
   }, 
+  //for profile icon press
   onProfilePress: function() {
 
   },
