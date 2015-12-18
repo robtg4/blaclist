@@ -29,12 +29,17 @@ var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
 module.exports = React.createClass({ 
+	//mixins are for menu functionality taken from 
+	//here: https://github.com/mcnamee/react-native-starter-app
 	mixins: [Subscribable.Mixin],
 	componentWillMount: function() {
 		this.eventEmitter = new EventEmitter();
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
 	},  
+	//on first login (and all new logins)
+	//need to pull onboarding keywords that indicate user interests
+	//so that we can pull the appropiate feeds 
 	componentDidMount: function() {
 		//console.log(this.state.user);
 		var personalFeed = null; 
@@ -57,6 +62,7 @@ module.exports = React.createClass({
 		});
 
 	},
+	//states of this components 
 	getInitialState: function() {
 		return {
 			user: null, 
@@ -69,6 +75,7 @@ module.exports = React.createClass({
             }), 
 		}
 	},
+	//part of menu button functionality 
 	navigate: function(title, link) {
       this.refs.rootSidebarMenu.closeMenu();
 
@@ -77,6 +84,7 @@ module.exports = React.createClass({
         component: link,
       });
     },
+    //gettign data for rss feed based on user interests 
 	fetchData: function(personalFeed) {
 		var that = this; 
 	    FeedStore.getArticles(personalFeed)
@@ -88,6 +96,7 @@ module.exports = React.createClass({
 		        });
 		  	}).done();
 	}, 
+	//rendering component 
 	render: function() {
 
 		if (!this.state.isLoaded) {
@@ -110,9 +119,11 @@ module.exports = React.createClass({
 					onPress={this.onMenuPress} />
         	</SideMenu>
 	},
+	//menu press function 
 	onMenuPress: function() {
 		this.eventEmitter.emit('toggleMenu');
 	}, 
+	//loading render
 	renderLoadingView: function() {
         return (
             <View style={styles.container}>
@@ -120,6 +131,7 @@ module.exports = React.createClass({
             </View>
         );
     }, 
+    //rendering list view
 	renderListView: function() {
         return (
                 <ListView
@@ -129,6 +141,7 @@ module.exports = React.createClass({
                     renderRow  = {this.renderEntry} />
         );
     }, 
+    //rendering rows within list view
     renderEntry: function(entry) {
 
 		if (typeof entry.mediaGroups === 'undefined')
@@ -170,10 +183,12 @@ module.exports = React.createClass({
 		}
 			
 	},
+	//pressing category button to go to feed of that category 
 	onCategoryDetailsPress: function() {
 		//forward to sytled web view of categorical article feed
 		console.log("onCategoryDetailsPress"); 
 	}, 
+	//press to see article's details 
 	onArticleDetailsPress: function(entry) {
 		//forward to sytled web view of article details given link
 		console.log("onArticleDetailsPress"); 
