@@ -73,6 +73,7 @@ module.exports = React.createClass({
 				<ActionButton 
 					selected={this.state.enoughSelections}
 					onPress={this.onNextPress}
+					text={'Next'}
 					buttonColor="rgba(0,0,0,0.7)" />
 			</View>
 		);

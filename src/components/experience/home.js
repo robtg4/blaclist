@@ -11,22 +11,27 @@ var {
 
 //additional libraries
 var Parse = require('parse/react-native');
+var EventEmitter = require('EventEmitter');
+var Spinner = require('react-native-spinkit');
+var SideMenu = require('react-native-side-menu');
+var Subscribable = require('Subscribable');
 
 //dynamic component references + libraries 
 var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 var ArticleDetails = require('./exp_base_components/article-details');
-var Spinner = require('react-native-spinkit');
-var SideMenu = require('react-native-side-menu');
 var Menu = require('./menu');
+var MenuButton = require('../common/menuButton');
 
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
 module.exports = React.createClass({ 
+	mixins: [Subscribable.Mixin],
 	componentWillMount: function() {
+		this.eventEmitter = new EventEmitter();
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
 	},  
@@ -56,12 +61,22 @@ module.exports = React.createClass({
 		return {
 			user: null, 
 			personalFeed: null, 
+			touchToClose: true,
+        	disableGestures: false,
 			isLoaded: false, 
 			dataSource: new ListView.DataSource({
                rowHasChanged: (row1, row2) => row1 !== row2,
             }), 
 		}
 	},
+	navigate: function(title, link) {
+      this.refs.rootSidebarMenu.closeMenu();
+
+      this.refs.rootNavigator.replace({
+        title: title,
+        component: link,
+      });
+    },
 	fetchData: function(personalFeed) {
 		var that = this; 
 	    FeedStore.getArticles(personalFeed)
@@ -79,14 +94,24 @@ module.exports = React.createClass({
             return this.renderLoadingView();
         }
         return <SideMenu 
-        			menu={<Menu/>}
+        			menu={<Menu events={this.eventEmitter} navigate={this.navigate} />}
+        			touchToClose={this.state.touchToClose}
+          			disableGestures={this.state.disableGestures}
         			toleranceX={0}
         			edgeHitWidth={window.width/5}
         			openMenuOffset={window.width/5}>
         		<View style={styles.container}>
         			{this.renderListView()}
         		</View>
+        		<MenuButton 
+					selected={this.state.enoughSelections}
+					source={require('../img/menu-btn.png')}
+					resize={'contain'}
+					onPress={this.onMenuPress} />
         	</SideMenu>
+	},
+	onMenuPress: function() {
+		this.eventEmitter.emit('toggleMenu');
 	}, 
 	renderLoadingView: function() {
         return (
@@ -176,7 +201,7 @@ var styles = StyleSheet.create({
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center',
-		backgroundColor: "black", 
+		backgroundColor: "#222222", 
 		shadowColor:'black', 
 	    shadowOffset: {width: 4, height: 4}, 
 	    shadowOpacity: 0.8, 

@@ -11,12 +11,20 @@ var {
   TouchableOpacity,
   PixelRatio,
   Dimensions,
+  Image
 } = React;
 
 var sW = Dimensions.get('window').width;
 
+//dimensions
+var Dimensions = require('Dimensions');
+var window = Dimensions.get('window');
 
-class ActionButton extends Component {
+//dynamic variables + libraries
+var ImageButton = require('./imageButton');
+
+
+class MenuButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,9 +63,9 @@ class ActionButton extends Component {
   setPositionAndSizeByType() {
     let position, offsetX, offsetY, size;
 
-      position = 'right',
-      offsetX  = 20,
-      offsetY  = 20,
+      position = 'left',
+      offsetX  = -1.1,
+      offsetY  = (window.height/1.1)+1,
       size     = 50;
 
     this.state.position = this.props.position || position;
@@ -129,12 +137,7 @@ class ActionButton extends Component {
         <TouchableOpacity 
           activeOpacity={0.2} 
           onPress={this.props.onPress}>
-          <Animated.View 
-            style={[styles.btn, this.props.selected ? {backgroundColor: 'black'} : {backgroundColor: 'transparent'}]}>
-            <Animated.Text style={[styles.btnText]}>
-              {this.props.text}
-            </Animated.Text>
-          </Animated.View>
+          <Image source={this.props.source} resizeMode={this.props.resize} style={styles.menu}/>
         </TouchableOpacity>
       </View>
     );
@@ -145,6 +148,10 @@ class ActionButton extends Component {
 
 
 var styles = StyleSheet.create({
+  menu: {
+    height: window.width/4, 
+    width: window.width/4, 
+  }, 
   overlay: {
     position: 'absolute',
     bottom: 0,
@@ -188,4 +195,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = ActionButton;
+module.exports = MenuButton;

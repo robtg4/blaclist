@@ -11,8 +11,31 @@ var window = Dimensions.get('window');
 
 //library and dynamic components
 var ImageButton = require('../common/imageButton');
+var EventEmitter = require('EventEmitter');
+var Subscribable = require('Subscribable');
 
 module.exports = React.createClass({ 
+  mixins: [Subscribable.Mixin],
+
+  /**
+    * Allow this component to see sidebar menu functions
+    */
+  contextTypes : {
+    menuActions: React.PropTypes.object.isRequired
+  },
+  /**
+    * On Load
+    */
+  componentDidMount: function() {
+    this.addListenerOn(this.props.events, 'toggleMenu', this.onLeftButtonPress);
+  },
+
+  /**
+    * When Navbar Left Button Tapped
+    */
+  onLeftButtonPress: function() {
+    this.context.menuActions.toggle();
+  },
   render: function() {
     return <View style={styles.container}>
       <View style={styles.top}>
@@ -20,44 +43,56 @@ module.exports = React.createClass({
           <ImageButton
               style={[styles.btn, this.border('red')]}
               resizeMode={'contain'}
-              onPress={this.onBtnPress}
+              onPress={this.onHomePress}
               source={require('../img/home-icon.png')} />
         </View> 
         <View style={[styles.btnWrapper, {backgroundColor: '#404040'}]} >
           <ImageButton
               style={[styles.btn, this.border('red')]}
               resizeMode={'contain'}
-              onPress={this.onBtnPress}
+              onPress={this.onTrendPress}
               source={require('../img/hash-icon.png')} />
         </View> 
         <View style={[styles.btnWrapper, {backgroundColor: '#383838'}]} >
           <ImageButton
               style={[styles.btn, this.border('red')]}
               resizeMode={'contain'}
-              onPress={this.onBtnPress}
+              onPress={this.onListPress}
               source={require('../img/list-icon.png')} />
         </View> 
         <View style={[styles.btnWrapper, {backgroundColor: '#303030'}]} >
           <ImageButton
               style={[styles.btn, this.border('red')]}
               resizeMode={'contain'}
-              onPress={this.onBtnPress}
+              onPress={this.onProfilePress}
               source={require('../img/user-icon.png')} />
         </View> 
         <View style={[styles.btnWrapper, {backgroundColor: '#282828'}]} >
           <ImageButton
               style={[styles.btn, this.border('red')]}
               resizeMode={'contain'}
-              onPress={this.onBtnPress}
+              onPress={this.onSettingPress}
               source={require('../img/settings-icon.png')} />
         </View> 
       </View>
       <View style={styles.bottom} />
     </View>
   }, 
-  onBtnPress: function() {
+  onHomePress: function() {
 
   }, 
+  onTrendPress: function() {
+
+  }, 
+  onListPress: function() {
+
+  }, 
+  onSettingPress: function() {
+
+  }, 
+  onProfilePress: function() {
+
+  },
   border: function(color) {
       return {
         //borderColor: color, 
