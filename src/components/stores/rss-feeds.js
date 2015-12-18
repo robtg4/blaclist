@@ -3,6 +3,8 @@
 //the root: http://www.theroot.com/articles.teaser.all.25.rss
 //buzzfeed usnews: http://www.buzzfeed.com/usnews.xml
 //hufington post black politics: http://feeds.huffingtonpost.com/huffingtonpost/raw_feed
+//AlJazeera => http://america.aljazeera.com/content/ajam/articles.rss
+
 
 //http://www.blacknews.com/feed/ -> no images
 //http://blackamericaweb.com/feed/ -> diff

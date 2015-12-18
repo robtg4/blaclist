@@ -1,59 +1,105 @@
 var React = require('react-native');
-var Dimensions = require('Dimensions');
 var {
+  View, 
   StyleSheet,
-  ScrollView,
-  View,
-  Image,
-  Text,
+  Text, 
 } = React;
 
+//dimensions
+var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
-module.exports = React.createClass({
-  render: function() {
-    return (
-      <ScrollView style={styles.menu}>
-        <View style={styles.avatarContainer}>
-          <Image
-            style={styles.avatar}
-            source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}} />
-          <Text style={styles.name}>Your name</Text>
-        </View>
+//library and dynamic components
+var ImageButton = require('../common/imageButton');
 
-        <Text style={styles.item}>About</Text>
-        <Text style={styles.item}>Contacts</Text>
-      </ScrollView>
-    );
-  }
+module.exports = React.createClass({ 
+  render: function() {
+    return <View style={styles.container}>
+      <View style={styles.top}>
+        <View style={[styles.btnWrapper, {backgroundColor: '#484848'}]} >
+          <ImageButton
+              style={[styles.btn, this.border('red')]}
+              resizeMode={'contain'}
+              onPress={this.onBtnPress}
+              source={require('../img/home-icon.png')} />
+        </View> 
+        <View style={[styles.btnWrapper, {backgroundColor: '#404040'}]} >
+          <ImageButton
+              style={[styles.btn, this.border('red')]}
+              resizeMode={'contain'}
+              onPress={this.onBtnPress}
+              source={require('../img/hash-icon.png')} />
+        </View> 
+        <View style={[styles.btnWrapper, {backgroundColor: '#383838'}]} >
+          <ImageButton
+              style={[styles.btn, this.border('red')]}
+              resizeMode={'contain'}
+              onPress={this.onBtnPress}
+              source={require('../img/list-icon.png')} />
+        </View> 
+        <View style={[styles.btnWrapper, {backgroundColor: '#303030'}]} >
+          <ImageButton
+              style={[styles.btn, this.border('red')]}
+              resizeMode={'contain'}
+              onPress={this.onBtnPress}
+              source={require('../img/user-icon.png')} />
+        </View> 
+        <View style={[styles.btnWrapper, {backgroundColor: '#282828'}]} >
+          <ImageButton
+              style={[styles.btn, this.border('red')]}
+              resizeMode={'contain'}
+              onPress={this.onBtnPress}
+              source={require('../img/settings-icon.png')} />
+        </View> 
+      </View>
+      <View style={styles.bottom} />
+    </View>
+  }, 
+  onBtnPress: function() {
+
+  }, 
+  border: function(color) {
+      return {
+        //borderColor: color, 
+        //borderWidth: 4,
+      } 
+   },
 });
 
 var styles = StyleSheet.create({
-  menu: {
-    flex: 1,
-    width: window.width,
-    height: window.height,
-    backgroundColor: 'black',
-    padding: 20,
-  },
-  avatarContainer: {
-    marginBottom: 20,
-    marginTop: 20,
-  },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    flex: 1,
-  },
-  name: {
-    position: 'absolute',
-    left: 70,
-    top: 20,
-  },
-  item: {
-    fontSize: 14,
-    fontWeight: '300',
-    paddingTop: 5,
-  },
+  top: {
+    flex: 5,
+    width: window.width/5, 
+    height: window.height*(5/9), 
+  }, 
+  bottom: {
+    flex: 4,
+    backgroundColor: '#222222',
+    height: window.height*(4/9), 
+    width: window.width/5, 
+  }, 
+  container: {
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    flexDirection: 'column', 
+    height: window.height, 
+    width: window.width/5, 
+    backgroundColor: '#222222',
+  }, 
+  btnWrapper: {
+    flex: 1, 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+  }, 
+  btn: {
+    width: window.width/12, 
+    height: window.width/12,
+    justifyContent: 'space-around', 
+    alignSelf: 'center', 
+    marginLeft: window.height/30, 
+    marginRight: window.height/30, 
+    marginTop: window.height/20, 
+    marginBottom: window.height/20, 
+  }, 
 });

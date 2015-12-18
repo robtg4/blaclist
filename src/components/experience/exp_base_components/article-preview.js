@@ -53,7 +53,7 @@ module.exports = React.createClass({
                               resizeMode={'contain'}
                               onPress={this.onHeartPress}
                               source={require('../../img/heart_btn.png')} />
-                          <Text style={[styles.heartText]}>{this.props.heartText} favorites</Text>
+                          <Text style={[styles.heartText]}>{this.props.heartText + ' favorites'}</Text>
                         </View>
                           <KeywordBox 
                               style={[styles.category, this.border('blue')]}
@@ -85,6 +85,7 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center', 
     marginLeft: 5, 
+    fontFamily: 'SFCompactText-Medium'
   }, 
   heartRow: {
     flexDirection: 'row', 

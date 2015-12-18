@@ -7,7 +7,6 @@ var {
 	StyleSheet,
 	Image,  
 } = React;
-var Parse = require('parse/react-native');
 
 //dimensions
 var Dimensions = require('Dimensions');

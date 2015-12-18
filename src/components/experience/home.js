@@ -6,19 +6,20 @@ var {
 	Text, 
 	ListView, 
 	TouchableHighlight, 
+	AsyncStorage, 
 } = React;
 
 //additional libraries
 var Parse = require('parse/react-native');
-//var Reflux = require('reflux');
 
-//dynamic component references
+//dynamic component references + libraries 
 var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 var ArticleDetails = require('./exp_base_components/article-details');
 var Spinner = require('react-native-spinkit');
-//var Actions = require('../../actions');
+var SideMenu = require('react-native-side-menu');
+var Menu = require('./menu');
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -29,16 +30,6 @@ module.exports = React.createClass({
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
 	},  
-	getInitialState: function() {
-		return {
-			user: null, 
-			personalFeed: null, 
-			isLoaded: false, 
-			dataSource: new ListView.DataSource({
-               rowHasChanged: (row1, row2) => row1 !== row2,
-            }), 
-		}
-	},
 	componentDidMount: function() {
 		//console.log(this.state.user);
 		var personalFeed = null; 
@@ -61,6 +52,16 @@ module.exports = React.createClass({
 		});
 
 	},
+	getInitialState: function() {
+		return {
+			user: null, 
+			personalFeed: null, 
+			isLoaded: false, 
+			dataSource: new ListView.DataSource({
+               rowHasChanged: (row1, row2) => row1 !== row2,
+            }), 
+		}
+	},
 	fetchData: function(personalFeed) {
 		var that = this; 
 	    FeedStore.getArticles(personalFeed)
@@ -77,7 +78,15 @@ module.exports = React.createClass({
 		if (!this.state.isLoaded) {
             return this.renderLoadingView();
         }
-        return this.renderListView();
+        return <SideMenu 
+        			menu={<Menu/>}
+        			toleranceX={0}
+        			edgeHitWidth={window.width/5}
+        			openMenuOffset={window.width/5}>
+        		<View style={styles.container}>
+        			{this.renderListView()}
+        		</View>
+        	</SideMenu>
 	}, 
 	renderLoadingView: function() {
         return (
@@ -88,13 +97,11 @@ module.exports = React.createClass({
     }, 
 	renderListView: function() {
         return (
-            <View style={styles.container}>
                 <ListView
                     dataSource = {this.state.dataSource}
                     initialListSize = {5}
                     pageSize={5}
                     renderRow  = {this.renderEntry} />
-            </View>
         );
     }, 
     renderEntry: function(entry) {
@@ -147,10 +154,13 @@ module.exports = React.createClass({
 		console.log("onArticleDetailsPress"); 
 		console.log(entry);
 
-		this.props.navigator.immediatelyResetRouteStack([{
+		//asynchronously store entry
+
+
+		this.props.navigator.push({
 			name: 'articledetails',
             passProps: {entry: entry},
-		}]);
+		});
 	}, 
 	/*
 	onChange: function(event, articles) {
@@ -161,12 +171,16 @@ module.exports = React.createClass({
 });
 
 
-styles = StyleSheet.create({
+var styles = StyleSheet.create({
 	container: {
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center',
-		backgroundColor: '#000000', 
+		backgroundColor: "black", 
+		shadowColor:'black', 
+	    shadowOffset: {width: 4, height: 4}, 
+	    shadowOpacity: 0.8, 
+	    shadowRadius: 20,
 	}, 
 	activityIndicator: {
         alignItems: 'center',

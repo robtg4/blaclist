@@ -5,7 +5,8 @@ var {
 	StyleSheet,
 	Text, 
 	Modal,  
-	ScrollView
+	ScrollView,
+	AsyncStorage
 } = React;
 
 //additional libraries
@@ -15,6 +16,9 @@ var Parse = require('parse/react-native');
 //dynamic component references
 var Api = require('../../utils/api');
 
+//libraries 
+
+
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
@@ -22,6 +26,8 @@ var HTMLView = require('react-native-htmlview');
 var ImageButton = require('../../common/imageButton');
 
 module.exports = React.createClass({ 
+	componentDidMount: function() {
+	}, 
 	componentWillMount: function() {
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
@@ -99,7 +105,7 @@ var styles_two = StyleSheet.create({
 		color:'white', 
 		fontSize: 12, 
 		fontWeight: '200', 
-		fontFamily: 'arial', 
+		fontFamily: 'SFCompactText-Medium', 
 	}
 }); 
 
@@ -166,7 +172,7 @@ var styles = StyleSheet.create({
 	sideText: {
 		color:'white', 
 		fontSize: 12, 
-		fontFamily: 'arial', 
+		fontFamily: 'SFCompactText-Medium', 
 		margin: 10, 
 		alignSelf: 'center', 
 	}, 
