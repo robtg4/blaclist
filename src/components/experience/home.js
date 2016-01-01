@@ -96,21 +96,22 @@ module.exports = React.createClass({
 	                      { borderBottomWidth: 2, justifyContent: 'center', alignItems: 'center' },
 	                      isActive ? { borderColor: '#DB202A'} : { borderColor: 'transparent' }
 	                    ]}>
-	                  <Text style={isActive ? { color: '#DB202A' } : null}>{ name }</Text>
+	                  <Text style={styles.menuText}>{ name }</Text>
 	                </View>
 	              	)}>
-		        		<Tabbar.Item name="Home">
+		        		<Tabbar.Item 
+		        			name="Home" >
 			        		<View style={styles.container}>
 			        			{this.renderListView()}
 			        		</View>
 			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Trending">
+			        	<Tabbar.Item name="Trending" >
 			        		<Text>This is the Trending tab</Text>
 			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Profile">
+			        	<Tabbar.Item name="Profile" >
 			        		<Text>This is the Profile tab</Text>
 			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Settings">
+			        	<Tabbar.Item name="Settings" >
 			        		<Text>This is the Settings tab</Text>
 			        	</Tabbar.Item>
 	        	</Tabbar>		
@@ -135,35 +136,16 @@ module.exports = React.createClass({
     }, 
     //rendering rows within list view
     renderEntry: function(entry) {
-
-		if (!entry.image.src)
-		{
-			return (
-				<ArticlePreview
-					category={'template'}
-					key={entry.title.text}
-					heartText={'2.9k'}
-					categoryPress={this.onCategoryDetailsPress}
-					selected={false}
-					source={require('../img/stock_image.png')}
-					text={entry.title.text}
-					onPress={() => this.onArticleDetailsPress(entry)} />
-			);
-		} else 
-		{ 
-			return (
-				<ArticlePreview
-					category={'template'}
-					key={entry.title.text}
-					heartText={'2.9k'}
-					categoryPress={this.onCategoryDetailsPress}
-					selected={false}
-					source={{uri: entry.image.src }}
-					text={entry.title.text}
-					onPress={() => this.onArticleDetailsPress(entry)} />
-			);
-		}
-			
+		return (
+			<ArticlePreview
+				category={'template'}
+				key={entry.title.text}
+				categoryPress={this.onCategoryDetailsPress}
+				selected={false}
+				source={{uri: entry.image.src }}
+				text={entry.title.text}
+				onPress={() => this.onArticleDetailsPress(entry)} />
+		);	
 	},
 	//pressing category button to go to feed of that category 
 	onCategoryDetailsPress: function() {
@@ -197,6 +179,10 @@ module.exports = React.createClass({
 
 
 var styles = StyleSheet.create({
+	menuText: {
+		color:'white',  
+		fontFamily: 'SFCompactText-Medium',
+	}, 
 	menu: {
 		backgroundColor: "black"
 	}, 

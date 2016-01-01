@@ -2,8 +2,7 @@
 //these are made of api urls from kimonolabs for consistency 
 //and enhanced content 
 
-var NEWS = ['https://www.kimonolabs.com/api/crkywa8c?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
-'https://www.kimonolabs.com/api/8t6ennhu?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
+var NEWS = ['https://www.kimonolabs.com/api/crkywa8c?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 NEWS.name = "News";
 
 var POLITICS = ['https://www.kimonolabs.com/api/byeh7eiu?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
@@ -35,13 +34,14 @@ FASHION.name = "Fashion";
 var STARTUPS = ['https://www.kimonolabs.com/api/ehywlf16?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 STARTUPS.name = "Entrepreneurship"; 
 
-var TECH = ['https://www.kimonolabs.com/api/dabb82c8?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
+var TECH = ['https://www.kimonolabs.com/api/dabb82c8?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/6s9d5pdg?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 TECH.name = "Technology";
 
 var BUSINESS = []; 
 BUSINESS.name = "Business"; 
 
-var BLACKBUZZ = []; 
+var BLACKBUZZ = ['https://www.kimonolabs.com/api/b5r0j28i?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 BLACKBUZZ.name = "Black Buzzfeed"; 
 
 var POETRY = []; 
@@ -105,7 +105,8 @@ INTERNET.name = "Internet";
 var THEATER = ['https://www.kimonolabs.com/api/d0bpzqve?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 THEATER.name = "Theater"; 
 
-var CELEBRITY = ['https://www.kimonolabs.com/api/79l57pss?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
+var CELEBRITY = ['https://www.kimonolabs.com/api/79l57pss?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/eiv4f3lo?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 CELEBRITY.name = "Celebrity News"
 
 var BOOKS = []; 
@@ -126,7 +127,7 @@ WALLSTREET.name = "Black Wall Street";
 var HOME = []; 
 HOME.name = "Home Decorating";
 
-var DEFAULT = ['https://www.kimonolabs.com/api/2mh8mwos?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
+var DEFAULT = ['https://www.kimonolabs.com/api/2mh8mwos?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 'https://www.kimonolabs.com/api/b5r0j28i?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 DEFAULT.name = "Default"; 
 
 module.exports = {

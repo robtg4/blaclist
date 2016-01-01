@@ -49,15 +49,20 @@ module.exports = {
           //console.log(final_array.length);
 
           // delete all duplicates from the array
-          for(var i = 0; i < final_array.length-1; i++) 
+          for(var i = 0; i < final_array.length; i++) 
           {
-            if ( final_array[i].title.text == final_array[i+1].title.text ) {
-              final_array.splice(i, 1)
+            for (var n = 0; n < final_array.length; n++) 
+            {
+              if (final_array[i].title.text == final_array[n].title.text) 
+              {
+                final_array.splice(i, 1)
+              }
             }
           }
 
           that.shuffle(final_array);
-          //console.log(final_array);
+          
+          console.log(final_array);
           return final_array;
       });
     
@@ -84,6 +89,7 @@ module.exports = {
             console.log(responseData.results.collection1[x]);
 
             //check if the entry has an image associated with it
+            console.log(responseData.results.collection1[x].image.src);
             if (responseData.results.collection1[x].image.src != "") 
             {
               //one by one so that we can randomize the array's contents 

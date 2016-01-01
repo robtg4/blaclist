@@ -35,37 +35,47 @@ module.exports = React.createClass({
     - this.props.selected
   */
   render: function() {
-    return (
-      <TouchableHighlight 
-        underlayColor={'transparent'}
-        onPress={this.props.onPress} >
-          <Image 
-            source={this.props.source} 
-            style={[styles.articlePreview, this.border('red')]}>
-                  <View style={[styles.container, this.border('organge')]}>
-                      <View style={[styles.header, this.border('blue')]}>
-                          <Text style={[styles.previewText]}>{this.props.text}</Text>
-                      </View>
-                      <View style={[styles.footer, this.border('white')]}>
-                        <View style={[styles.heartRow, this.border('black')]}>
-                          <ImageButton
-                              style={[styles.heartBtn, , this.border('red')]}
-                              resizeMode={'contain'}
-                              onPress={this.onHeartPress}
-                              source={require('../../img/heart_btn.png')} />
-                          <Text style={[styles.heartText]}>{this.props.heartText + ' favorites'}</Text>
-                        </View>
-                          <KeywordBox 
-                              style={[styles.category, this.border('blue')]}
-                              key={this.props.key} 
-                              text={this.props.category} 
-                              onPress={this.props.categoryPress}
-                              selected={this.props.selected} />
-                      </View>
+      return (
+        <TouchableHighlight 
+          style={styles.touchCard}
+          underlayColor={'transparent'}
+          onPress={this.props.onPress} >
+            <View style={styles.card}>
+              <Image 
+                source={this.props.source} 
+                style={[styles.articlePreview, this.border('red')]} />
+              <View style={[styles.container, this.border('organge')]}>
+                  <View style={[styles.header, this.border('blue')]}>
+                      <Text style={[styles.previewText]}>{this.props.text}</Text>
                   </View>
-          </Image>
-      </TouchableHighlight>
-    );
+                  <View style={[styles.footer, this.border('white')]}>
+                    <View style={styles.sourceRow}>
+                      <View style={[this.border('white')]}>
+                        <ImageButton
+                            style={[styles.logoBtn, , this.border('red'), styles.row]}
+                            resizeMode={'contain'}
+                            onPress={this.onHeartPress}
+                            source={require('../../img/logos/complex-logo.png')} />
+                      </View>
+                      <View style={[this.border('white')]}>
+                          <Text style={[styles.rowText, {fontWeight: 'bold'}]}>Reuters</Text>
+                          <Text style={[styles.rowText]}>27 minutes ago</Text>
+                      </View>
+                    </View>
+                    <View style={[styles.heartRow, this.border('black')]}>
+                      <KeywordBox 
+                          style={[styles.category, this.border('blue')]}
+                          key={this.props.key} 
+                          text={this.props.category} 
+                          onPress={this.props.categoryPress}
+                          selected={this.props.selected} />
+                    </View>
+                  </View>
+              </View>
+            </View>
+        </TouchableHighlight>
+      );
+    
   }, 
   onHeartPress: function() {
     //will move this function to a general module
@@ -79,12 +89,38 @@ module.exports = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  sourceRow: {
+    justifyContent: 'space-around', 
+    flexDirection: 'row', 
+  }, 
+  rowText: {
+    textAlign: 'left',
+    color: 'white', 
+    fontSize: 12, 
+    marginLeft: 5, 
+    fontFamily: 'SFCompactText-Medium'
+  }, 
+  detailText: {
+    fontFamily: 'SFCompactText-Light',
+    fontSize: 18,
+    color: 'white', 
+    textAlign: 'left', 
+    marginTop: 2, 
+    marginLeft: 5, 
+  }, 
+  touchCard: {
+    margin: 3, 
+    width: window.width*0.95, 
+  }, 
+  card: {
+    flex: 1, 
+    width: window.width*0.95, 
+  }, 
   heartText: {
     color: 'white', 
     fontSize: 12, 
     fontWeight: 'bold',
     alignSelf: 'center', 
-    marginLeft: 5, 
     fontFamily: 'SFCompactText-Medium'
   }, 
   heartRow: {
@@ -92,6 +128,11 @@ var styles = StyleSheet.create({
     justifyContent: 'space-around', 
     alignSelf: 'center', 
     justifyContent: 'center', 
+  }, 
+  logoBtn: {
+    height: window.width/10, 
+    width: window.width/10, 
+    alignSelf:'center', 
   }, 
   heartBtn: {
     height: (92/97)*(window.width/13), 
@@ -104,41 +145,37 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   }, 
   header: {
-    flex: 3, 
-    alignItems: 'center', 
+    flex: 1, 
     justifyContent: 'space-around', 
-    marginTop: window.height/30,
+    marginTop: 5, 
   }, 
   footer: {
     flex: 1, 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
     alignItems: 'center', 
-    margin: window.height/50,
+    marginLeft: 2, 
+    marginTop: 5, 
+    marginBottom: 5, 
+    marginRight: 5, 
   }, 
   container: {
     flex: 1, 
     backgroundColor: 'black', 
-    opacity: 0.6, 
   }, 
   articlePreview: {
-    flex: 1, 
-    height: window.height/3.2, 
-    width: window.width, 
+    flex: 2, 
+    height: window.width*0.95, 
+    width:window.width*0.95, 
     flexDirection: 'column'
   }, 
   previewText: {
     fontFamily: 'Bebas Neue', 
     fontSize: 23,
     color: 'white', 
-    alignSelf: 'center', 
-    textAlign: 'center', 
-    margin: 5, 
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
+    textAlign: 'left', 
+    marginTop: 2, 
+    marginLeft: 5, 
   }, 
 
 });
