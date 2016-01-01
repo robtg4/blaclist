@@ -11,29 +11,21 @@ var {
 
 //additional libraries
 var Parse = require('parse/react-native');
-var EventEmitter = require('EventEmitter');
 var Spinner = require('react-native-spinkit');
-var SideMenu = require('react-native-side-menu');
-var Subscribable = require('Subscribable');
+var Tabbar = require('react-native-tabbar');
 
 //dynamic component references + libraries 
 var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 var ArticleDetails = require('./exp_base_components/article-details');
-var Menu = require('./menu');
-var MenuButton = require('../common/menuButton');
 
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
 module.exports = React.createClass({ 
-	//mixins are for menu functionality taken from 
-	//here: https://github.com/mcnamee/react-native-starter-app
-	mixins: [Subscribable.Mixin],
 	componentWillMount: function() {
-		this.eventEmitter = new EventEmitter();
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
 	},  
@@ -67,23 +59,13 @@ module.exports = React.createClass({
 		return {
 			user: null, 
 			personalFeed: null, 
-			touchToClose: true,
-        	disableGestures: false,
+			selected: 'Home', 
 			isLoaded: false, 
 			dataSource: new ListView.DataSource({
                rowHasChanged: (row1, row2) => row1 !== row2,
             }), 
 		}
 	},
-	//part of menu button functionality 
-	navigate: function(title, link) {
-      this.refs.rootSidebarMenu.closeMenu();
-
-      this.refs.rootNavigator.replace({
-        title: title,
-        component: link,
-      });
-    },
     //gettign data for rss feed based on user interests 
 	fetchData: function(personalFeed) {
 		var that = this; 
@@ -102,27 +84,37 @@ module.exports = React.createClass({
 		if (!this.state.isLoaded) {
             return this.renderLoadingView();
         }
-        return <SideMenu 
-        			menu={<Menu events={this.eventEmitter} navigate={this.navigate} />}
-        			touchToClose={this.state.touchToClose}
-          			disableGestures={this.state.disableGestures}
-        			toleranceX={0}
-        			edgeHitWidth={window.width/5}
-        			openMenuOffset={window.width/5}>
-        		<View style={styles.container}>
-        			{this.renderListView()}
-        		</View>
-        		<MenuButton 
-					selected={this.state.enoughSelections}
-					source={require('../img/menu-btn.png')}
-					resize={'contain'}
-					onPress={this.onMenuPress} />
-        	</SideMenu>
+        return <Tabbar 
+		        	selected={this.state.selected} 
+		        	tabHeight={window.height/16}
+		        	style={styles.menu}
+		        	onTabItemPress={name => this.setState({ selected: name })}
+		        	renderTabComponent
+		        	renderTabComponent={(name, isActive) => (
+	                <View
+	                    style={[
+	                      { borderBottomWidth: 2, justifyContent: 'center', alignItems: 'center' },
+	                      isActive ? { borderColor: '#DB202A'} : { borderColor: 'transparent' }
+	                    ]}>
+	                  <Text style={isActive ? { color: '#DB202A' } : null}>{ name }</Text>
+	                </View>
+	              	)}>
+		        		<Tabbar.Item name="Home">
+			        		<View style={styles.container}>
+			        			{this.renderListView()}
+			        		</View>
+			        	</Tabbar.Item>
+			        	<Tabbar.Item name="Trending">
+			        		<Text>This is the Trending tab</Text>
+			        	</Tabbar.Item>
+			        	<Tabbar.Item name="Profile">
+			        		<Text>This is the Profile tab</Text>
+			        	</Tabbar.Item>
+			        	<Tabbar.Item name="Settings">
+			        		<Text>This is the Settings tab</Text>
+			        	</Tabbar.Item>
+	        	</Tabbar>		
 	},
-	//menu press function 
-	onMenuPress: function() {
-		this.eventEmitter.emit('toggleMenu');
-	}, 
 	//loading render
 	renderLoadingView: function() {
         return (
@@ -144,40 +136,30 @@ module.exports = React.createClass({
     //rendering rows within list view
     renderEntry: function(entry) {
 
-		if (typeof entry.mediaGroups === 'undefined')
+		if (!entry.image.src)
 		{
 			return (
 				<ArticlePreview
-					category={entry.categories[0]}
-					key={entry.title}
+					category={'template'}
+					key={entry.title.text}
 					heartText={'2.9k'}
 					categoryPress={this.onCategoryDetailsPress}
 					selected={false}
 					source={require('../img/stock_image.png')}
-					text={entry.title.toLowerCase().replace('&nbsp;','')}
+					text={entry.title.text}
 					onPress={() => this.onArticleDetailsPress(entry)} />
 			);
 		} else 
 		{ 
-			var url = entry.mediaGroups[0].contents[0].url; 
-			if (url.indexOf('w=150') > -1)
-			{
-				url.replace("w=150", "w=500");
-			}
-			var catsource = entry.categories[0]; 
-			if (typeof catsource == "undefined")
-			{
-				catsource = "News";
-			}
 			return (
 				<ArticlePreview
-					category={catsource}
-					key={entry.title}
+					category={'template'}
+					key={entry.title.text}
 					heartText={'2.9k'}
 					categoryPress={this.onCategoryDetailsPress}
 					selected={false}
-					source={{uri: url }}
-					text={entry.title.toLowerCase().replace('&nbsp;','')}
+					source={{uri: entry.image.src }}
+					text={entry.title.text}
 					onPress={() => this.onArticleDetailsPress(entry)} />
 			);
 		}
@@ -187,6 +169,12 @@ module.exports = React.createClass({
 	onCategoryDetailsPress: function() {
 		//forward to sytled web view of categorical article feed
 		console.log("onCategoryDetailsPress"); 
+
+		fetch('https://www.kimonolabs.com/api/d076bfeo?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE')
+	      .then((response) => response.json())
+	      .then((responseData) => {
+	       console.log(responseData);
+	    });
 	}, 
 	//press to see article's details 
 	onArticleDetailsPress: function(entry) {
@@ -194,12 +182,9 @@ module.exports = React.createClass({
 		console.log("onArticleDetailsPress"); 
 		console.log(entry);
 
-		//asynchronously store entry
-
-
 		this.props.navigator.push({
 			name: 'articledetails',
-            passProps: {entry: entry},
+            passProps: { entry: entry }
 		});
 	}, 
 	/*
@@ -212,6 +197,9 @@ module.exports = React.createClass({
 
 
 var styles = StyleSheet.create({
+	menu: {
+		backgroundColor: "black"
+	}, 
 	container: {
 		flex: 1, 
 		alignItems: 'center', 

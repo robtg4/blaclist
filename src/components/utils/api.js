@@ -59,19 +59,6 @@ module.exports = {
 				RSS_custom.push(RSS.FEEDS[i][x]);
 			}
 		}
-	
-		//clean customized array of urls 
-		for (var z = 0; z < RSS_custom.length; z++)
-		{
-			//clean the url, default = 5
-			if (!(/^http:\/\//.test(RSS_custom[z]))) {
-		     RSS_custom[z] = "http://" + RSS_custom[z];
-		    }
-
-		    //encode the feed
-		    var GOOGLE_FEED_API_URL = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=-1&q=";
-		    RSS_custom[z] = GOOGLE_FEED_API_URL + encodeURIComponent(RSS_custom[z]);
-		}
 		
 		console.log(RSS_custom);
 		var url = RSS_custom[2];

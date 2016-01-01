@@ -1,59 +1,43 @@
 //where we store the app's rss feeds
-//slatest: http://feeds.slate.com/slate/testfeed/SlatestFullTextRssFeed
-//the root: http://www.theroot.com/articles.teaser.all.25.rss
-//buzzfeed usnews: http://www.buzzfeed.com/usnews.xml
-//hufington post black politics: http://feeds.huffingtonpost.com/huffingtonpost/raw_feed
-//AlJazeera => http://america.aljazeera.com/content/ajam/articles.rss
+//these are made of api urls from kimonolabs for consistency 
+//and enhanced content 
 
-
-//http://www.blacknews.com/feed/ -> no images
-//http://blackamericaweb.com/feed/ -> diff
-//http://thegrio.com/feed/ -> diff
-var NEWS = ['http://www.buzzfeed.com/usnews.xml',
-'http://goodblacknews.org/feed/', 'http://www.theroot.com/articles.teaser.all.25.rss'];
+var NEWS = ['https://www.kimonolabs.com/api/crkywa8c?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/8t6ennhu?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 NEWS.name = "News";
 
-//http://blackpoliticstoday.com/home/feed/ -> diff
-var POLITICS = ['http://feeds.slate.com/slate-101526'];
+var POLITICS = ['https://www.kimonolabs.com/api/byeh7eiu?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/dq70bg20?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 POLITICS.name = "Politics";
 
-//http://www.lgbtqnation.com/feed/ -> no images
-//http://www.musedmagonline.com/feed/ -> no images
-var LGBQT = [];
+var LGBQT = ['https://www.kimonolabs.com/api/95b0meoa?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/50w0vdou?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 LGBQT.name = "LGBQT";
 
-//'http://www.blackenterprise.com/category/lifestyle/feed'
-//http://blacklivesmatter.com/feed/ -> diff
-var BLM = [];
+var BLM = ['https://www.kimonolabs.com/api/7igz6dsw?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 BLM.name = "BlackLivesMatter"; 
 
-//http://www.sohh.com/feed/ -> diff
-var ARTS = []; 
+var ARTS = ['https://www.kimonolabs.com/api/48i8b73g?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 ARTS.name = "Arts"; 
 
-var HIPHOP = [];
+var HIPHOP = ['https://www.kimonolabs.com/api/66ytckus?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE',
+'https://www.kimonolabs.com/api/1yhip7y4?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 HIPHOP.name = "Hip-Hop";
 
-var HISTORY = []; 
+var HISTORY = ['https://www.kimonolabs.com/api/dufmw85u?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 HISTORY.name = "History";
 
-//needs to be treated differently from the rest (image based diff structure)
-var FASHION = ['http://blackfashion.tumblr.com/rss']; 
+var FASHION = ['https://www.kimonolabs.com/api/4nlj00lw?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/24dzw25w?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/3hyjtpyy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 FASHION.name = "Fashion"; 
 
-//'http://www.blackenterprise.com/category/small-business/feed/'
-//'http://blackfounders.com/feed/'
-var STARTUPS = []; 
+var STARTUPS = ['https://www.kimonolabs.com/api/ehywlf16?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 STARTUPS.name = "Entrepreneurship"; 
 
-//'https://www.blacksintechnology.net/feed/', 
-//http://wearetechnoir.com/feed/ -> diff
-var TECH = ['http://techcrunch.com/feed/']; 
+var TECH = ['https://www.kimonolabs.com/api/dabb82c8?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 TECH.name = "Technology";
 
-//'http://www.blackenterprise.com/category/money/feed'
-//'http://www.blackenterprise.com/category/career/feed'
-//http://www.tnj.com/rss.xml -> diff
 var BUSINESS = []; 
 BUSINESS.name = "Business"; 
 
@@ -63,29 +47,25 @@ BLACKBUZZ.name = "Black Buzzfeed";
 var POETRY = []; 
 POETRY.name = "Poetry"; 
 
-//http://www.theguardian.com/world/rss -> no images
-//http://www.telegraph.co.uk/news/worldnews/rss -> doesn't show
-//http://www.npr.org/rss/rss.php?id=1001 -> no images 
-var WORLD = []; 
+var WORLD = ['https://www.kimonolabs.com/api/54xblsqm?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 WORLD.name = "World";
 
-//http://blackdoctor.org/feed/ -> diff
-var HEALTH = [];
+var HEALTH = ['https://www.kimonolabs.com/api/3m0ii7ca?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 HEALTH.name = "Health"; 
 
 var TRENDING = []; 
 TRENDING.name = 'Trending'; 
 
-//https://www.yahoo.com/music/rss -> no images
-var MUSIC = []; 
+var MUSIC = ['https://www.kimonolabs.com/api/a5iszcra?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/8e1vktuc?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE',
+'https://www.kimonolabs.com/api/c78lje40?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 MUSIC.name = 'Music'; 
 
-//http://www.blackenterprise.com/category/lifestyle/sportsbiz/feed/'
-//http://www.cbssports.com/partners/feeds/rss/home_news -> no images
-var SPORTS =[]; 
+var SPORTS =['https://www.kimonolabs.com/api/4g5mejqo?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/altyt7nc?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 SPORTS.name = 'Sports'; 
 
-var ENT = []; 
+var ENT = ['https://www.kimonolabs.com/api/cqt9k7a2?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 ENT.name = 'Entertainment'; 
 
 var GAMES = []; 
@@ -94,26 +74,25 @@ GAMES.name = "Gaming";
 var DESIGN = []; 
 DESIGN.name = "Design"; 
 
-//http://www.collegehumor.com/rss -> no images
 var HUMOR = []; 
 HUMOR.name = "Humor"; 
 
-//http://healthyblackmen.org/feed/ -> diff
-var MOC = []; 
+var MOC = ['https://www.kimonolabs.com/api/4nlj00lw?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/3hyjtpyy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 MOC.name = "Men of Color"; 
 
 var HAPPINESS = []; 
 HAPPINESS.name = "Happiness"; 
 
-//http://www.npr.org/rss/rss.php?id=1015 -> no images
-//http://www.bwwla.org/feed/ -> diff
-var WOC = [];
+var WOC = ['https://www.kimonolabs.com/api/84nsjymc?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE',
+'https://www.kimonolabs.com/api/bzzg9s1u?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/99q84pko?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE', 
+'https://www.kimonolabs.com/api/6oomuzpy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE'];
 WOC.name = "Women of Color";  
 
-var TRAVEL = []; 
+var TRAVEL = ['https://www.kimonolabs.com/api/5k2vjyhw?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 TRAVEL.name = "Travel";
 
-//http://www.blackenterprise.com/category/photos/feed -> no images 
 var PHOTOGRAPHY = []; 
 PHOTOGRAPHY.name = "Photogrpahy"; 
 
@@ -123,10 +102,10 @@ UNIVERSE.name = "Universe";
 var INTERNET = []; 
 INTERNET.name = "Internet"; 
 
-var THEATER = []; 
+var THEATER = ['https://www.kimonolabs.com/api/d0bpzqve?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 THEATER.name = "Theater"; 
 
-var CELEBRITY = []; 
+var CELEBRITY = ['https://www.kimonolabs.com/api/79l57pss?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 CELEBRITY.name = "Celebrity News"
 
 var BOOKS = []; 
@@ -135,10 +114,10 @@ BOOKS.name = "Books";
 var MARKETING =[]; 
 MARKETING.name = "Marketing"; 
 
-var FILM = []; 
+var FILM = ['https://www.kimonolabs.com/api/40nuptnq?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 FILM.name = "Film"; 
 
-var CARS = []; 
+var CARS = ['https://www.kimonolabs.com/api/d4abojl8?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 CARS.name = "Auto"; 
 
 var WALLSTREET = []; 
@@ -147,7 +126,7 @@ WALLSTREET.name = "Black Wall Street";
 var HOME = []; 
 HOME.name = "Home Decorating";
 
-var DEFAULT = ['http://feeds.huffingtonpost.com/c/35496/f/677047/index.rss', 'http://www.vice.com/rss']; 
+var DEFAULT = ['https://www.kimonolabs.com/api/2mh8mwos?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE']; 
 DEFAULT.name = "Default"; 
 
 module.exports = {

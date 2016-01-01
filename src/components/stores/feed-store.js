@@ -16,18 +16,19 @@ var React = require('react-native');
 module.exports = {
   //listenables: [Actions], 
   getArticles: function(personalFeed) {
-    //console.log("Inside the getArticles function");
-    //console.log(personalFeed);
+    console.log("Inside the getArticles function");
+    console.log(personalFeed);
     var RSS_custom = Api.fetchRss(personalFeed);
     var rss_feeds = [];
     var final_array = [];
-    //console.log(RSS_custom);
+    console.log(RSS_custom);
     //go through each of the urls and make sure 
     //their fine 
     for (var i = 0; i < RSS_custom.length; i++)
     {
         //console.log("Processing through the following custom feed: " + RSS_custom[i] + ": Repo #" + i);
         //processing url 1 by 1 to maintain global scope for all repos 
+        console.log(RSS_custom[i]);
         rss_feeds.push(this.fetchEntries(RSS_custom[i]));
     }
 
@@ -46,6 +47,15 @@ module.exports = {
           }
           //console.log('The following array of objects was constructed and is now being shuffled');
           //console.log(final_array.length);
+
+          // delete all duplicates from the array
+          for(var i = 0; i < final_array.length-1; i++) 
+          {
+            if ( final_array[i].title.text == final_array[i+1].title.text ) {
+              final_array.splice(i, 1)
+            }
+          }
+
           that.shuffle(final_array);
           //console.log(final_array);
           return final_array;
@@ -53,40 +63,47 @@ module.exports = {
     
   },  
   fetchEntries: function(url) {
+    console.log("inside the fetchEntries");
     var that = this; 
     return fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
-        //console.log("Processing the custom feed");
+        console.log("Processing the custom feed");
         //check if the rss feed is up 
         if (that.responseValidator(responseData)) 
         {
-          //console.log("The repo is up! Now processing the entries within the data");
+          console.log("The repo is up! Now processing the entries within the data");
           //if it is indeed up we need to return the objects 1 by 1 
           //store in new array that is 
           //indicative of working feeds 
           //get initial set of entries 
           var working_feeds = [];
-          for (var x = 0; x < responseData.responseData.feed.entries.length; x++)
+          for (var x = 0; x < responseData.results.collection1.length; x++)
           {
-            //console.log(responseData.responseData.feed.entries[x]);
-            //one by one so that we can randomize the array's contents 
-            working_feeds.push(responseData.responseData.feed.entries[x]);
+            console.log("looping through feed entries and putting into array");
+            console.log(responseData.results.collection1[x]);
+
+            //check if the entry has an image associated with it
+            if (responseData.results.collection1[x].image.src != "") 
+            {
+              //one by one so that we can randomize the array's contents 
+              working_feeds.push(responseData.results.collection1[x]);
+            }
           }
-          //console.log(working_feeds);
+          console.log("The working feed array is the following");
+          console.log(working_feeds);
           return working_feeds; 
         } 
       });
   }, 
   responseValidator: function(responseData) {
-    //console.log("Verifying data to see if repo is up");
-    /*console.log(responseData);
-    console.log(responseData.responseData.feed.entries[0].mediaGroups);
-    console.log(typeof responseData.responseData.feed.entries[0].mediaGroups);*/
-      if(responseData.responseStatus == 200) 
+    console.log("Verifying data to see if repo is up");
+    //console.log(responseData);
+   
+      if(responseData.thisversionstatus == 'success') 
       {
-        console.log("Code 200 Success!");
-        console.log(responseData);
+        console.log("Success!");
+        //console.log(responseData);
         return true; 
       } else {
         return false; 
