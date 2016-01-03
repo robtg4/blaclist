@@ -55,10 +55,10 @@ module.exports = React.createClass({
                             style={[styles.logoBtn, , this.border('red'), styles.row]}
                             resizeMode={'contain'}
                             onPress={this.onHeartPress}
-                            source={require('../../img/logos/complex-logo.png')} />
+                            source={this.props.src} />
                       </View>
                       <View style={[this.border('white')]}>
-                          <Text style={[styles.rowText, {fontWeight: 'bold'}]}>Reuters</Text>
+                          <Text style={[styles.rowText, {fontWeight: 'bold'}]}>{this.props.entryBrand}</Text>
                           <Text style={[styles.rowText]}>27 minutes ago</Text>
                       </View>
                     </View>
@@ -147,17 +147,14 @@ var styles = StyleSheet.create({
   header: {
     flex: 1, 
     justifyContent: 'space-around', 
-    marginTop: 5, 
+    marginTop: window.height/60, 
   }, 
   footer: {
     flex: 1, 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
     alignItems: 'center', 
-    marginLeft: 2, 
-    marginTop: 5, 
-    marginBottom: 5, 
-    marginRight: 5, 
+    margin: window.height/80, 
   }, 
   container: {
     flex: 1, 

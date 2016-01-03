@@ -45,20 +45,25 @@ module.exports = {
               final_array.push(res[q][a]);
             }
           }
-          //console.log('The following array of objects was constructed and is now being shuffled');
-          //console.log(final_array.length);
+          console.log('The following array of objects was constructed and is now being shuffled');
+          console.log(final_array.length);
 
           // delete all duplicates from the array
-          for(var i = 0; i < final_array.length; i++) 
+          var duplicate = 0;
+          for(var e = 0; e < final_array.length; e++) 
           {
             for (var n = 0; n < final_array.length; n++) 
             {
-              if (final_array[i].title.text == final_array[n].title.text) 
+              if (final_array[e].title.text == final_array[n].title.text) 
               {
-                final_array.splice(i, 1)
+                //console.log("MATCH!: " + final_array[e].title.text + " : " + final_array[n].title.text);
+                final_array.splice(e, 1)
+                duplicate++;
               }
             }
           }
+           console.log(duplicate); 
+           console.log(final_array.length);
 
           that.shuffle(final_array);
           
