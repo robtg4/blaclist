@@ -14,7 +14,7 @@ var {
 var Signin = require('./components/authentication/signin');
 var Launch = require('./components/authentication/launch');
 var Signup = require('./components/authentication/signup');
-var Home = require('./components/experience/home');
+var MainView = require('./components/experience/main-view');
 var Onboarding = require('./components/authentication/onboarding');
 var Introduction = require('./components/authentication/introduction');
 var ArticleDetails = require('./components/experience/exp_base_components/article-details.js');
@@ -30,7 +30,7 @@ var ROUTES ={
 	signup: Signup,
 	introduction: Introduction,
 	onboarding: Onboarding,  
-	home: Home, 
+	mainview: MainView, 
 	articledetails: ArticleDetails, 
 }
 

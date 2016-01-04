@@ -154,7 +154,7 @@ module.exports = React.createClass({
 			user_words.save({
 			  success: function(user_words) {
 			    console.log("The save was successful.");
-			    that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
+			    that.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]);
 			  },
 			  error: function(user_words, error) {
 			    console.log(error);

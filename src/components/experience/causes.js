@@ -13,7 +13,7 @@ module.exports = React.createClass({
 	render: function() {
 
         return <View style={styles.container}>
-        	<Text>This is the Settings Page</Text>
+        	<Text>This is the Causes Page</Text>
         </View>
 	},
 });

@@ -128,7 +128,7 @@ module.exports = React.createClass({
 			          // login: nothing to do
 			          console.log('User Already Logged In');
 			          that.setState({loadingCurrentUser: false});
-			          that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
+			          that.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]);
 			        } else {
 			          // signup: update user data, e.g. email
 			          console.log('getting user additional information');
@@ -156,7 +156,7 @@ module.exports = React.createClass({
 			              }).dispatch();
 
 			              that.setState({loadingCurrentUser: false});
-			              that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
+			              that.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]);
 			            }
 			          }, '/me?fields=name,email');
 			          // FIXME https://github.com/facebook/react-native-fbsdk/issues/20
@@ -191,7 +191,7 @@ module.exports = React.createClass({
 		//log the user on, get eror if login information doesn't exist 
 		//we need to show the user that the error occured
 		Parse.User.logIn(this.state.username, this.state.password, {
-			  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]); },
+			  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]); },
 			  error: (data, error) => { this.setState({ errorMessage: error.message }); }
 		});
 	},

@@ -34,11 +34,12 @@
     "react-native-order-children": "^1.1.2",
     "react-native-overlay": "^0.3.0",
     "react-native-router-flux": "^0.3.4",
+    "react-native-scrollable-tab-view": "^0.3.4",
     "react-native-side-menu": "^0.15.5",
     "react-native-spinkit": "0.0.5",
     "react-native-store": "^0.2.4",
     "react-native-tabbar": "^0.2.1",
-    "react-native-vector-icons": "^1.0.0",
+    "react-native-vector-icons": "^1.0.4",
     "reflux": "^0.3.0",
     "request": "^2.67.0",
     "whatwg-fetch": "^0.10.1"

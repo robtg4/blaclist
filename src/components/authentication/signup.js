@@ -178,7 +178,7 @@ module.exports = React.createClass({
 
 			          //set state that the user is done being loaded
 			          that.setState({loadingCurrentUser: false});
-			          that.props.navigator.immediatelyResetRouteStack([{ name: 'home'}]);
+			          that.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]);
 			        } else {
 			          // signup: update user data, e.g. email
 			          console.log('getting user additional information');

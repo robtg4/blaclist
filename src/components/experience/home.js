@@ -12,14 +12,13 @@ var {
 //additional libraries
 var Parse = require('parse/react-native');
 var Spinner = require('react-native-spinkit');
-var Tabbar = require('react-native-tabbar');
 
 //dynamic component references + libraries 
 var ArticlePreview = require('./exp_base_components/article-preview');
+var ArticlePreviewAlt = require('./exp_base_components/article-preview-alt');
 var Api = require('../utils/api');
 var FeedStore = require('../stores/feed-store');
 var ArticleDetails = require('./exp_base_components/article-details');
-var Profile = require('./profile'); 
 
 //dimensions
 var Dimensions = require('Dimensions');
@@ -85,41 +84,9 @@ module.exports = React.createClass({
 		if (!this.state.isLoaded) {
             return this.renderLoadingView();
         }
-        return <Tabbar 
-		        	selected={this.state.selected} 
-		        	tabHeight={window.height/16}
-		        	style={styles.menu}
-		        	onTabItemPress={name => this.setState({ selected: name })}
-		        	renderTabComponent
-		        	renderTabComponent={(name, isActive) => (
-	                <View
-	                    style={[
-	                      { borderBottomWidth: 2, justifyContent: 'center', alignItems: 'center' },
-	                      isActive ? { borderColor: '#DB202A'} : { borderColor: 'transparent' }
-	                    ]}>
-	                  <Text style={styles.menuText}>{ name }</Text>
-	                </View>
-	              	)}>
-	              		<Tabbar.Item name="Causes" >
-			        		<Text>This is the Causes tab</Text>
-			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Trending" >
-			        		<Text>This is the Trending tab</Text>
-			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Home" >
-			        		<View style={styles.container}>
-			        			{this.renderListView()}
-			        		</View>
-			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Profile" >
-			        		<View style={styles.container}>
-			        			<Profile />
-			        		</View>
-			        	</Tabbar.Item>
-			        	<Tabbar.Item name="Settings" >
-			        		<Text>This is the Settings tab</Text>
-			        	</Tabbar.Item>
-	        	</Tabbar>		
+        return <View style={styles.container}>
+    		{this.renderListView()}
+    	</View>	
 	},
 	//loading render
 	renderLoadingView: function() {
@@ -141,79 +108,81 @@ module.exports = React.createClass({
     }, 
     //need to find which site the data is from to get logo
     getLogo: function(src) {
-      if (src.indexOf('ebony') > 0) {
+      if (src.toLowerCase() == "ebony") {
         return 'http://www.logotypes101.com/free_vector_logo_png/23293/DA01DB2F01F5D8B02F14B70E9687D4AD/Ebony';
-      } else if (src.indexOf('google') > 0) {
+      } else if (src.toLowerCase() == 'google') {
         return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1000px-Google_%22G%22_Logo.svg.png';
-      } else if (src.indexOf('bossip') > 0) {
+      } else if (src.toLowerCase() == 'bossip') {
         return 'http://www.devidev.com/wp-content/uploads_2/2013/08/bossip-small.png';
-      } else if (src.indexOf('blackfilm') > 0) {
+      } else if (src.toLowerCase() == 'blackfilm') {
         return '../../img/logos/blackfilm-logo.png';
-      } else if (src.indexOf('theybf') > 0) {
+      } else if (src.toLowerCase() == 'theybf') {
         return 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Theybf-logo.png';
-      } else if (src.indexOf('nyt') > 0) {
+      } else if (src.toLowerCase() == 'nyt') {
         return 'http://static01.nyt.com/images/icons/t_logo_291_black.png';
-      } else if (src.indexOf('gq') > 0) {
+      } else if (src.toLowerCase() =='gq') {
         return 'http://static1.squarespace.com/static/544d4d0fe4b0dbc1bb9dcac9/5469408ee4b0ddf2508d1fe6/5469411de4b067500a0ef991/1431200703106/GQlogo.jpg';
-      } else if (src.indexOf('buzzfeed') > 0) {
+      } else if (src.toLowerCase() =='buzzfeed') {
         return 'http://barnraisersllc.com/wp-content/uploads/2015/12/buzzfeed-logo.png';
-      } else if (src.indexOf('complex') > 0) {
+      } else if (src.toLowerCase() =='complex') {
         return 'http://images.complex.com/complex/image/upload/v1426696463/Complex_180x180_obsb5h.png';
-      } else if (src.indexOf('fox') > 0) {
+      } else if (src.toLowerCase() =='fox') {
         return 'https://pbs.twimg.com/profile_images/572924972104839168/QfSnx_Mu.png';
-      } else if (src.indexOf('huffingtonpost') > 0) {
+      } else if (src.toLowerCase() =='huffingtonpost') {
         return 'http://static.wixstatic.com/media/5ba28b_ba693d2a1acf4b6f883a6a72ac2e62f6.png/v1/fit/w_600,h_512/5ba28b_ba693d2a1acf4b6f883a6a72ac2e62f6.png';
-      } else if (src.indexOf('blavity') > 0) {
+      } else if (src.toLowerCase() =='blavity') {
         return 'https://d2o2wpn1drmies.cloudfront.net/avatars/429/863/202/7d8/410/3af/722/992/e0d/7da/eb/filledinturquoiseicon-jpg.medium.png?1406559707';
-      } else if (src.indexOf('aljazeera') > 0) {
+      } else if (src.toLowerCase() =='al jazeera') {
         return 'http://static.dnaindia.com/sites/default/files/styles/square/public/2015/03/26/321952-al-jazeera-logo.png?itok=sfH-fRQd';
-      } 
-    }, 
-    getSource: function(src) {
-      if (src.indexOf('ebony') > 0) {
-        return 'Ebony';
-      } else if (src.indexOf('google') > 0) {
-        return 'Google';
-      } else if (src.indexOf('bossip') > 0) {
-        return 'Bossip';
-      } else if (src.indexOf('blackfilm') > 0) {
-        return 'Blackfilm';
-      } else if (src.indexOf('theybf') > 0) {
-        return 'TheyBF';
-      } else if (src.indexOf('nyt') > 0) {
-        return 'New York Times';
-      } else if (src.indexOf('gq') > 0) {
-        return 'GQ';
-      } else if (src.indexOf('buzzfeed') > 0) {
-        return 'Buzzfeed';
-      } else if (src.indexOf('complex') > 0) {
-        return 'Complex';
-      } else if (src.indexOf('fox') > 0) {
-        return 'Fox Sports';
-      } else if (src.indexOf('huffingtonpost') > 0) {
-        return 'Huffington Post';
-      } else if (src.indexOf('blavity') > 0) {
-        return 'Blavity';
-      } else if (src.indexOf('aljazeera') > 0) {
-        return 'Aljazeera';
-      } 
+      } else if (src.toLowerCase() =='us uncut') {
+        return 'http://33.media.tumblr.com/avatar_2af44bd6a553_128.png';
+      } else if (src.toLowerCase() =='washington post') {
+        return 'https://www.washingtonpost.com/wp-apps/topicly/wp-content/themes/topicly/images/fb.png';
+      }
     }, 
     //rendering rows within list view
     renderEntry: function(entry) {
-    	var logo = this.getLogo(entry.url);
-    	var brand = this.getSource(entry.url);
-		return (
+    	var logo = this.getLogo(entry.newsSource);
+    	var title = null;
+    	if (typeof entry.title.text == 'undefined')
+		{
+			title = entry.title; 
+		} else
+		{
+			title = entry.title.text;
+		}
+    	if (entry.imageSource)
+    	{
+    		
+    		return (
 			<ArticlePreview
-				category={'template'}
-				entryBrand={brand}
+				category={entry.category}
+				postTime={entry.postTime}
+				entryBrand={entry.newsSource}
 				key={entry.title.text}
 				categoryPress={this.onCategoryDetailsPress}
 				selected={false}
 				src={{uri:logo}}
 				source={{uri: entry.image.src }}
-				text={entry.title.text}
+				text={title}
 				onPress={() => this.onArticleDetailsPress(entry)} />
-		);	
+			);
+    	} else 
+    	{
+    		return (
+			<ArticlePreviewAlt
+				category={entry.category}
+				postTime={entry.postTime}
+				entryBrand={entry.newsSource}
+				key={entry.title.text}
+				categoryPress={this.onCategoryDetailsPress}
+				selected={false}
+				src={{uri:logo}}
+				description={entry.desc}
+				text={title}
+				onPress={() => this.onArticleDetailsPress(entry)} />
+			);
+    	}	
 	},
 	//pressing category button to go to feed of that category 
 	onCategoryDetailsPress: function() {

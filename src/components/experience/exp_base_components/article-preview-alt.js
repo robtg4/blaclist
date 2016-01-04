@@ -17,7 +17,6 @@ var {
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
-//components
 var ImageButton = require('../../common/imageButton');
 var KeywordBox = require('../../authentication/onboarding/keyword-box');
 
@@ -26,15 +25,6 @@ var KeywordBox = require('../../authentication/onboarding/keyword-box');
 module.exports = React.createClass({
   //onPress function that triggers when button pressed
   //this.props.text is property that can be dynamically filled within button 
-  /* following props:
-    - source={this.props.source}
-    - onPress={this.props.onPress}
-    - {this.props.text}
-    - {this.props.heartText}
-    - key={this.props.key} 
-    - text={this.props.category} 
-    - this.props.selected
-  */
   render: function() {
       return (
         <TouchableHighlight 
@@ -42,12 +32,10 @@ module.exports = React.createClass({
           underlayColor={'transparent'}
           onPress={this.props.onPress} >
             <View style={styles.card}>
-              <Image 
-                source={this.props.source} 
-                style={[styles.articlePreview, this.border('red')]} />
               <View style={[styles.container, this.border('organge')]}>
                   <View style={[styles.header, this.border('blue')]}>
                       <Text style={[styles.previewText]}>{this.props.text}</Text>
+                      <Text style={[styles.descText]}>{this.props.description}</Text>
                   </View>
                   <View style={[styles.footer, this.border('white')]}>
                     <View style={styles.sourceRow}>
@@ -112,6 +100,7 @@ var styles = StyleSheet.create({
   touchCard: {
     margin: 3, 
     width: window.width*0.95, 
+    shadowColor: 'black',
     shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 3,
@@ -169,6 +158,14 @@ var styles = StyleSheet.create({
     height: window.width*0.95, 
     width:window.width*0.95, 
     flexDirection: 'column'
+  }, 
+  descText: {
+    fontFamily: 'SFCompactText-Medium', 
+    fontSize: 15,
+    color: 'white', 
+    textAlign: 'left', 
+    marginTop: 2, 
+    marginLeft: 5, 
   }, 
   previewText: {
     fontFamily: 'Bebas Neue', 
