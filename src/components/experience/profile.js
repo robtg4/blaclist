@@ -30,9 +30,7 @@ module.exports = React.createClass({
 					<Image 
 						style={styles.profileImage}
 						source={require('../img/test-profile.png')} />
-					<View>
-						<Text style={styles.usernameText}>@ROBTGREEEN</Text>
-					</View>
+					<Text style={styles.usernameText}>@ROBTGREEEN</Text>
 				</View>
 				<View style={[styles.detailsSection, this.border('orange')]}>
 					<View>
@@ -121,7 +119,7 @@ var styles = StyleSheet.create({
 		alignSelf: 'center', 
 	}, 
 	googleBtn:  {
-		width: window.width/20,
+		width: window.width/18,
 		height: window.width/12,
 		alignSelf: 'center', 
 	}, 
@@ -148,7 +146,6 @@ var styles = StyleSheet.create({
 		flexDirection:'row', 
 		justifyContent: 'space-around', 
 		alignItems: 'center', 
-		marginTop: 15, 
 	}, 
 	profileKeywords: {
 		flex: 3, 
@@ -159,22 +156,24 @@ var styles = StyleSheet.create({
 		flex: 1, 
 	}, 
   	profileImage: {
-		borderRadius: 50, 
-		width: 100, 
-		height: 100, 
-		borderWidth: 2, 
-		marginBottom: window.height/30, 
+  		marginTop: window.height/15, 
+		borderRadius: 60, 
+		width: 120, 
+		height: 120, 
+		marginBottom: 2, 
 		backgroundColor: 'transparent', 
 	},  
 	usernameText: {	
 		fontSize: 15, 
 		fontFamily: 'SFCompactText-Medium',
 		color: 'white', 
+		marginBottom: window.height/30, 
 	}, 
 	container: {
 		flex: 1,
 		alignItems: 'center', 
 		justifyContent: 'center', 
+		backgroundColor: '#333333', 
 	}, 
 	imageSection: {
 		flex: 1, 
@@ -191,5 +190,6 @@ var styles = StyleSheet.create({
 		width: window.width, 
 		flexDirection: 'column', 
 		justifyContent: 'center', 
+		height: 2*window.height/3
 	}
 });

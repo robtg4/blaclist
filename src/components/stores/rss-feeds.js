@@ -5,10 +5,14 @@
 var NEWS = ['https://www.kimonolabs.com/api/7obk1xko?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1',
 'https://www.kimonolabs.com/api/2y2zpnh2?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
 'https://www.kimonolabs.com/api/bu2tu1c0?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/elx8ew6m?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
+'https://www.kimonolabs.com/api/elx8ew6m?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
+'https://www.kimonolabs.com/api/a8dfp6lm?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
+'https://www.kimonolabs.com/api/9ubc8rmg?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
 NEWS.name = "News";
 
-var POLITICS = [];
+var POLITICS = ['https://www.kimonolabs.com/api/8a8h0aq6?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
+'https://www.kimonolabs.com/api/24qd1qyy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
+'https://www.kimonolabs.com/api/dtzowgh4?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
 POLITICS.name = "Politics";
 
 var LGBQT = [];

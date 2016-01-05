@@ -22,6 +22,11 @@ var styles = StyleSheet.create({
 	container: {
 		flex: 1, 
 		alignItems: 'center', 
-		justifyContent: 'center', 
-	}
+		justifyContent: 'center',
+		backgroundColor: "#222222", 
+		shadowColor:'black', 
+	    shadowOffset: {width: 4, height: 4}, 
+	    shadowOpacity: 0.8, 
+	    shadowRadius: 20,
+	}, 
 });

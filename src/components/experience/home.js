@@ -128,17 +128,24 @@ module.exports = React.createClass({
         return 'http://images.complex.com/complex/image/upload/v1426696463/Complex_180x180_obsb5h.png';
       } else if (src.toLowerCase() =='fox') {
         return 'https://pbs.twimg.com/profile_images/572924972104839168/QfSnx_Mu.png';
-      } else if (src.toLowerCase() =='huffingtonpost') {
+      } else if (src.toLowerCase() =='huffington post') {
         return 'http://static.wixstatic.com/media/5ba28b_ba693d2a1acf4b6f883a6a72ac2e62f6.png/v1/fit/w_600,h_512/5ba28b_ba693d2a1acf4b6f883a6a72ac2e62f6.png';
       } else if (src.toLowerCase() =='blavity') {
-        return 'https://d2o2wpn1drmies.cloudfront.net/avatars/429/863/202/7d8/410/3af/722/992/e0d/7da/eb/filledinturquoiseicon-jpg.medium.png?1406559707';
+        return 'http://blavity.com/wp-content/uploads/2015/12/Blavity.png';
       } else if (src.toLowerCase() =='al jazeera') {
         return 'http://static.dnaindia.com/sites/default/files/styles/square/public/2015/03/26/321952-al-jazeera-logo.png?itok=sfH-fRQd';
       } else if (src.toLowerCase() =='us uncut') {
         return 'http://33.media.tumblr.com/avatar_2af44bd6a553_128.png';
       } else if (src.toLowerCase() =='washington post') {
-        return 'https://www.washingtonpost.com/wp-apps/topicly/wp-content/themes/topicly/images/fb.png';
+        return 'http://purebarre.com/wp-content/uploads/2015/12/Washington-post-logo-thumb.jpg';
+      } else if (src.toLowerCase() =='the grio') {
+        return 'https://loveessence.files.wordpress.com/2012/06/the-grio-com-logo.jpg';
+      } else if (src.toLowerCase() =='the atlantic') {
+        return 'http://journalism.nyu.edu/wp-content/uploads/logo-publication-the-atlantic.png';
+      } else if (src.toLowerCase() =='the root') {
+        return 'https://pbs.twimg.com/profile_images/517418757702963200/MfhBCTzG.jpeg';
       }
+      
     }, 
     //rendering rows within list view
     renderEntry: function(entry) {
@@ -151,7 +158,7 @@ module.exports = React.createClass({
 		{
 			title = entry.title.text;
 		}
-    	if (entry.imageSource)
+    	if (entry.imageSource && entry.image.src.indexOf('trans.gif') == -1)
     	{
     		
     		return (
@@ -167,7 +174,7 @@ module.exports = React.createClass({
 				text={title}
 				onPress={() => this.onArticleDetailsPress(entry)} />
 			);
-    	} else 
+    	} else if (entry.image.src.indexOf('trans.gif') > 0 || entry.imageSource == false)
     	{
     		return (
 			<ArticlePreviewAlt
@@ -200,11 +207,6 @@ module.exports = React.createClass({
 		//forward to sytled web view of article details given link
 		console.log("onArticleDetailsPress"); 
 		console.log(entry);
-
-		this.props.navigator.push({
-			name: 'articledetails',
-            passProps: { entry: entry }
-		});
 	}, 
 	/*
 	onChange: function(event, articles) {
