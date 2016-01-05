@@ -16,8 +16,8 @@ var React = require('react-native');
 module.exports = {
   //listenables: [Actions], 
   getArticles: function(personalFeed) {
-    console.log("Inside the getArticles function");
-    console.log(personalFeed);
+    //console.log("Inside the getArticles function");
+    //console.log(personalFeed);
     var RSS_custom = Api.fetchRss(personalFeed);
     var rss_feeds = [];
     var final_array = [];
@@ -28,12 +28,12 @@ module.exports = {
     {
         //console.log("Processing through the following custom feed: " + RSS_custom[i] + ": Repo #" + i);
         //processing url 1 by 1 to maintain global scope for all repos 
-        console.log(RSS_custom[i]);
+        //console.log(RSS_custom[i]);
         rss_feeds.push(this.fetchEntries(RSS_custom[i]));
     }
 
-    console.log("Done processing repos. Combining promises");
-    console.log(rss_feeds);
+    //console.log("Done processing repos. Combining promises");
+    //console.log(rss_feeds);
     //combining promises
     var that = this; 
     return Promise.all(rss_feeds)
@@ -58,16 +58,16 @@ module.exports = {
     
   },  
   fetchEntries: function(url) {
-    console.log("inside the fetchEntries");
+    //console.log("inside the fetchEntries");
     var that = this; 
     return fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
-        console.log("Processing the custom feed");
+        //console.log("Processing the custom feed");
         //check if the rss feed is up 
         if (that.responseValidator(responseData)) 
         {
-          console.log("The repo is up! Now processing the entries within the data");
+          //console.log("The repo is up! Now processing the entries within the data");
           //if it is indeed up we need to return the objects 1 by 1 
           //store in new array that is 
           //indicative of working feeds 
@@ -75,30 +75,30 @@ module.exports = {
           var working_feeds = [];
           for (var x = 0; x < responseData.results.collection1.length; x++)
           {
-            console.log("looping through feed entries and putting into array");
-            console.log(responseData.results.collection1[x]);
+            //console.log("looping through feed entries and putting into array");
+            //console.log(responseData.results.collection1[x]);
 
             //check if the entry has an image associated with it
-            console.log(responseData.results.collection1[x].image.src);
+            //console.log(responseData.results.collection1[x].image.src);
             if (responseData.results.collection1[x].image.src != "") 
             {
               //one by one so that we can randomize the array's contents 
               working_feeds.push(responseData.results.collection1[x]);
             }
           }
-          console.log("The working feed array is the following");
-          console.log(working_feeds);
+          //console.log("The working feed array is the following");
+          //console.log(working_feeds);
           return working_feeds; 
         } 
       });
   }, 
   responseValidator: function(responseData) {
-    console.log("Verifying data to see if repo is up");
+    //console.log("Verifying data to see if repo is up");
     //console.log(responseData);
    
       if(responseData.thisversionstatus == 'success') 
       {
-        console.log("Success!");
+        //console.log("Success!");
         //console.log(responseData);
         return true; 
       } else {

@@ -1,8 +1,9 @@
 //profile page
 var React = require('react-native');
-var { View, Image, StyleSheet, Text } = React;
+var { View, Image, StyleSheet, Text, ScrollView } = React;
 //additional libraries
 var Parse = require('parse/react-native');
+var Spinner = require('react-native-spinkit');
 //dynamic component references + libraries 
 var ImageButton = require('../common/imageButton');
 var KeywordBox = require('../authentication/onboarding/keyword-box')
@@ -14,61 +15,7 @@ module.exports = React.createClass({
 	componentWillMount: function() {
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
-	},   
-	//states of this components 
-	getInitialState: function() {
-		return {
-			user: null, 
-			keywords: null, 
-		}
-	},
-	//rendering component 
-	render: function() {
-		var interests = this.state.keywords;
-        return <View style={styles.container}>
-				<View style={[styles.imageSection, this.border('red')]}>	
-					<Image 
-						style={styles.profileImage}
-						source={require('../img/test-profile.png')} />
-					<Text style={styles.usernameText}>@ROBTGREEEN</Text>
-				</View>
-				<View style={[styles.detailsSection, this.border('orange')]}>
-					<View>
-						<Text style={styles.profileDescription}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-						</Text>
-					</View>
-					<View style={[styles.socialIcons, this.border('red')]}>
-						<ImageButton
-							style={[styles.igBtn, this.border('red')]}
-							resizeMode={'contain'}
-							onPress={this.onReadyPress}
-							source={require('../img/instagram-icon.png')} />
-						<ImageButton
-							style={[styles.googleBtn, this.border('red')]}
-							resizeMode={'contain'}
-							onPress={this.onReadyPress}
-							source={require('../img/google-icon.png')} />
-						<ImageButton
-							style={[styles.fbBtn, this.border('red')]}
-							resizeMode={'contain'}
-							onPress={this.onReadyPress}
-							source={require('../img/facebook-icon.png')} />
-						<ImageButton
-							style={[styles.twBtn, this.border('red')]}
-							resizeMode={'contain'}
-							onPress={this.onReadyPress}
-							source={require('../img/twitter-icon.png')} />
-					</View>
-					<View style={[styles.profileKeywords, this.border('blue')]}>
-						{this.renderKeywords}
-					</View>
-					<View style={[styles.profileStatus, this.border('white')]}>
-					</View>
-				</View>
-			</View>
-	},
-	renderKeywords: function() {
+
 		var Onboarding = Parse.Object.extend("Onboarding");
 		var query = new Parse.Query(Onboarding);
 		query.equalTo("userObjectId", Parse.User.current());
@@ -79,24 +26,107 @@ module.exports = React.createClass({
 		    console.log(object.id);
 		    // retreive interests array
 		    that.setState({ keywords: object.get('interests') }); 
-		    return object.get('interests').map(function(keyword, i) {
-		    	console.log(keyword);
-				return <KeywordBox 
-					key={i} 
-					text={keyword} 
-					onPress={ () => { that.onReadyPress }}
-					selected={true} />
-			});	
 		  },
 		  error: function(error) {
 		    console.log("Error: " + error.code + " " + error.message);
 		  }
 		});
-
+	},   
+	//states of this components 
+	getInitialState: function() {
+		return {
+			user: null, 
+			keywords: null, 
+		}
+	},
+	//rendering component 
+	render: function() {
+		var interests = this.state.keywords; 
+		if (interests == null)
+		{
+			return this.renderLoadingView();
+		} else
+		{
+			return <View style={styles.container}>
+        		<ScrollView>
+					<View style={[styles.imageSection, this.border('red')]}>	
+						<Image 
+							style={styles.profileImage}
+							source={require('../img/test-profile.png')} />
+						<Text style={styles.usernameText}>@ROBTGREEEN</Text>
+					</View>
+					<View style={[styles.detailsSection, this.border('orange')]}>
+						<View>
+							<Text style={styles.profileDescription}>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+							</Text>
+						</View>
+						<View style={[styles.socialIcons, this.border('red')]}>
+							<ImageButton
+								style={[styles.igBtn, this.border('red')]}
+								resizeMode={'contain'}
+								onPress={this.onReadyPress}
+								source={require('../img/instagram-icon.png')} />
+							<ImageButton
+								style={[styles.googleBtn, this.border('red')]}
+								resizeMode={'contain'}
+								onPress={this.onReadyPress}
+								source={require('../img/google-icon.png')} />
+							<ImageButton
+								style={[styles.fbBtn, this.border('red')]}
+								resizeMode={'contain'}
+								onPress={this.onReadyPress}
+								source={require('../img/facebook-icon.png')} />
+							<ImageButton
+								style={[styles.twBtn, this.border('red')]}
+								resizeMode={'contain'}
+								onPress={this.onReadyPress}
+								source={require('../img/twitter-icon.png')} />
+						</View>
+						<View style={[styles.profileKeywords, this.border('blue')]}>
+							{this.renderKeywords(interests)}
+						</View>
+						<View style={[styles.profileStatus, this.border('white')]}>
+							<View style={styles.textBox}>
+								<Text style={styles.profileDetailsText}>292</Text>
+								<Text style={styles.profileDetailsTextUnder}>comments</Text>
+							</View>
+							<View style={styles.textBox}>
+								<Text style={styles.profileDetailsText}>0</Text>
+								<Text style={styles.profileDetailsTextUnder}>lists</Text>
+							</View>
+							<View style={styles.textBox}>
+								<Text style={styles.profileDetailsText}>91</Text>
+								<Text style={styles.profileDetailsTextUnder}>favorites</Text>
+							</View>
+						</View>
+					</View>
+				</ScrollView>
+			</View>
+		}
+        
+	},
+	renderKeywords: function(interests) {
+	    return interests.map(function(keyword, i) {
+	    	console.log(keyword);
+			return <KeywordBox 
+				key={i} 
+				text={keyword} 
+				onPress={ () => { this.onReadyPress }}
+				selected={false} />
+		});	
 	}, 
 	onReadyPress: function() {
 
 	}, 
+	//loading render
+	renderLoadingView: function() {
+        return (
+            <View style={styles.container}>
+            	<Spinner style={styles.spinner} isVisible={!this.state.isLoaded} size={50} type={'Arc'} color={'#FF0000'}/>
+            </View>
+        );
+    }, 
 	border: function(color) {
       return {
         //borderColor: color, 
@@ -108,6 +138,22 @@ module.exports = React.createClass({
 
 
 var styles = StyleSheet.create({
+	profileDetailsTextUnder: {
+		color:'white',  
+		fontFamily: 'SFCompactText-Medium',
+		fontSize: 15, 
+	}, 
+	textBox: {
+		justifyContent: 'center', 
+		flexDirection: 'column', 
+		alignItems: 'center', 
+		alignSelf: 'center', 
+	}, 
+	profileDetailsText: {
+		fontFamily: 'Bebas Neue', 
+		fontSize: 25, 
+		color: 'white', 
+	}, 
 	igBtn: {
 		width: window.width/12,
 		height: window.width/12,
@@ -148,12 +194,15 @@ var styles = StyleSheet.create({
 		alignItems: 'center', 
 	}, 
 	profileKeywords: {
-		flex: 3, 
+		flex: 0.5, 
 		alignItems: 'center', 
-		justifyContent: 'center'
+		justifyContent: 'center', 
+		flexDirection: 'row', 
 	}, 
 	profileStatus: {
 		flex: 1, 
+		flexDirection: 'row', 
+		justifyContent: 'space-around', 
 	}, 
   	profileImage: {
   		marginTop: window.height/15, 
@@ -190,6 +239,6 @@ var styles = StyleSheet.create({
 		width: window.width, 
 		flexDirection: 'column', 
 		justifyContent: 'center', 
-		height: 2*window.height/3
+		height: 1.8*window.height/3
 	}
 });

@@ -28,8 +28,8 @@ var styles = StyleSheet.create({
     backgroundColor:'black'
   },
   icon: {
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
     position: 'absolute',
     top: 0,
     left: 20,
@@ -51,9 +51,9 @@ module.exports = React.createClass({
 
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={[styles.tab]}>
-        <Icon name={name} size={30} color='#DA1129' style={styles.icon}
+        <Icon name={name} size={20} color='#DA1129' style={styles.icon}
               ref={(icon) => { this.selectedTabIcons[page] = icon }}/>
-        <Icon name={name} size={30} color='#222222' style={styles.icon}
+        <Icon name={name} size={20} color='#333333' style={styles.icon}
               ref={(icon) => { this.unselectedTabIcons[page] = icon }}/>
       </TouchableOpacity>
     );

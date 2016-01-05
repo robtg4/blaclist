@@ -13,12 +13,16 @@ module.exports = React.createClass({
 	render: function() {
 
         return <View style={styles.container}>
-        	<Text>This is the Settings Page</Text>
+        	<Text style={styles.text}>This is the Settings Page</Text>
         </View>
 	},
 });
 
 var styles = StyleSheet.create({	
+	text: {
+		fontSize: 20, 
+		color: 'white', 
+	}, 
 	container: {
 		flex: 1, 
 		alignItems: 'center', 
@@ -28,5 +32,7 @@ var styles = StyleSheet.create({
 	    shadowOffset: {width: 4, height: 4}, 
 	    shadowOpacity: 0.8, 
 	    shadowRadius: 20,
+	    height: window.height, 
+	    width: window.width, 
 	}, 
 });

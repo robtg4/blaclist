@@ -21,7 +21,6 @@
 {
   NSURL *jsCodeLocation;
   
-  /** Check for the fonts within React
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
@@ -30,7 +29,7 @@
       NSLog(@"%@", name);
     }
   }
-   */
+  
   
   /**
    * Loading JavaScript code - uncomment the one you want.

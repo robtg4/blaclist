@@ -6,7 +6,6 @@ var {
 	Text, 
 	ListView, 
 	TouchableHighlight, 
-	AsyncStorage, 
 } = React;
 
 //additional libraries
@@ -91,7 +90,7 @@ module.exports = React.createClass({
 	//loading render
 	renderLoadingView: function() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {height: window.height, width: window.width}]}>
             	<Spinner style={styles.spinner} isVisible={!this.state.isLoaded} size={50} type={'Arc'} color={'#FF0000'}/>
             </View>
         );
