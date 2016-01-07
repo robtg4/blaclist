@@ -53,7 +53,14 @@ module.exports = React.createClass({
 						<Image 
 							style={styles.profileImage}
 							source={require('../img/test-profile.png')} />
-						<Text style={styles.usernameText}>@ROBTGREEEN</Text>
+						<View style={styles.usernameRow}>
+							<Text style={styles.usernameText}>@ROBTGREEEN</Text>
+							<ImageButton
+								style={[styles.settingsBtn, this.border('red')]}
+								resizeMode={'contain'}
+								onPress={this.onReadyPress}
+								source={require('../img/settings-icon.png')} />
+						</View>
 					</View>
 					<View style={[styles.detailsSection, this.border('orange')]}>
 						<View>
@@ -138,6 +145,13 @@ module.exports = React.createClass({
 
 
 var styles = StyleSheet.create({
+	usernameRow: {
+		flexDirection: 'row', 
+	}, 
+	settingsBtn: {
+		width: window.width/30,
+		height: window.width/30,
+	}, 
 	profileDetailsTextUnder: {
 		color:'white',  
 		fontFamily: 'SFCompactText-Medium',

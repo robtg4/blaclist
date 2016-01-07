@@ -17,7 +17,9 @@ BLM.name = "BlackLivesMatter";
 var ARTS = []; 
 ARTS.name = "Arts"; 
 
-var HIPHOP = [];
+var HIPHOP = ['https://www.kimonolabs.com/api/bnzhz2ha?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
+'https://www.kimonolabs.com/api/55q10m3i?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
+'https://www.kimonolabs.com/api/eegcmu6q?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
 HIPHOP.name = "Hip-Hop";
 
 var HISTORY = []; 
@@ -35,7 +37,7 @@ TECH.name = "Technology";
 var BUSINESS = []; 
 BUSINESS.name = "Business"; 
 
-var BLACKBUZZ = []; 
+var BLACKBUZZ = ['https://www.kimonolabs.com/api/e6prkm60?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1']; 
 BLACKBUZZ.name = "Black Buzzfeed"; 
 
 var BLOGS = []; 
@@ -74,7 +76,7 @@ MOC.name = "Men of Color";
 var HAPPINESS = []; 
 HAPPINESS.name = "Happiness"; 
 
-var WOC = [];
+var WOC = ['https://www.kimonolabs.com/api/bfq4d1ak?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
 WOC.name = "Women of Color";  
 
 var TRAVEL = []; 

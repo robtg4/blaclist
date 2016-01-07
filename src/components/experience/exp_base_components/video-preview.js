@@ -20,7 +20,6 @@ module.exports = React.createClass({
            <View style={styles.card}>
             <WebView
                 style={styles.videoPreview}
-                allowsInlineMediaPlayback={true}
                 automaticallyAdjustContentInsets={true}
                 scrollEnabled={false}
                 style={styles.videoPreview}
@@ -43,7 +42,7 @@ module.exports = React.createClass({
                       </View>
                       <View style={[this.border('white')]}>
                           <Text style={[styles.rowText, {fontWeight: 'bold'}]}>{this.props.entryBrand}</Text>
-                          <Text style={[styles.rowText]}>{this.props.postTime}</Text>
+                          <Text style={[styles.rowText]}>{this.props.views}</Text>
                       </View>
                     </View>
                     <View style={[styles.heartRow, this.border('black')]}>

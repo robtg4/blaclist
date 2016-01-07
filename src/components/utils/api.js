@@ -79,7 +79,7 @@ module.exports = {
 			//go through rss names to match 
 			for (var i = 0; i < VIDEO.FEEDS.length; i++)
 			{
-				console.log('Matching Videos: ' + VIDEO.FEEDS[i].name + " with " + personalFeed[x]);
+				//console.log('Matching Videos: ' + VIDEO.FEEDS[i].name + " with " + personalFeed[x]);
 				//start matching as substrings
 				if (VIDEO.FEEDS[i].name.toLowerCase().indexOf(personalFeed[x].toLowerCase()) > -1)
 				{	

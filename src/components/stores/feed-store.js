@@ -39,8 +39,8 @@ module.exports = {
           }
           console.log('The following array of objects was constructed and is now being shuffled');
           console.log(video_array.length);
-
-          console.log(video_array);
+          video_array = that.orderVideos(video_array);
+          //console.log(video_array);
           return video_array;
       });
     
@@ -70,7 +70,7 @@ module.exports = {
       .then((res) => {
           for (var q = 0; q < res.length; q++)
           {
-            console.log(res);
+            //console.log(res);
             for (var a =0; a < res[q].length; a++)
             {
               final_array.push(res[q][a]);
@@ -81,7 +81,7 @@ module.exports = {
 
           // delete all duplicates from the array***
 
-          final_array = that.order(final_array);
+          final_array = that.orderArticles(final_array);
           
           //console.log(final_array);
           return final_array;
@@ -98,10 +98,20 @@ module.exports = {
         if (that.responseValidator(responseData)) 
         {
           var vids_feeds = [];
-          for (var x = 0; x < responseData.results.collection2.length; x++)
+          if (typeof responseData.results.collection2[0].title.text != 'undefined') 
           {
-              vids_feeds.push(responseData.results.collection2[x]);
+            for (var x = 0; x < responseData.results.collection2.length; x++)
+            {
+                vids_feeds.push(responseData.results.collection2[x]);
+            }
+          } else 
+          {
+            for (var x = 0; x < responseData.results.collection1.length; x++)
+            {
+                vids_feeds.push(responseData.results.collection1[x]);
+            }
           }
+
           //console.log("The working feed array is the following");
           //console.log(working_feeds);
           return vids_feeds; 
@@ -174,8 +184,104 @@ module.exports = {
 
     return array;
   }, 
-  order: function(array) {
+  orderVideos: function(array) {
     //go through array and rearrange by post time
+    //order of arrays
+    var hourarray = [];
+    var minutearray = [];
+    var dayarray = []; 
+    var weekarray = [];
+    var montharray = [];
+    var yeararray = [];
+
+    for (var x = 0; x < array.length; x++) {
+      console.log(array[x].postTime);
+      if (array[x].postTime.search('hours') > -1 || array[x].postTime.search('hour') > -1) {
+        //posted today with hours ago
+        hourarray.push(array[x]); 
+        hourarray.sort(function(a, b) {
+            a = parseInt(a.postTime.substring(0,2));
+            b = parseInt(b.postTime.substring(0,2));
+            //console.log("Hours Array Battle: " + a + " vs " + b);
+            return a - b;
+        });
+
+      } else if ((array[x].postTime.search('minutes') > -1) || (array[x].postTime.search('minute') > -1)) {
+       //posted today with minutes ago
+       //console.log(array[x].postTime);
+        minutearray.push(array[x]); 
+        minutearray.sort(function(a, b) {
+            a = parseInt(a.postTime.substring(0,2));
+            b = parseInt(b.postTime.substring(0,2));
+            return a - b;
+        });
+
+      } else if ((array[x].postTime.search('days') > -1) || (array[x].postTime.search('day') > -1)) {
+        //posted in the today without hours or minutes 
+        dayarray.push(array[x]); 
+        dayarray.sort(function(a, b) {
+          a = parseInt(a.postTime.substring(0,2));
+          b = parseInt(b.postTime.substring(0,2));
+          return a - b;
+        });
+
+      } else if ((array[x].postTime.search('weeks') > -1) || (array[x].postTime.search('week') > -1)) {
+        //posted in past 
+        weekarray.push(array[x]); 
+        weekarray.sort(function(a, b) {
+          a = parseInt(a.postTime.substring(0,2));
+          b = parseInt(b.postTime.substring(0,2));
+          return a - b;
+        });
+
+      } else if ((array[x].postTime.search('months') > -1) || (array[x].postTime.search('month') > -1)) {
+        //posted in past 
+        montharray.push(array[x]); 
+        montharray.sort(function(a, b) {
+          a = parseInt(a.postTime.substring(0,2));
+          b = parseInt(b.postTime.substring(0,2));
+          return a - b;
+        });
+
+      } else {
+        yeararray.push(array[x]); 
+        yeararray.sort(function(a, b) {
+          a = parseInt(a.postTime.substring(0,2));
+          b = parseInt(b.postTime.substring(0,2));
+          return a - b;
+        });
+      }
+    }
+
+    //order arrays further
+    var newarray = [];
+    for (var z = 0; z < minutearray.length; z++) {
+      newarray.push(minutearray[z]);
+    }
+    for (z = 0; z < hourarray.length; z++) {
+      newarray.push(hourarray[z]);
+    }
+    for (z = 0; z < dayarray.length; z++) {
+      newarray.push(dayarray[z]);
+    }
+    for (z = 0; z < weekarray.length; z++) {
+      newarray.push(weekarray[z]);
+    }
+    for (z = 0; z < montharray.length; z++) {
+      newarray.push(montharray[z]);
+    }
+    for (z = 0; z < yeararray.length; z++) {
+      newarray.push(yeararray[z]);
+    }
+
+    console.log(newarray);
+    console.log(montharray);
+
+    return newarray;
+  }, 
+  orderArticles: function(array) {
+    //go through array and rearrange by post time
+    console.log("Ordering!");
     var currentday = String(new Date().getDay());
     var monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
@@ -247,6 +353,7 @@ module.exports = {
       console.log(newarray[z]);
     }
     
+   // console.log(newarray);
 
     return newarray;
   }, 
