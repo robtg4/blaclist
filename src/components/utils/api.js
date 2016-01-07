@@ -3,6 +3,7 @@ var React = require('react-native');
 
 //libraries
 var RSS = require('../stores/rss-feeds');
+var VIDEO = require('../stores/video-feeds');
 
 module.exports = {
 
@@ -23,26 +24,26 @@ module.exports = {
 	}, 
 	fetchRss: function(personalFeed) {
 		//go through the rss feeds provided within the library
-		console.log("In APi");
-		console.log(personalFeed);
+		//console.log("In APi");
+		//console.log(personalFeed);
 		//match the personalFeed array with the names of the rss arrays
 		var RSS_custom = []; 
 		//go through the user array given 
 		for (var x = 0; x < personalFeed.length; x++)
 		{
-			console.log('Going through: ' + personalFeed[x]);
+			//console.log('Going through: ' + personalFeed[x]);
 			//go through rss names to match 
 			for (var i = 0; i < RSS.FEEDS.length; i++)
 			{
-				console.log('Matching: ' + RSS.FEEDS[i].name + " with " + personalFeed[x]);
+				//console.log('Matching: ' + RSS.FEEDS[i].name + " with " + personalFeed[x]);
 				//start matching as substrings
 				if (RSS.FEEDS[i].name.toLowerCase().indexOf(personalFeed[x].toLowerCase()) > -1)
 				{	
-					console.log('Its a MATCH!');
+					//console.log('Its a MATCH!');
 					//the names match, so we need to get all the 
 					//feeds that are relevant in that array
 					//go into array of rss topic arrays
-					console.log(RSS.FEEDS[i]);
+					//console.log(RSS.FEEDS[i]);
 					for (var w = 0; w < RSS.FEEDS[i].length; w++)
 					{
 						RSS_custom.push(RSS.FEEDS[i][w]);
@@ -60,15 +61,53 @@ module.exports = {
 			}
 		}
 		
-		console.log(RSS_custom);
+		//console.log(RSS_custom);
 		var url = RSS_custom[2];
 
 		//get json from all the different 
 	    return RSS_custom; 
 	},
-	imageSearch: function(query) {
+	fetchVideo: function(personalFeed) {
+		//match the personalFeed array with the names of the rss arrays
+		console.log("Fetching Videos");
+		console.log(personalFeed);
+		var Video_custom = []; 
+		//go through the user array given 
+		for (var x = 0; x < personalFeed.length; x++)
+		{
+			console.log('Going through: ' + personalFeed[x]);
+			//go through rss names to match 
+			for (var i = 0; i < VIDEO.FEEDS.length; i++)
+			{
+				console.log('Matching Videos: ' + VIDEO.FEEDS[i].name + " with " + personalFeed[x]);
+				//start matching as substrings
+				if (VIDEO.FEEDS[i].name.toLowerCase().indexOf(personalFeed[x].toLowerCase()) > -1)
+				{	
+					console.log('Its a MATCH!');
+					//the names match, so we need to get all the 
+					//feeds that are relevant in that array
+					//go into array of rss topic arrays
+					console.log(VIDEO.FEEDS[i]);
+					for (var w = 0; w < VIDEO.FEEDS[i].length; w++)
+					{
+						Video_custom.push(VIDEO.FEEDS[i][w]);
+					}
+				}
+			}
+		}
+
+		//always add default array
+		for (x = 0; x < VIDEO.FEEDS[VIDEO.FEEDS.length-1].length; x++)
+		{
+			console.log(VIDEO.FEEDS[VIDEO.FEEDS.length-1][x]);
+			Video_custom.push(VIDEO.FEEDS[VIDEO.FEEDS.length-1][x]);
+		}
 		
-	} 
+		console.log(Video_custom);
+
+		//get json from all the different 
+	    return Video_custom; 
+	}, 
 
 
 }

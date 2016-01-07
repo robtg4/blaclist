@@ -37,7 +37,7 @@ var styles = StyleSheet.create({
 	keywordBox: {
 		backgroundColor: 'transparent',
 		margin: 3, 
-		borderColor: 'rgb(68,106,122, 0.6)', 
+		borderColor: '#436675', 
 	    borderWidth: 2,
 	},
 });

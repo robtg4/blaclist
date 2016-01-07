@@ -111,14 +111,16 @@ var styles = StyleSheet.create({
   }, 
   touchCard: {
     margin: 3, 
-    width: window.width*0.95, 
+    width: window.width, 
     shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    alignSelf:'center', 
   }, 
   card: {
     flex: 1, 
-    width: window.width*0.95, 
+    width: window.width*0.98, 
+    alignSelf:'center'
   }, 
   heartText: {
     color: 'white', 
@@ -162,13 +164,14 @@ var styles = StyleSheet.create({
   }, 
   container: {
     flex: 1, 
-    backgroundColor: 'black', 
+    backgroundColor: '#1a1a1a', 
   }, 
   articlePreview: {
     flex: 2, 
     height: window.width*0.95, 
-    width:window.width*0.95, 
-    flexDirection: 'column'
+    width:window.width*0.98, 
+    flexDirection: 'column', 
+    alignSelf:'center', 
   }, 
   previewText: {
     fontFamily: 'Bebas Neue', 

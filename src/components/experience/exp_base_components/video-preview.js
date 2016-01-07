@@ -1,41 +1,36 @@
-//component for article preview touchable image
-/* will require the following
-- rss feed and api
-- user's keyword interests from parse In home.js
-- parse db needs to be augmented to include what they heart
-- parse db needs to be augmented to include what they press on (like google news)
-*/
+//component for video preview content
 var React = require('react-native');
-var {
-  View, 
-  StyleSheet, 
-  Text, 
-  Image, 
-  TouchableHighlight, 
-} = React;
+var { View, StyleSheet, Text, Image, TouchableHighlight, WebView } = React;
 
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
+//components
 var ImageButton = require('../../common/imageButton');
 var KeywordBox = require('../../authentication/onboarding/keyword-box');
-
 //additional libraries
 
 module.exports = React.createClass({
-  //onPress function that triggers when button pressed
-  //this.props.text is property that can be dynamically filled within button 
   render: function() {
       return (
         <TouchableHighlight 
           style={styles.touchCard}
           underlayColor={'transparent'}
           onPress={this.props.onPress} >
-            <View style={styles.card}>
+           <View style={styles.card}>
+            <WebView
+                style={styles.videoPreview}
+                allowsInlineMediaPlayback={true}
+                automaticallyAdjustContentInsets={true}
+                scrollEnabled={false}
+                style={styles.videoPreview}
+                html={this.props.source}
+                renderLoading={this.renderLoading}
+                renderError={this.renderError}
+                automaticallyAdjustContentInsets={false} />
               <View style={[styles.container, this.border('organge')]}>
                   <View style={[styles.header, this.border('blue')]}>
                       <Text style={[styles.previewText]}>{this.props.text}</Text>
-                      <Text style={[styles.descText]}>{this.props.description}</Text>
                   </View>
                   <View style={[styles.footer, this.border('white')]}>
                     <View style={styles.sourceRow}>
@@ -66,6 +61,21 @@ module.exports = React.createClass({
       );
     
   }, 
+  renderLoading: function () {
+    console.log('## webView: loading()');
+    return (
+        <View style={[styles.container, styles.centerText]}>
+            <Text style={styles.noResultsText}>Loading video...</Text>
+        </View>
+    );
+  },
+  renderError: function () {
+    return (
+        <View style={[styles.container, styles.centerText]}>
+            <Text style={styles.noResultsText}>Video not found - 404</Text>
+        </View>
+    );
+  },
   onHeartPress: function() {
     //will move this function to a general module
   }, 
@@ -78,6 +88,15 @@ module.exports = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  centerText: {
+    marginBottom:5,
+    textAlign: 'center',
+  },
+  noResultsText: {
+    marginTop: 70,
+    marginBottom:0,
+    color: '#000000',
+  },
   sourceRow: {
     justifyContent: 'space-around', 
     flexDirection: 'row', 
@@ -100,14 +119,15 @@ var styles = StyleSheet.create({
   touchCard: {
     margin: 3, 
     width: window.width*0.95, 
-    shadowColor: 'black',
     shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 3,
+    alignSelf:'center', 
   }, 
   card: {
     flex: 1, 
     width: window.width*0.98, 
+    alignSelf:'center', 
   }, 
   heartText: {
     color: 'white', 
@@ -153,19 +173,11 @@ var styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#1a1a1a', 
   }, 
-  articlePreview: {
+  videoPreview: {
     flex: 2, 
-    height: window.width*0.95, 
-    width:window.width*0.95, 
+    height: window.width*0.85, 
+    width:window.width*0.98, 
     flexDirection: 'column'
-  }, 
-  descText: {
-    fontFamily: 'SFCompactText-Medium', 
-    fontSize: 15,
-    color: 'white', 
-    textAlign: 'left', 
-    marginTop: 2, 
-    marginLeft: 5, 
   }, 
   previewText: {
     fontFamily: 'Bebas Neue', 

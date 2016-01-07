@@ -49,7 +49,7 @@ module.exports = React.createClass({
 		//render a component and return it, whatever we return is placed on stack
 		//add navigator property into this component for all app access
 		var Component = ROUTES[route.name]; //ROUTE['signin'] => Signin
-		return <Component route={route} navigator={navigator}/>;
+		return <Component route={route} navigator={navigator} {...route.passProps}/>;
 	}, 
 	transition: function(route) {
     	return ROUTES[route.name].transition;

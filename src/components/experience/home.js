@@ -133,16 +133,18 @@ module.exports = React.createClass({
         return 'http://blavity.com/wp-content/uploads/2015/12/Blavity.png';
       } else if (src.toLowerCase() =='al jazeera') {
         return 'http://static.dnaindia.com/sites/default/files/styles/square/public/2015/03/26/321952-al-jazeera-logo.png?itok=sfH-fRQd';
-      } else if (src.toLowerCase() =='us uncut') {
-        return 'http://33.media.tumblr.com/avatar_2af44bd6a553_128.png';
       } else if (src.toLowerCase() =='washington post') {
         return 'http://purebarre.com/wp-content/uploads/2015/12/Washington-post-logo-thumb.jpg';
-      } else if (src.toLowerCase() =='the grio') {
-        return 'https://loveessence.files.wordpress.com/2012/06/the-grio-com-logo.jpg';
       } else if (src.toLowerCase() =='the atlantic') {
         return 'http://journalism.nyu.edu/wp-content/uploads/logo-publication-the-atlantic.png';
       } else if (src.toLowerCase() =='the root') {
         return 'https://pbs.twimg.com/profile_images/517418757702963200/MfhBCTzG.jpeg';
+      } else if (src.toLowerCase() =='black enterprise') {
+        return 'https://pbs.twimg.com/profile_images/660082410382602240/MQCpH3x5.png';
+      } else if (src.toLowerCase() =='lgbt feed') {
+        return 'http://cdn.lgbtfeed.com/Files/2379/09a96854-8082-4bc5-9b71-b7151879f42d.png';
+      } else if (src.toLowerCase() =='mic') {
+        return 'https://pbs.twimg.com/profile_images/668821647860846593/vHMZRbG8.png';
       }
       
     }, 
@@ -206,6 +208,13 @@ module.exports = React.createClass({
 		//forward to sytled web view of article details given link
 		console.log("onArticleDetailsPress"); 
 		console.log(entry);
+		//pass props to details page
+		this.props.navigator.push({
+			name: 'articledetails', 
+			passProps: {
+				entry: entry, 
+			}
+		});
 	}, 
 	/*
 	onChange: function(event, articles) {
@@ -228,7 +237,7 @@ var styles = StyleSheet.create({
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center',
-		backgroundColor: "#222222", 
+		backgroundColor: "#333333", 
 		shadowColor:'black', 
 	    shadowOffset: {width: 4, height: 4}, 
 	    shadowOpacity: 0.8, 

@@ -15,6 +15,36 @@ var React = require('react-native');
 
 module.exports = {
   //listenables: [Actions], 
+  getVideos: function(personalFeed) {
+    var Video_custom = Api.fetchVideo(personalFeed);
+    var video_feeds = [];
+    var video_array = [];
+    console.log(Video_custom);
+    //go through each of the urls and make sure 
+    //their fine 
+    for (var i = 0; i < Video_custom.length; i++)
+    {
+        video_feeds.push(this.fetchVideos(Video_custom[i]));
+    }
+
+    var that = this; 
+    return Promise.all(video_feeds)
+      .then((res) => {
+          for (var q = 0; q < res.length; q++)
+          {
+            for (var a =0; a < res[q].length; a++)
+            {
+              video_array.push(res[q][a]);
+            }
+          }
+          console.log('The following array of objects was constructed and is now being shuffled');
+          console.log(video_array.length);
+
+          console.log(video_array);
+          return video_array;
+      });
+    
+  }, 
   getArticles: function(personalFeed) {
     //console.log("Inside the getArticles function");
     //console.log(personalFeed);
@@ -40,23 +70,44 @@ module.exports = {
       .then((res) => {
           for (var q = 0; q < res.length; q++)
           {
+            console.log(res);
             for (var a =0; a < res[q].length; a++)
             {
               final_array.push(res[q][a]);
             }
           }
-          console.log('The following array of objects was constructed and is now being shuffled');
-          console.log(final_array.length);
+          //console.log('The following array of objects was constructed and is now being shuffled');
+          //console.log(final_array.length);
 
           // delete all duplicates from the array***
 
-          that.shuffle(final_array);
+          final_array = that.order(final_array);
           
-          console.log(final_array);
+          //console.log(final_array);
           return final_array;
       });
     
   },  
+  fetchVideos: function(url) {
+    //console.log("inside the fetchEntries");
+    var that = this; 
+    return fetch(url)
+      .then((response) => response.json())
+      .then((responseData) => {
+
+        if (that.responseValidator(responseData)) 
+        {
+          var vids_feeds = [];
+          for (var x = 0; x < responseData.results.collection2.length; x++)
+          {
+              vids_feeds.push(responseData.results.collection2[x]);
+          }
+          //console.log("The working feed array is the following");
+          //console.log(working_feeds);
+          return vids_feeds; 
+        } 
+      });
+  }, 
   fetchEntries: function(url) {
     //console.log("inside the fetchEntries");
     var that = this; 
@@ -122,6 +173,82 @@ module.exports = {
     }
 
     return array;
+  }, 
+  order: function(array) {
+    //go through array and rearrange by post time
+    var currentday = String(new Date().getDay());
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+    var currentmonth = monthNames[new Date().getMonth()];
+    var currentyear = String(new Date().getFullYear());
+
+    //order of arrays
+    var hourarray = [];
+    var minutearray = [];
+    var dayarray = []; 
+    var pastarray = [];
+
+    //postTime
+    
+
+    for (var x = 0; x < array.length; x++) {
+      var datearray = array[x].postTime.split(" ");
+      //console.log(array[x].postTime);
+      if (array[x].postTime.search('hours') > -1 || array[x].postTime.search('hour') > -1) {
+        //posted today with hours ago
+        hourarray.push(array[x]); 
+        hourarray.sort(function(a, b) {
+            a = parseInt(a.postTime.substring(0,2));
+            b = parseInt(b.postTime.substring(0,2));
+            //console.log("Hours Array Battle: " + a + " vs " + b);
+            return a - b;
+        });
+
+      } else if ((array[x].postTime.search('minutes') > -1) || (array[x].postTime.search('minute') > -1)) {
+       //posted today with minutes ago
+       //console.log(array[x].postTime);
+        minutearray.push(array[x]); 
+        minutearray.sort(function(a, b) {
+            a = parseInt(a.postTime.substring(0,2));
+            b = parseInt(b.postTime.substring(0,2));
+            return a - b;
+        });
+
+      } else if (array[x].postTime.search(currentmonth) > -1 && array[x].postTime.search(currentyear) > -1 && parseInt(datearray[2]) == currentday) {
+        //posted in the today without hours or minutes 
+        dayarray.push(array[x]); 
+
+      } else {
+        //posted in past 
+        pastarray.push(array[x]); 
+      } 
+    }
+
+    //shuffle day array 
+    dayarray = this.shuffle(dayarray);
+    pastarray = this.shuffle(pastarray);
+
+    //order arrays further
+    var newarray = [];
+    for (var z = 0; z < minutearray.length; z++) {
+      newarray.push(minutearray[z]);
+    }
+    for (z = 0; z < hourarray.length; z++) {
+      newarray.push(hourarray[z]);
+    }
+    for (z = 0; z < dayarray.length; z++) {
+      newarray.push(dayarray[z]);
+    }
+    for (z = 0; z < pastarray.length; z++) {
+      newarray.push(pastarray[z]);
+    }
+
+    for (z = 0; z < newarray; z++) {
+      console.log(newarray[z]);
+    }
+    
+
+    return newarray;
   }, 
   
 };

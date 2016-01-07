@@ -16,7 +16,7 @@ var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 //dynamic component references + libraries 
 var Profile = require('./profile'); 
-var Settings = require('./settings'); 
+var Video = require('./video'); 
 var Trending = require('./trends');
 var Home = require('./home');
 var Causes = require('./causes');
@@ -28,9 +28,10 @@ module.exports = React.createClass({
       <View style={[styles.container, this.border('red')]}>
         <ScrollableTabView 
         	initialPage={2}
-        	tabBarInactiveTextColor={"#222222"}
-        	tabBarUnderlineColor={'#DA1129'}
-        	tabBarBackgroundColor={'black'}
+        	tabBarUnderlineColor={'#DD2A2A'}
+        	tabBarBackgroundColor={'#1a1a1a'}
+          tabBarInactiveTextColor={'#1a1a1a'}
+          tabBarActiveTextColor={'#1a1a1a'}
         	tabBarPosition={'bottom'}
         	renderTabBar={() => <MenuTabBar />}>
           <ScrollView tabLabel="ion|heart">
@@ -42,11 +43,11 @@ module.exports = React.createClass({
           <ScrollView tabLabel="ion|ios-paper" >
           	<Home />
           </ScrollView>
-          <ScrollView tabLabel="ion|checkmark-circled">
-            <Profile />
+          <ScrollView tabLabel="ion|play">
+             <Video />
           </ScrollView>
-          <ScrollView tabLabel="ion|gear-b">
-            <Settings />
+          <ScrollView tabLabel="ion|ios-at">
+            <Profile />
           </ScrollView>
         </ScrollableTabView>
       </View>
@@ -63,11 +64,11 @@ module.exports = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#222222',
+    backgroundColor: '#333333',
   },
   tabView: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#222222',
+    backgroundColor: '#333333',
   },
 });

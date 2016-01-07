@@ -2,23 +2,16 @@
 //these are made of api urls from kimonolabs for consistency 
 //and enhanced content 
 
-var NEWS = ['https://www.kimonolabs.com/api/bu2tu1c0?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/cdag8uyc?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/9ubc8rmg?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/a8o5hd30?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
+var NEWS = [];
 NEWS.name = "News";
 
-var POLITICS = ['https://www.kimonolabs.com/api/24qd1qyy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/dtzowgh4?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
+var POLITICS = [];
 POLITICS.name = "Politics";
 
-var LGBQT = ['https://www.kimonolabs.com/api/copcks1s?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/3mzjkz88?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1',
-'https://www.kimonolabs.com/api/23d7uk1y?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
+var LGBQT = [];
 LGBQT.name = "LGBQT";
 
-var BLM = ['https://www.kimonolabs.com/api/7klgnrow?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/ckis0228?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
+var BLM = [];
 BLM.name = "BlackLivesMatter"; 
 
 var ARTS = []; 
@@ -111,7 +104,7 @@ WALLSTREET.name = "Black Wall Street";
 var HOME = []; 
 HOME.name = "Home Decorating";
 
-var DEFAULT = ['https://www.kimonolabs.com/api/3enwmiyy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1']; 
+var DEFAULT = ['https://www.kimonolabs.com/api/3mnn320y?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1']; 
 DEFAULT.name = "Default"; 
 
 module.exports = {
