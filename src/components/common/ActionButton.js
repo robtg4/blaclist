@@ -51,7 +51,7 @@ class ActionButton extends Component {
     offsetY: React.PropTypes.number,
     spacing: React.PropTypes.number,
     size: React.PropTypes.number,
-  }
+  };
 
   setPositionAndSizeByType() {
     let position, offsetX, offsetY, size;

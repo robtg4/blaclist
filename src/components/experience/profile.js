@@ -208,10 +208,10 @@ var styles = StyleSheet.create({
 		alignItems: 'center', 
 	}, 
 	profileKeywords: {
-		flex: 0.5, 
-		alignItems: 'center', 
 		justifyContent: 'center', 
 		flexDirection: 'row', 
+		flexWrap: 'wrap', 
+		alignItems: 'flex-start',
 	}, 
 	profileStatus: {
 		flex: 1, 

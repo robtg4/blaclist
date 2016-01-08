@@ -21,7 +21,7 @@ module.exports = React.createClass({
 			<View style={[styles.container, this.border('green')]}>
 				<Image 
 					style={styles.bg} 
-					source={require('../img/login_bg1_3x.png')}>
+					source={require('../img/login_bg_alt_3x.png')}>
 					<View style={[styles.header, this.border('blue')]}>
 						<Image 
 							style={[styles.brand, this.border('orange')]} 
