@@ -2,10 +2,7 @@
 //these are made of api urls from kimonolabs for consistency 
 //and enhanced content 
 
-var NEWS = ['https://www.kimonolabs.com/api/bu2tu1c0?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/cdag8uyc?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/9ubc8rmg?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 
-'https://www.kimonolabs.com/api/a8o5hd30?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
+var NEWS = ['https://www.kimonolabs.com/api/9ubc8rmg?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1'];
 NEWS.name = "News";
 
 var POLITICS = ['https://www.kimonolabs.com/api/24qd1qyy?apikey=RrrlPrWddE8EflaLM7iVdF5pKN0w0lqE&kimmodify=1', 

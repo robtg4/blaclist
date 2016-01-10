@@ -11,27 +11,38 @@ var {
 //libraries
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var MenuTabBar = require('./exp_base_components/menuTabBar');
+var NavigationBar = require('react-native-navbar');
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
-//dynamic component references + libraries 
-var Profile = require('./profile'); 
-var Video = require('./video'); 
+//dynamic component references + libraries
+var Profile = require('./profile');
+var Video = require('./video');
 var Trending = require('./trends');
 var Home = require('./home');
 var Causes = require('./causes');
 
 
-module.exports = React.createClass({ 
+module.exports = React.createClass({
   render: function() {
+    var rightButtonConfig = {
+      title: 'Next',
+      handler: function onNext() {
+        alert('hello!');
+      }
+    };
+
+    var titleConfig = {
+      title: 'Hello, world',
+    };
     return (
       <View style={[styles.container, this.border('red')]}>
-        <ScrollableTabView 
+        <ScrollableTabView
         	initialPage={2}
         	tabBarUnderlineColor={'#DD2A2A'}
-        	tabBarBackgroundColor={'#1a1a1a'}
-          tabBarInactiveTextColor={'#1a1a1a'}
-          tabBarActiveTextColor={'#1a1a1a'}
+        	tabBarBackgroundColor={'#1A1A1A'}
+          tabBarInactiveTextColor={'#1A1A1A'}
+          tabBarActiveTextColor={'#1A1A1A'}
         	tabBarPosition={'bottom'}
         	renderTabBar={() => <MenuTabBar />}>
           <ScrollView tabLabel="ion|heart">
@@ -40,8 +51,16 @@ module.exports = React.createClass({
           <ScrollView tabLabel="ion|pound" >
             <Trending />
           </ScrollView>
-          <ScrollView tabLabel="ion|ios-paper" >
-          	<Home />
+          <ScrollView
+            stickyHeaderIndices={[0]}
+            alwaysBounceVertical={false}
+            tabLabel="ion|ios-paper" >
+            <NavigationBar
+              style={styles.header}
+              title={{ title: 'Title', }}
+              leftButton={{ title: 'Back', }}
+              rightButton={{ title: 'Forward', }} />
+            <Home/>
           </ScrollView>
           <ScrollView tabLabel="ion|play">
              <Video />
@@ -52,16 +71,18 @@ module.exports = React.createClass({
         </ScrollableTabView>
       </View>
     );
-  }, 
+  },
   border: function(color) {
       return {
-        //borderColor: color, 
+        //borderColor: color,
         //borderWidth: 1,
-      } 
+      }
   },
 });
 
 var styles = StyleSheet.create({
+  header: {
+  },
   container: {
     flex: 1,
     backgroundColor: '#333333',

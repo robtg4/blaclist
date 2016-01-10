@@ -1,6 +1,5 @@
 //api connector to external data 
 var React = require('react-native');
-
 //libraries
 var RSS = require('../stores/rss-feeds');
 var VIDEO = require('../stores/video-feeds');

@@ -20,7 +20,6 @@ module.exports = React.createClass({
            <View style={styles.card}>
             <WebView
                 style={styles.videoPreview}
-                automaticallyAdjustContentInsets={true}
                 scrollEnabled={false}
                 style={styles.videoPreview}
                 html={this.props.source}

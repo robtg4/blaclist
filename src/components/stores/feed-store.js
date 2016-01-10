@@ -282,7 +282,7 @@ module.exports = {
   orderArticles: function(array) {
     //go through array and rearrange by post time
     console.log("Ordering!");
-    var currentday = String(new Date().getDay());
+    var currentday = String(new Date().getDate());
     var monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
     var currentmonth = monthNames[new Date().getMonth()];
@@ -324,15 +324,21 @@ module.exports = {
         //posted in the today without hours or minutes 
         dayarray.push(array[x]); 
 
-      } else {
+      } else if (array[x].postTime.search(currentmonth) > -1 && array[x].postTime.search(currentyear) > -1 && parseInt(datearray[2]) < currentday) {
         //posted in past 
         pastarray.push(array[x]); 
-      } 
+        pastarray.sort(function(a, b) {
+            a = parseInt(a.postTime.split(" ")[1]);
+            b = parseInt(b.postTime.split(" ")[1]);
+            return a - b;
+        });
+      } else {
+        pastarray.push(array[x]); 
+      }
     }
 
     //shuffle day array 
     dayarray = this.shuffle(dayarray);
-    pastarray = this.shuffle(pastarray);
 
     //order arrays further
     var newarray = [];
