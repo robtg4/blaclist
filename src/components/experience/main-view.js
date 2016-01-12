@@ -46,27 +46,21 @@ module.exports = React.createClass({
         	tabBarPosition={'bottom'}
         	renderTabBar={() => <MenuTabBar />}>
           <ScrollView tabLabel="ion|heart">
-            <Causes />
+            <Causes navigator={this.props.navigator} />
           </ScrollView>
           <ScrollView tabLabel="ion|pound" >
-            <Trending />
+            <Trending navigator={this.props.navigator} />
           </ScrollView>
           <ScrollView
-            stickyHeaderIndices={[0]}
             alwaysBounceVertical={false}
             tabLabel="ion|ios-paper" >
-            <NavigationBar
-              style={styles.header}
-              title={{ title: 'Title', }}
-              leftButton={{ title: 'Back', }}
-              rightButton={{ title: 'Forward', }} />
-            <Home/>
+            <Home navigator={this.props.navigator} />
           </ScrollView>
           <ScrollView tabLabel="ion|play">
-             <Video />
+             <Video navigator={this.props.navigator} />
           </ScrollView>
           <ScrollView tabLabel="ion|ios-at">
-            <Profile />
+            <Profile navigator={this.props.navigator} />
           </ScrollView>
         </ScrollableTabView>
       </View>

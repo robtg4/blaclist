@@ -1,33 +1,33 @@
 
-//fetch data from api 
+//fetch data from api
 var Api = require('../utils/api');
 var Promise = require("bluebird");
 //var Reflux = require('reflux');
 //var Actions = require('../../actions');
-//var _ = require('lodash'); //utility library for common ops that js needs 
-//we have an array of objects and some contain a key that is_album 
-//- we want to fliter that out, we use reject to help do that 
+//var _ = require('lodash'); //utility library for common ops that js needs
+//we have an array of objects and some contain a key that is_album
+//- we want to fliter that out, we use reject to help do that
 //if bool true we reject, function constructs new array of data without the rejected
-//objects 
+//objects
 
-//api connector to external data 
+//api connector to external data
 var React = require('react-native');
 
 module.exports = {
-  //listenables: [Actions], 
+  //listenables: [Actions],
   getVideos: function(personalFeed) {
     var Video_custom = Api.fetchVideo(personalFeed);
     var video_feeds = [];
     var video_array = [];
     console.log(Video_custom);
-    //go through each of the urls and make sure 
-    //their fine 
+    //go through each of the urls and make sure
+    //their fine
     for (var i = 0; i < Video_custom.length; i++)
     {
         video_feeds.push(this.fetchVideos(Video_custom[i]));
     }
 
-    var that = this; 
+    var that = this;
     return Promise.all(video_feeds)
       .then((res) => {
           for (var q = 0; q < res.length; q++)
@@ -43,29 +43,19 @@ module.exports = {
           //console.log(video_array);
           return video_array;
       });
-    
-  }, 
+
+  },
   getArticles: function(personalFeed) {
-    //console.log("Inside the getArticles function");
-    //console.log(personalFeed);
-    var RSS_custom = Api.fetchRss(personalFeed);
+    var RSS_custom = Api.fetchRSS(personalFeed);
     var rss_feeds = [];
     var final_array = [];
-    console.log(RSS_custom);
-    //go through each of the urls and make sure 
-    //their fine 
-    for (var i = 0; i < RSS_custom.length; i++)
-    {
-        //console.log("Processing through the following custom feed: " + RSS_custom[i] + ": Repo #" + i);
-        //processing url 1 by 1 to maintain global scope for all repos 
-        //console.log(RSS_custom[i]);
+    //go through each of the urls and make sure
+    //their fine, get data from each rss feed
+    for (var i = 0; i < RSS_custom.length; i++) {
         rss_feeds.push(this.fetchEntries(RSS_custom[i]));
     }
 
-    //console.log("Done processing repos. Combining promises");
-    //console.log(rss_feeds);
-    //combining promises
-    var that = this; 
+    var that = this;
     return Promise.all(rss_feeds)
       .then((res) => {
           for (var q = 0; q < res.length; q++)
@@ -82,29 +72,29 @@ module.exports = {
           // delete all duplicates from the array***
 
           final_array = that.orderArticles(final_array);
-          
+
           //console.log(final_array);
           return final_array;
       });
-    
-  },  
+
+  },
   fetchVideos: function(url) {
     //console.log("inside the fetchEntries");
-    var that = this; 
+    var that = this;
     return fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
 
-        if (that.responseValidator(responseData)) 
+        if (that.responseValidator(responseData))
         {
           var vids_feeds = [];
-          if (typeof responseData.results.collection2[0].title.text != 'undefined') 
+          if (typeof responseData.results.collection2[0].title.text != 'undefined')
           {
             for (var x = 0; x < responseData.results.collection2.length; x++)
             {
                 vids_feeds.push(responseData.results.collection2[x]);
             }
-          } else 
+          } else
           {
             for (var x = 0; x < responseData.results.collection1.length; x++)
             {
@@ -114,58 +104,33 @@ module.exports = {
 
           //console.log("The working feed array is the following");
           //console.log(working_feeds);
-          return vids_feeds; 
-        } 
+          return vids_feeds;
+        }
       });
-  }, 
+  },
   fetchEntries: function(url) {
     //console.log("inside the fetchEntries");
-    var that = this; 
+    var that = this;
     return fetch(url)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((responseData) => {
-        //console.log("Processing the custom feed");
-        //check if the rss feed is up 
-        if (that.responseValidator(responseData)) 
-        {
-          //console.log("The repo is up! Now processing the entries within the data");
-          //if it is indeed up we need to return the objects 1 by 1 
-          //store in new array that is 
-          //indicative of working feeds 
-          //get initial set of entries 
+        if (that.responseValidator(responseData)) {
           var working_feeds = [];
-          for (var x = 0; x < responseData.results.collection1.length; x++)
-          {
-            //console.log("looping through feed entries and putting into array");
-            //console.log(responseData.results.collection1[x]);
+          //going through the array of entries
+          for (var  i = 0; i < responseData.entries.length; i++) {
 
-            //check if the entry has an image associated with it
-            //console.log(responseData.results.collection1[x].image.src);
-            if (responseData.results.collection1[x].image.src != "") 
-            {
-              //one by one so that we can randomize the array's contents 
-              working_feeds.push(responseData.results.collection1[x]);
-            }
           }
-          //console.log("The working feed array is the following");
-          //console.log(working_feeds);
-          return working_feeds; 
-        } 
+          return working_feeds;
+        }
       });
-  }, 
+  },
   responseValidator: function(responseData) {
-    //console.log("Verifying data to see if repo is up");
-    //console.log(responseData);
-   
-      if(responseData.thisversionstatus == 'success') 
-      {
-        //console.log("Success!");
-        //console.log(responseData);
-        return true; 
+      if(responseData.responseStatus == 200) {
+        return true;
       } else {
-        return false; 
+        return false;
       }
-  }, 
+  },
   shuffle: function(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -183,13 +148,13 @@ module.exports = {
     }
 
     return array;
-  }, 
+  },
   orderVideos: function(array) {
     //go through array and rearrange by post time
     //order of arrays
     var hourarray = [];
     var minutearray = [];
-    var dayarray = []; 
+    var dayarray = [];
     var weekarray = [];
     var montharray = [];
     var yeararray = [];
@@ -198,7 +163,7 @@ module.exports = {
       console.log(array[x].postTime);
       if (array[x].postTime.search('hours') > -1 || array[x].postTime.search('hour') > -1) {
         //posted today with hours ago
-        hourarray.push(array[x]); 
+        hourarray.push(array[x]);
         hourarray.sort(function(a, b) {
             a = parseInt(a.postTime.substring(0,2));
             b = parseInt(b.postTime.substring(0,2));
@@ -209,7 +174,7 @@ module.exports = {
       } else if ((array[x].postTime.search('minutes') > -1) || (array[x].postTime.search('minute') > -1)) {
        //posted today with minutes ago
        //console.log(array[x].postTime);
-        minutearray.push(array[x]); 
+        minutearray.push(array[x]);
         minutearray.sort(function(a, b) {
             a = parseInt(a.postTime.substring(0,2));
             b = parseInt(b.postTime.substring(0,2));
@@ -217,8 +182,8 @@ module.exports = {
         });
 
       } else if ((array[x].postTime.search('days') > -1) || (array[x].postTime.search('day') > -1)) {
-        //posted in the today without hours or minutes 
-        dayarray.push(array[x]); 
+        //posted in the today without hours or minutes
+        dayarray.push(array[x]);
         dayarray.sort(function(a, b) {
           a = parseInt(a.postTime.substring(0,2));
           b = parseInt(b.postTime.substring(0,2));
@@ -226,8 +191,8 @@ module.exports = {
         });
 
       } else if ((array[x].postTime.search('weeks') > -1) || (array[x].postTime.search('week') > -1)) {
-        //posted in past 
-        weekarray.push(array[x]); 
+        //posted in past
+        weekarray.push(array[x]);
         weekarray.sort(function(a, b) {
           a = parseInt(a.postTime.substring(0,2));
           b = parseInt(b.postTime.substring(0,2));
@@ -235,8 +200,8 @@ module.exports = {
         });
 
       } else if ((array[x].postTime.search('months') > -1) || (array[x].postTime.search('month') > -1)) {
-        //posted in past 
-        montharray.push(array[x]); 
+        //posted in past
+        montharray.push(array[x]);
         montharray.sort(function(a, b) {
           a = parseInt(a.postTime.substring(0,2));
           b = parseInt(b.postTime.substring(0,2));
@@ -244,7 +209,7 @@ module.exports = {
         });
 
       } else {
-        yeararray.push(array[x]); 
+        yeararray.push(array[x]);
         yeararray.sort(function(a, b) {
           a = parseInt(a.postTime.substring(0,2));
           b = parseInt(b.postTime.substring(0,2));
@@ -278,7 +243,7 @@ module.exports = {
     console.log(montharray);
 
     return newarray;
-  }, 
+  },
   orderArticles: function(array) {
     //go through array and rearrange by post time
     console.log("Ordering!");
@@ -291,18 +256,18 @@ module.exports = {
     //order of arrays
     var hourarray = [];
     var minutearray = [];
-    var dayarray = []; 
+    var dayarray = [];
     var pastarray = [];
 
     //postTime
-    
+
 
     for (var x = 0; x < array.length; x++) {
       var datearray = array[x].postTime.split(" ");
       //console.log(array[x].postTime);
       if (array[x].postTime.search('hours') > -1 || array[x].postTime.search('hour') > -1) {
         //posted today with hours ago
-        hourarray.push(array[x]); 
+        hourarray.push(array[x]);
         hourarray.sort(function(a, b) {
             a = parseInt(a.postTime.substring(0,2));
             b = parseInt(b.postTime.substring(0,2));
@@ -313,7 +278,7 @@ module.exports = {
       } else if ((array[x].postTime.search('minutes') > -1) || (array[x].postTime.search('minute') > -1)) {
        //posted today with minutes ago
        //console.log(array[x].postTime);
-        minutearray.push(array[x]); 
+        minutearray.push(array[x]);
         minutearray.sort(function(a, b) {
             a = parseInt(a.postTime.substring(0,2));
             b = parseInt(b.postTime.substring(0,2));
@@ -321,23 +286,23 @@ module.exports = {
         });
 
       } else if (array[x].postTime.search(currentmonth) > -1 && array[x].postTime.search(currentyear) > -1 && parseInt(datearray[2]) == currentday) {
-        //posted in the today without hours or minutes 
-        dayarray.push(array[x]); 
+        //posted in the today without hours or minutes
+        dayarray.push(array[x]);
 
       } else if (array[x].postTime.search(currentmonth) > -1 && array[x].postTime.search(currentyear) > -1 && parseInt(datearray[2]) < currentday) {
-        //posted in past 
-        pastarray.push(array[x]); 
+        //posted in past
+        pastarray.push(array[x]);
         pastarray.sort(function(a, b) {
             a = parseInt(a.postTime.split(" ")[1]);
             b = parseInt(b.postTime.split(" ")[1]);
             return a - b;
         });
       } else {
-        pastarray.push(array[x]); 
+        pastarray.push(array[x]);
       }
     }
 
-    //shuffle day array 
+    //shuffle day array
     dayarray = this.shuffle(dayarray);
 
     //order arrays further
@@ -358,11 +323,10 @@ module.exports = {
     for (z = 0; z < newarray; z++) {
       console.log(newarray[z]);
     }
-    
+
    // console.log(newarray);
 
     return newarray;
-  }, 
-  
-};
+  },
 
+};

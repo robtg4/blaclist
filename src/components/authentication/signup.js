@@ -1,10 +1,10 @@
 //component that opens up app to signup screen
 var React = require('react-native');
 var {
-	View, 
-	Text, 
+	View,
+	Text,
 	StyleSheet,
-	Image,  
+	Image,
 	TextInput,
 } = React;
 
@@ -15,7 +15,7 @@ var FBLoginManager = require('NativeModules').FBLoginManager;
 var FBSDKCore = require('react-native-fbsdkcore');
 var {
   FBSDKGraphRequest,
-  FBSDKGraphRequestManager, 
+  FBSDKGraphRequestManager,
 } = FBSDKCore;
 var Api = require('../utils/api.js');
 
@@ -41,24 +41,24 @@ module.exports = React.createClass({
     },
 	getInitialState: function() {
 		return {
-			username: '', 
+			username: '',
 			email: '',
-			password: '', 
+			password: '',
 			errorMessage: '',
 			passwordConfirmation: '',
-			loadingCurrentUser: true, 
+			loadingCurrentUser: true,
 			authData: null,
 		};
 	},
 	render: function() {
 		return (
 			<View style={styles.container}>
-				<Image 
+				<Image
 					style={styles.bg}
 					source={require('../img/login_bg_alt_3x.png')}>
 					<View style={[styles.header, this.border('red')]} >
 						<View style={styles.headerWrapper} >
-							<Image 
+							<Image
 								style={[styles.login_brand]}
 								resizeMode={"contain"}
 								source={require('../img/signup_brand.png')} />
@@ -67,9 +67,9 @@ module.exports = React.createClass({
 								resizeMode={'contain'}
 								onPress={this.onFbSignupPress}
 								source={require('../img/fb_signup_btn.png')} />
-							<Image 
+							<Image
 								style={[styles.loginBar]}
-								style={[styles.loginBar]} 
+								style={[styles.loginBar]}
 								resizeMode={'contain'}
 								source={require('../img/login_bar_3x.png')} />
 						</View>
@@ -77,21 +77,21 @@ module.exports = React.createClass({
 					<View style={[styles.footer, this.border('blue')]} >
 						<View style={styles.footerWrapper} >
 							<Text style={styles.error}>{this.state.errorMessage}</Text>
-							<TextInput 
+							<TextInput
 								placeholder={'Email'}
-								style={styles.input} 
+								style={styles.input}
 								value={this.state.username}
 								onChangeText={(text) => this.setState({username: text})} />
-							<TextInput 
+							<TextInput
 								placeholder={'Password'}
-								secureTextEntry={true} 
-								style={styles.input} 
+								secureTextEntry={true}
+								style={styles.input}
 								value={this.state.password}
 								onChangeText={(text) => this.setState({password: text})} />
-							<TextInput 
+							<TextInput
 								placeholder={'Confirm Password'}
-								secureTextEntry={true} 
-								style={styles.input} 
+								secureTextEntry={true}
+								style={styles.input}
 								value={this.state.confirmPassword}
 								onChangeText={(text) => this.setState({passwordConfirmation: text})} />
 							<ImageButton
@@ -109,7 +109,7 @@ module.exports = React.createClass({
 				</Image>
 			</View>
 		);
-	}, 
+	},
 	onFbSignupPress: function() {
 
 		var that=this;
@@ -118,7 +118,7 @@ module.exports = React.createClass({
 		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
 	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile"], function(error, data){
 		  if (!error) {
-			
+
 			console.log('No error');
 		    var authData = {
 			    id: data.credentials.userId,
@@ -165,7 +165,7 @@ module.exports = React.createClass({
 								        success: function(currentUser) {
 								        	console.log('Success');
 								            currentUser = Parse.User.current();
-								            getPlayerDataAndGraph ();   
+								            getPlayerDataAndGraph ();
 								        },
 								        error: function(error) {
 								            console.log("Error: ", error);
@@ -231,7 +231,7 @@ module.exports = React.createClass({
 			        that.setState({errorMessage: error.message});
 			      }
 			    });
-			
+
 		  } else {
 		  	console.log('User did not succesfully log in');
 		  	console.log("Error: ", error);
@@ -241,7 +241,7 @@ module.exports = React.createClass({
 	},
 	onCreateAcctPress: function() {
 		if (this.state.password === this.state.passwordConfirmation)
-		{	
+		{
 			var user = new Parse.User();
 				user.set("username", this.state.username);
 				user.set("password", this.state.password);
@@ -262,9 +262,9 @@ module.exports = React.createClass({
 	},
 	border: function(color) {
 	    return {
-	      //borderColor: color, 
+	      //borderColor: color,
 	      //borderWidth: 4,
-	    } 
+	    }
 	 },
 });
 
@@ -275,62 +275,62 @@ var styles = StyleSheet.create({
 	},
 	bg: {
 		flex: 1,
-		width: window.width, 
-		height: window.height, 
+		width: window.width,
+		height: window.height,
 	},
 	header: {
 		flex: 2,
-	}, 
+	},
 	headerWrapper: {
-		flex: 1, 
-		flexDirection: 'column', 
+		flex: 1,
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent:'space-around',
 		marginTop: window.height/35,
-	}, 
+	},
 	footerWrapper: {
-		flexDirection: 'column', 
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent:'space-around',
-		marginTop: 15, 
-	}, 
+		marginTop: 15,
+	},
 	footer: {
-		flex: 4, 
-	}, 
+		flex: 4,
+	},
 	loginBar: {
-		width: (window.width/1.3)/1.8, 
+		width: (window.width/1.3)/1.8,
 		height: (70/553)*((window.width/1.3)/1.8),
-	}, 
+	},
 	fb_btn: {
 		width: window.width/1.3,
 		height: (147/1095)*window.width/1.3,
-		margin: 10, 
-	}, 
+		margin: 10,
+	},
 	login_brand: {
 		width: window.width/5,
 		height: (268/273)*window.width/5,
 		margin: 6,
 	},
 	input: {
-		padding: 4, //gives us offset to border 
-		height: window.height/20, 
-		backgroundColor: 'rgba(255,255,255, 0.4)', 
-		borderColor: 'gray', 
-		borderWidth: 1, 
+		padding: 4, //gives us offset to border
+		height: window.height/20,
+		backgroundColor: 'rgba(255,255,255, 0.4)',
+		borderColor: 'gray',
+		borderWidth: 1,
 		borderRadius: 2, //round input box
-		margin: 2, 
+		margin: 2,
 		width: window.width/1.3,
-		alignSelf: 'center', //center yourself on form when you have fixed widths 
-	}, 
+		alignSelf: 'center', //center yourself on form when you have fixed widths
+	},
 	email_btn: {
 		width: window.width/1.3,
 		height: (147/1095)*window.width/1.3,
-		margin: 3, 
-	}, 
+		margin: 3,
+	},
 	error: {
-		alignItems: 'center', 
+		alignItems: 'center',
 		alignSelf:'center',
-		fontFamily: 'Bebas Neue', 
+		fontFamily: 'Bebas Neue',
 		fontSize: 15,
 		color: 'red',
 		margin: 5

@@ -1,10 +1,10 @@
 //component that opens up app to login screen
 var React = require('react-native');
 var {
-	View, 
-	Text, 
+	View,
+	Text,
 	StyleSheet,
-	Image,  
+	Image,
 	TextInput,
 } = React;
 
@@ -15,7 +15,7 @@ var FBLoginManager = require('NativeModules').FBLoginManager;
 var FBSDKCore = require('react-native-fbsdkcore');
 var {
   FBSDKGraphRequest,
-  FBSDKGraphRequestManager, 
+  FBSDKGraphRequestManager,
 } = FBSDKCore;
 
 //dimensions
@@ -40,21 +40,21 @@ module.exports = React.createClass({
     },
 	getInitialState: function() {
 		return {
-			username: '', 
-			password: '', 
+			username: '',
+			password: '',
 			errorMessage: '',
-			loadingCurrentUser: true, 
+			loadingCurrentUser: true,
 		};
 	},
 	render: function() {
 		return (
 			<View style={[styles.container]}>
-				<Image 
-					style={styles.bg} 
+				<Image
+					style={styles.bg}
 					source={require('../img/login_bg_alt_3x.png')}>
 					<View style={[styles.header, this.border('red')]} >
 						<View style={styles.headerWrapper} >
-							<Image 
+							<Image
 								style={[styles.login_brand]}
 								resizeMode={"contain"}
 								source={require('../img/login_brand_2.png')} />
@@ -63,9 +63,9 @@ module.exports = React.createClass({
 								resizeMode={'contain'}
 								onPress={this.onFbLoginPress}
 								source={require('../img/fb_login.png')} />
-							<Image 
+							<Image
 								style={[styles.loginBar]}
-								style={[styles.loginBar]} 
+								style={[styles.loginBar]}
 								resizeMode={'contain'}
 								source={require('../img/login_bar_3x.png')} />
 						</View>
@@ -73,15 +73,15 @@ module.exports = React.createClass({
 					<View style={[styles.footer, this.border('blue')]} >
 						<View style={styles.footerWrapper} >
 						<Text style={styles.error}>{this.state.errorMessage}</Text>
-							<TextInput 
+							<TextInput
 								placeholder={'Email'}
-								style={styles.input} 
+								style={styles.input}
 								value={this.state.username}
 								onChangeText={(text) => this.setState({username: text})} />
-							<TextInput 
+							<TextInput
 								placeholder={'Password'}
-								style={styles.input} 
-								secureTextEntry={true} 
+								style={styles.input}
+								secureTextEntry={true}
 								value={this.state.password}
 								onChangeText={(text) => this.setState({password: text})} />
 							<ImageButton
@@ -99,7 +99,7 @@ module.exports = React.createClass({
 				</Image>
 			</View>
 		);
-	}, 
+	},
 	onFbLoginPress: function() {
 		//sign up/login via facebook and store credentials into parse
 		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
@@ -109,7 +109,7 @@ module.exports = React.createClass({
 		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
 	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile", "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"], function(error, data){
 		  if (!error) {
-		
+
 		    var authData = {
 			    id: data.credentials.userId,
 			    access_token: data.credentials.token,
@@ -179,7 +179,7 @@ module.exports = React.createClass({
 			        that.setState({errorMessage: error.message});
 			      }
 			    });
-			
+
 		  } else {
 		  	console.log('User did not succesfully log in');
 		  	console.log("Error: ", error);
@@ -188,7 +188,7 @@ module.exports = React.createClass({
 		});
 	},
 	onEmailLoginPress: function() {
-		//log the user on, get eror if login information doesn't exist 
+		//log the user on, get eror if login information doesn't exist
 		//we need to show the user that the error occured
 		Parse.User.logIn(this.state.username, this.state.password, {
 			  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]); },
@@ -198,14 +198,14 @@ module.exports = React.createClass({
 	onCreateAcctPress: function() {
 		this.props.navigator.pop();
 	},
-	 //function that helps with laying out flexbox itmes 
-	 //takes a color argument to construct border, this is an additional 
-	 //style because we dont want to mess up our real styling 
+	 //function that helps with laying out flexbox itmes
+	 //takes a color argument to construct border, this is an additional
+	 //style because we dont want to mess up our real styling
 	 border: function(color) {
 	    return {
-	      //borderColor: color, 
+	      //borderColor: color,
 	      //borderWidth: 4,
-	    } 
+	    }
 	 },
 });
 
@@ -216,62 +216,62 @@ var styles = StyleSheet.create({
 	},
 	bg: {
 		flex: 1,
-		width: window.width, 
-		height: window.height, 
+		width: window.width,
+		height: window.height,
 	},
 	header: {
 		flex: 2,
-	}, 
+	},
 	headerWrapper: {
-		flex: 1, 
-		flexDirection: 'column', 
+		flex: 1,
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent:'space-around',
 		marginTop: window.height/35,
-	}, 
+	},
 	footerWrapper: {
-		flexDirection: 'column', 
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent:'space-around',
-		marginTop: 15, 
-	}, 
+		marginTop: 15,
+	},
 	footer: {
-		flex: 4, 
-	}, 
+		flex: 4,
+	},
 	loginBar: {
-		width: (window.width/1.3)/1.8, 
+		width: (window.width/1.3)/1.8,
 		height: (70/553)*((window.width/1.3)/1.8),
-	}, 
+	},
 	fb_btn: {
 		width: window.width/1.3,
 		height: (147/1095)*window.width/1.3,
-		margin: 10, 
-	}, 
+		margin: 10,
+	},
 	login_brand: {
 		width: window.width/6,
 		height: (268/273)*window.width/6,
 		margin: 6,
 	},
 	input: {
-		padding: 4, //gives us offset to border 
-		height: window.height/20, 
-		backgroundColor: 'rgba(255,255,255, 0.4)', 
-		borderColor: 'gray', 
-		borderWidth: 1, 
+		padding: 4, //gives us offset to border
+		height: window.height/20,
+		backgroundColor: 'rgba(255,255,255, 0.4)',
+		borderColor: 'gray',
+		borderWidth: 1,
 		borderRadius: 2, //round input box
-		margin: 2, 
+		margin: 2,
 		width: window.width/1.3,
-		alignSelf: 'center', //center yourself on form when you have fixed widths 
-	}, 
+		alignSelf: 'center', //center yourself on form when you have fixed widths
+	},
 	email_btn: {
 		width: window.width/1.3,
 		height: (147/1095)*window.width/1.3,
-		margin: 3, 
-	}, 
+		margin: 3,
+	},
 	error: {
-		alignItems: 'center', 
+		alignItems: 'center',
 		alignSelf:'center',
-		fontFamily: 'Bebas Neue', 
+		fontFamily: 'Bebas Neue',
 		fontSize: 15,
 		color:'red',
 	},

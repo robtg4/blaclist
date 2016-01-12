@@ -21,6 +21,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		882D253B1C43C2DC00828B8B /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 882D25351C43C2D000828B8B /* libRCTYouTube.a */; };
+		882D253D1C43C31400828B8B /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 882D253C1C43C31400828B8B /* YTPlayerView-iframe-player.html */; };
 		883829E31C3B3D04007EBC2E /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 883829DD1C3B3D04007EBC2E /* FontAwesome.otf */; };
 		883829E41C3B3D04007EBC2E /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829DE1C3B3D04007EBC2E /* foundation-icons.ttf */; };
 		883829E51C3B3D04007EBC2E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829DF1C3B3D04007EBC2E /* ionicons.ttf */; };
@@ -152,6 +154,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		882D25341C43C2D000828B8B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 882D25211C43C2D000828B8B /* RCTYouTube.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8BDB9BC91B4289AE00EF9FEF;
+			remoteInfo = RCTYouTube;
+		};
 		886D9B9C1C3705B60017DC31 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 886D9B881C3705B60017DC31 /* ReactNativeIcons.xcodeproj */;
@@ -245,6 +254,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		882D25211C43C2D000828B8B /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
+		882D253C1C43C31400828B8B /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "YTPlayerView-iframe-player.html"; path = "../node_modules/react-native-youtube/Assets/YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		883829DD1C3B3D04007EBC2E /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FontAwesome.otf"; sourceTree = "<group>"; };
 		883829DE1C3B3D04007EBC2E /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "foundation-icons.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/foundation-icons.ttf"; sourceTree = "<group>"; };
 		883829DF1C3B3D04007EBC2E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
@@ -320,6 +331,7 @@
 				8877EC2E1C1551A2005EB156 /* FBSDKShareKit.framework in Frameworks */,
 				889809EE1C1ECAE800D8EBB7 /* libRNSpinkit.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				882D253B1C43C2DC00828B8B /* libRCTYouTube.a in Frameworks */,
 				8877EC431C1562B9005EB156 /* libRCTFBSDKShare.a in Frameworks */,
 				8877EC611C169DCD005EB156 /* libBVLinearGradient.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
@@ -445,6 +457,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				882D25211C43C2D000828B8B /* RCTYouTube.xcodeproj */,
 				886D9B881C3705B60017DC31 /* ReactNativeIcons.xcodeproj */,
 				889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */,
 				889809E81C1ECAD800D8EBB7 /* RNSpinkit.xcodeproj */,
@@ -486,6 +499,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* blaclistTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				882D253C1C43C31400828B8B /* YTPlayerView-iframe-player.html */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -496,6 +510,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* blaclist.app */,
 				00E356EE1AD99517003FC87E /* blaclistTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		882D25221C43C2D000828B8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				882D25351C43C2D000828B8B /* libRCTYouTube.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -773,6 +795,10 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
+					ProductGroup = 882D25221C43C2D000828B8B /* Products */;
+					ProjectRef = 882D25211C43C2D000828B8B /* RCTYouTube.xcodeproj */;
+				},
+				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
@@ -872,6 +898,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		882D25351C43C2D000828B8B /* libRCTYouTube.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTYouTube.a;
+			remoteRef = 882D25341C43C2D000828B8B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		886D9B9D1C3705B60017DC31 /* libReactNativeIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -956,6 +989,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				882D253D1C43C31400828B8B /* YTPlayerView-iframe-player.html in Resources */,
 				883829E31C3B3D04007EBC2E /* FontAwesome.otf in Resources */,
 				883829E41C3B3D04007EBC2E /* foundation-icons.ttf in Resources */,
 				883829E51C3B3D04007EBC2E /* ionicons.ttf in Resources */,

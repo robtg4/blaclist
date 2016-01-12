@@ -54,7 +54,7 @@ module.exports = React.createClass({
 			isLoaded: false,
 			dataSource: new ListView.DataSource({
                rowHasChanged: (row1, row2) => row1 !== row2,
-            }),
+      }),
 		}
 	},
     //gettign data for rss feed based on user interests
@@ -71,12 +71,47 @@ module.exports = React.createClass({
 	},
 	//rendering component
 	render: function() {
-		if (!this.state.isLoaded) {
+				if (!this.state.isLoaded) {
             return this.renderLoadingView();
         }
-        return <View style={styles.container}>
+        /* return <View style={styles.container}>
 			    {this.renderListView()}
 		    </View>
+				*/
+				var entry = false;
+				return <View>
+					<ArticlePreview
+						category={'Black Millenials'}
+						postTime={'30 minutes ago'}
+						entryBrand={'Blavity'}
+						key={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
+						categoryPress={this.onCategoryDetailsPress}
+						src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}}
+						source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }}
+						text={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
+						onPress={() => this.onArticleDetailsPress(entry)} />
+					<ArticlePreview
+						category={'Black Millenials'}
+						postTime={'1 hour ago'}
+						entryBrand={'Blavity'}
+						key={'First Look At Cast Of Nat Turner Biopic “The Birth Of A Nation”'}
+						categoryPress={this.onCategoryDetailsPress}
+						src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}}
+						source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/birth.jpg?0fd4d3' }}
+						text={'First Look At Cast Of Nat Turner Biopic “The Birth Of A Nation”'}
+						onPress={() => this.onArticleDetailsPress(entry)} />
+					<ArticlePreview
+						category={'Black Millenials'}
+						postTime={'30 minutes ago'}
+						entryBrand={'Blavity'}
+						key={'ICYMI: Presidemnt Obama’s Town Hall #GunsInAmerica'}
+						categoryPress={this.onCategoryDetailsPress}
+						src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}}
+						source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-218x150.jpg?0fd4d3' }}
+						text={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
+						onPress={() => this.onArticleDetailsPress(entry)} />
+				</View>
+
 	},
 	//loading render
 	renderLoadingView: function() {
