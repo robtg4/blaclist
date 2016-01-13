@@ -28,7 +28,7 @@ module.exports = React.createClass({
 		return (
 			<View style={styles.container}>
 				<ScrollView style={styles.container}>
-					<Image source={{uri:'http://blameebro.com/wp-content/uploads/2015/07/kdot-alright-video.png' }} style={[styles.entryImage]} />
+					<Image source={{uri:'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }} style={[styles.entryImage]} />
 				</ScrollView>
 				<View style={styles.footer}>
 				</View>

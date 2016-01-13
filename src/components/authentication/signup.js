@@ -62,11 +62,18 @@ module.exports = React.createClass({
 								style={[styles.login_brand]}
 								resizeMode={"contain"}
 								source={require('../img/signup_brand.png')} />
-							<ImageButton
-								style={[styles.fb_btn]}
-								resizeMode={'contain'}
-								onPress={this.onFbSignupPress}
-								source={require('../img/fb_signup_btn.png')} />
+							<View style={styles.btnRow}>
+								<ImageButton
+									style={[styles.tw_btn]}
+									resizeMode={'contain'}
+									onPress={this.onTwLoginPress}
+									source={require('../img/twitter-btn.png')} />
+								<ImageButton
+									style={[styles.fb_btn]}
+									resizeMode={'contain'}
+									onPress={this.onFbLoginPress}
+									source={require('../img/facebook-btn.png')} />
+							</View>
 							<Image
 								style={[styles.loginBar]}
 								style={[styles.loginBar]}
@@ -273,6 +280,22 @@ var styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'stretch',
 	},
+	btnRow: {
+		flexDirection: 'row',
+	},
+	tw_btn: {
+		width: window.width/3,
+		height: (147/526)*window.width/3,
+		borderRadius: 4,
+		justifyContent: 'space-around',
+		marginRight: 5,
+	},
+	fb_btn: {
+		width: window.width/3,
+		height: (147/526)*window.width/3,
+		borderRadius: 4,
+		justifyContent: 'space-around',
+	},
 	bg: {
 		flex: 1,
 		width: window.width,
@@ -300,11 +323,6 @@ var styles = StyleSheet.create({
 	loginBar: {
 		width: (window.width/1.3)/1.8,
 		height: (70/553)*((window.width/1.3)/1.8),
-	},
-	fb_btn: {
-		width: window.width/1.3,
-		height: (147/1095)*window.width/1.3,
-		margin: 10,
 	},
 	login_brand: {
 		width: window.width/5,

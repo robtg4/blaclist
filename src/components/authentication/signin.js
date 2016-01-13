@@ -58,11 +58,18 @@ module.exports = React.createClass({
 								style={[styles.login_brand]}
 								resizeMode={"contain"}
 								source={require('../img/login_brand_2.png')} />
-							<ImageButton
-								style={[styles.fb_btn]}
-								resizeMode={'contain'}
-								onPress={this.onFbLoginPress}
-								source={require('../img/fb_login.png')} />
+							<View style={styles.btnRow}>
+								<ImageButton
+									style={[styles.tw_btn]}
+									resizeMode={'contain'}
+									onPress={this.onTwLoginPress}
+									source={require('../img/twitter-btn.png')} />
+								<ImageButton
+									style={[styles.fb_btn]}
+									resizeMode={'contain'}
+									onPress={this.onFbLoginPress}
+									source={require('../img/facebook-btn.png')} />
+							</View>
 							<Image
 								style={[styles.loginBar]}
 								style={[styles.loginBar]}
@@ -99,6 +106,9 @@ module.exports = React.createClass({
 				</Image>
 			</View>
 		);
+	},
+	onTwLoginPress: function() {
+
 	},
 	onFbLoginPress: function() {
 		//sign up/login via facebook and store credentials into parse
@@ -242,10 +252,21 @@ var styles = StyleSheet.create({
 		width: (window.width/1.3)/1.8,
 		height: (70/553)*((window.width/1.3)/1.8),
 	},
+	btnRow: {
+		flexDirection: 'row',
+	},
+	tw_btn: {
+		width: window.width/3,
+		height: (147/526)*window.width/3,
+		borderRadius: 4,
+		justifyContent: 'space-around',
+		marginRight: 5,
+	},
 	fb_btn: {
-		width: window.width/1.3,
-		height: (147/1095)*window.width/1.3,
-		margin: 10,
+		width: window.width/3,
+		height: (147/526)*window.width/3,
+		borderRadius: 4,
+		justifyContent: 'space-around',
 	},
 	login_brand: {
 		width: window.width/6,
