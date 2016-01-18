@@ -55,7 +55,7 @@ module.exports = React.createClass({
                     <View style={styles.sourceRow}>
                       <View style={[this.border('white')]}>
                         <ImageButton
-                            style={[styles.logoBtn, , this.border('red'), styles.row]}
+                            style={[styles.logoBtn]}
                             resizeMode={'contain'}
                             onPress={this.onHeartPress}
                             source={this.props.src} />

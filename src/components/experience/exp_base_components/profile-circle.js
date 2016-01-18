@@ -15,15 +15,12 @@ module.exports = React.createClass({
         <TouchableHighlight
           style={styles.profileBtn}
           underlayColor={'transparent'}
-          onPress={this.props.onProfilePress} >
+          onPress={this.props.onPress} >
             <Image
               source={this.props.source}
               style={[styles.profile, this.border('red')]} />
         </TouchableHighlight>
       );
-
-  },
-  onProfilePress: function() {
 
   },
   border: function(color) {
