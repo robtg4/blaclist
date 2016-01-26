@@ -11,6 +11,7 @@ var window = Dimensions.get('window');
 
 module.exports = React.createClass({
 	render: function() {
+				var entry = false;
         return <View style={styles.container}>
 					<CausePreview
 						key={'Justice for Tamir Rice'}
@@ -22,7 +23,7 @@ module.exports = React.createClass({
 						supText={'35,250 supporters of 50k'}
 						sumText={'More than a year after police shot and killed my 12-year-old cousin Tamir Rice as he played in a park with a toy gun, a grand jury declined to charge the officers who opened fire on Tamir in less than 2 seconds of arriving to the scene...'}
 						protestor={{uri: 'http://blogs-images.forbes.com/kurtbadenhausen/files/2014/07/0324_lebron-james_650x455.jpg'}}
-						onPress={() => this.onArticleDetailsPress(entry)} />
+						onPress={() => this.onCauseDetailsPress(entry)} />
 					<CausePreview
 						key={'Indict Governor Snyder for the Flint Water Crisis'}
 						protestorname={'Michael Moore'}
@@ -33,8 +34,18 @@ module.exports = React.createClass({
 						supText={'35,250 supporters of 50k'}
 						sumText={'Michigans top prosecutor said Monday that its an "outrage" that residents of Flint are being forced to pay for water thats unsafe to drink — and his office may take action to stop the billing.'}
 						protestor={{uri: 'http://media.mlive.com/onthetown_impact/photo/11232068-large.jpg'}}
-						onPress={() => this.onArticleDetailsPress(entry)} />
+						onPress={() => this.onCauseDetailsPress(entry)} />
         </View>
+	},
+	//press to see article's details
+	onArticleDetailsPress: function(entry) {
+		//pass props to details page
+		this.props.navigator.push({
+			name: 'causedetails',
+			passProps: {
+				entry: entry,
+			}
+		});
 	},
 });
 
