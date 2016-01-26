@@ -89,9 +89,12 @@ module.exports = React.createClass({
               </Text>
 						</View>
             <View style={styles.footer}>
-              <View style={styles.signBtn}>
+              <TouchableHighlight
+                underlayColor={'transparent'}
+                onPress={() => {}}
+                style={styles.signBtn}>
                 <Text style={styles.signBtnText}>SIGN THIS PETITION</Text>
-              </View>
+              </TouchableHighlight>
               <Text style={styles.footerText}>view this petition at change.org</Text>
             </View>
 					</View>
