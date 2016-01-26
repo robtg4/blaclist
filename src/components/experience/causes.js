@@ -38,7 +38,7 @@ module.exports = React.createClass({
         </View>
 	},
 	//press to see article's details
-	onArticleDetailsPress: function(entry) {
+	onCauseDetailsPress: function(entry) {
 		//pass props to details page
 		this.props.navigator.push({
 			name: 'causedetails',

@@ -49,34 +49,55 @@ module.exports = React.createClass({
 							<BackButton
 								onPress={this.goBack} /> } />
 				<ScrollView>
-					<Image source={{uri:'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }} style={[styles.entryImage]} />
+					<Image source={{uri:'http://image.cleveland.com/home/cleve-media/width620/img/plain-dealer/photo/2015/12/31/19477763-mmmain.jpg' }} style={[styles.entryImage]} />
 					<View style={[styles.articleBody, this.border('red')]}>
-						<Text style={styles.titleText}>ICYMI: President Obama’s Town Hall #GunsInAmerica</Text>
-						<View style={styles.sourceRow}>
-							<ImageButton
-								style={[styles.logoBtn]}
-								resizeMode={'contain'}
-								onPress={this.onPressSource}
-								source={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}} />
-							<View style={styles.sourceCol}>
-								<Text style={styles.brandName}>Blavity</Text>
-								<Text style={styles.authorName}>By DAVID E. SANGER, ERIC SCHMITT, and HELENE COOPER</Text>
-								<Text style={styles.postTime}>Yesterday</Text>
-							</View>
-						</View>
+						<Text style={styles.titleText}>Justice for Tamir Rice</Text>
+            <Text style={[styles.supText, this.border('blue')]}>35,250 supporters of 50k</Text>
+            <View style={[styles.protestorRow, this.border('white')]}>
+              <View style={styles.sourceRow}>
+                <View style={styles.thoughtsRow}>
+                  <ProfileCircle
+                    style={styles.protestor}
+                    key={1}
+                    source={{uri: 'http://blogs-images.forbes.com/kurtbadenhausen/files/2014/07/0324_lebron-james_650x455.jpg'}} />
+                  <Text style={styles.protestorName}>Lebron James</Text>
+                  <Text style={styles.protestorCity}>Cleveland, OH</Text>
+                </View>
+              </View>
+            </View>
 						<View style={styles.bodyTextView}>
 							<Text style={styles.bodyText}>
-								President Obama expounded on his intentions to expand gun safety in America during a town hall moderated by CNN’s Anderson Cooper just days after announcing his Executive Actions on the matter.  As he enters the final phase of his Presidency, Mr. Obama’s move to fully focus his energy and attention on gun reform during the first full week of the new year isn’t a mere coincidence. Historians, anchors and amateurs alike are paying close attention to the final moves that will bookend the narrative of his legacy long beyond his departure from public office.
-							</Text>
-							<Image style={{width: 200, height: 150, marginTop: 10, alignSelf: 'center', marginBottom: 10,}} source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/secret.gif?dfe5c5'}} />
+								More than a year after police shot and killed my 12-year-old cousin Tamir Rice as he played in a park with a toy gun, a grand jury declined to charge the officers who opened fire on Tamir in less than 2 seconds of arriving to the scene.
+              </Text>
 							<Text style={styles.bodyText}>
-							He has referenced the Newtown shooting of first graders as the “worst day” of his presidency time and again—both during this town hall meeting and in the emotional unveiling of his executive actions on January 5.  It is no surprise, then, that he has chosen gun violence as the banner issue that will precede all other political ambitions this year.
+							  My family is saddened and disappointed– but we are not surprised.
 							</Text>
+              <Text style={[styles.bodyText, {marginTop: 10}]}>
+							  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							</Text>
+              <Text style={[styles.bodyText, {marginTop: 10}]}>
+							  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							</Text>
+              <Text style={[styles.bodyText, {marginTop: 10}]}>
+							  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</Text>
+              <Text style={[styles.bodyText, {marginTop: 10}]}>
+							  Please sign my petition asking the Department of Justice to launch a federal investigation into prosecutor McGintys handling of the grand jury process; and for the killing of 12 year old Tamir Rice.
+							</Text>
+              <Text style={[styles.bodyText, {marginTop: 20}]}>
+                LaTonya Goldsby
+              </Text>
 						</View>
+            <View style={styles.footer}>
+              <ImageButton
+                style={[styles.sign_btn]}
+                resizeMode={'contain'}
+                onPress={() => {}}
+                source={require('../../img/petition-btn.png')} />
+              <Text style={styles.footerText}>view this petition at change.org</Text>
+            </View>
 					</View>
 				</ScrollView>
-				<View style={styles.footer}>
-				</View>
 				<Modal style={[styles.modal]} ref={"modal"} swipeToClose={this.state.swipeToClose}>
           <Text style={styles.text}>Basic modal</Text>
         </Modal>
@@ -92,18 +113,80 @@ module.exports = React.createClass({
 	      //borderWidth: 2,
 	    }
 	 },
-	 onPressThoughts: function() {
-		 this.props.navigator.push({name: 'thoughts'});
-	 },
-	 onPressSource: function() {
-
-	 },
 	 goBack: function() {
      this.props.navigator.pop();
    },
 });
 
 var styles = StyleSheet.create({
+  protestorName: {
+    fontFamily: 'SFCompactText-Bold',
+    fontSize: 13,
+    textAlign: 'left',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    color: 'white',
+    marginLeft: window.width/40,
+  },
+  protestorCity: {
+    fontFamily: 'SFCompactText-Regular',
+    fontSize: 13,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    color: 'white',
+    marginLeft: window.width/30,
+  },
+  protestorRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: window.height/80,
+  },
+  footerText: {
+    margin: 10,
+    fontSize: 15,
+    fontFamily: 'SFCompactText-Regular',
+    color: '#436675',
+  },
+  sign_btn: {
+    marginTop: 20,
+    width: window.width/1.1,
+		height: (177/1418)*window.width/1.1,
+		justifyContent: 'center',
+    alignSelf: 'center',
+		marginRight: 5,
+  },
+  protestorName: {
+    fontFamily: 'SFCompactText-Bold',
+    fontSize: 13,
+    textAlign: 'left',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    color: 'white',
+    marginLeft: window.width/40,
+  },
+  protestorCity: {
+    fontFamily: 'SFCompactText-Regular',
+    fontSize: 13,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    color: 'white',
+    marginLeft: window.width/30,
+  },
+  protestor: {
+    width: window.width/25,
+    height: window.width/25,
+    justifyContent:'flex-start',
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent',
+  },
+  thoughtsRow: {
+    flexDirection: 'row',
+  },
+  sourceRow: {
+    flexDirection: 'row',
+  },
 	modal: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -125,26 +208,6 @@ var styles = StyleSheet.create({
 		justifyContent: 'center',
 		marginTop: -2,
 	},
-	brandName: {
-		textAlign:'left',
-		fontFamily: 'SFCompactDisplay-Medium',
-		fontSize: 15,
-		color: 'white'
-	},
-	postTime: {
-		textAlign:'left',
-		color: 'white'
-	},
-	sourceRow: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		marginTop: 20,
-	},
-	logoBtn: {
-    height: window.width/8,
-    width: window.width/8,
-    alignSelf:'center',
-  },
 	bodyText: {
 		fontFamily: 'SFCompactDisplay-Medium',
 		fontSize: 15,
@@ -171,7 +234,7 @@ var styles = StyleSheet.create({
 	    shadowRadius: 0.25,
 	},
 	container: {
-		flex: 0.93,
+		flex: 0.85,
 		backgroundColor: '#222222',
 	},
 	twitterIcon: {
@@ -193,26 +256,39 @@ var styles = StyleSheet.create({
 		flexDirection: 'row',
 		marginTop: 5,
 	},
-	thoughtRow: {
-		flex: 0.7,
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		alignItems: 'center',
-		marginRight: window.width/30,
-	},
 	footer: {
-		flex: 0.07,
-		backgroundColor: '#DB202A',
+		flex: 0.15,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
 	},
 	entryImage: {
 		height: window.height/2.8,
 		width: window.width,
 	},
-	titleText: {
-		fontFamily: 'Bebas Neue',
-		fontSize: 20,
-		color: 'white',
-		letterSpacing: 1,
-		textAlign: 'left'
-	},
+  titleText: {
+    fontFamily: 'BebasNeueBook',
+    fontSize: 23,
+    color: 'white',
+    textAlign: 'left',
+    textAlign: 'left',
+    marginTop: 2,
+    width:window.width*0.90,
+  },
+  supText: {
+    color: 'white',
+    marginTop: 2,
+    fontSize: 15,
+    textAlign: 'left',
+    fontFamily: 'SFCompactText-Regular',
+    width:window.width*0.90,
+  },
+  sumText: {
+    color: 'white',
+    marginTop: 2,
+    textAlign: 'left',
+    fontSize: 12,
+    fontFamily: 'SFCompactText-Regular',
+    width:window.width*0.90,
+  },
 });
