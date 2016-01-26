@@ -89,11 +89,9 @@ module.exports = React.createClass({
               </Text>
 						</View>
             <View style={styles.footer}>
-              <ImageButton
-                style={[styles.sign_btn]}
-                resizeMode={'contain'}
-                onPress={() => {}}
-                source={require('../../img/petition-btn.png')} />
+              <View style={styles.signBtn}>
+                <Text style={styles.signBtnText}>SIGN THIS PETITION</Text>
+              </View>
               <Text style={styles.footerText}>view this petition at change.org</Text>
             </View>
 					</View>
@@ -149,12 +147,22 @@ var styles = StyleSheet.create({
     fontFamily: 'SFCompactText-Regular',
     color: '#436675',
   },
-  sign_btn: {
-    marginTop: 20,
+  signBtnText: {
+    fontSize: 20,
+    fontFamily: 'BebasNeueBold',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    color: 'white',
+  },
+  signBtn: {
+    marginTop: 15,
     width: window.width/1.1,
 		height: (177/1418)*window.width/1.1,
 		justifyContent: 'center',
     alignSelf: 'center',
+    borderColor: '#436675',
+    borderWidth: 2,
 		marginRight: 5,
   },
   protestorName: {
