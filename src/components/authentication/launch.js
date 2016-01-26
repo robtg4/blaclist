@@ -3,9 +3,9 @@ var React = require('react-native');
 var SplashScreen = require('@remobile/react-native-splashscreen');
 var {
 	View, 
-	Text, 
+	Text,
 	StyleSheet,
-	Image,  
+	Image,
 } = React;
 
 //dimensions
@@ -19,12 +19,12 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<View style={[styles.container, this.border('green')]}>
-				<Image 
-					style={styles.bg} 
+				<Image
+					style={styles.bg}
 					source={require('../img/login_bg_alt_3x.png')}>
 					<View style={[styles.header, this.border('blue')]}>
-						<Image 
-							style={[styles.brand, this.border('orange')]} 
+						<Image
+							style={[styles.brand, this.border('orange')]}
 							resizeMode={'contain'}
 							source={require('../img/login_brand_3x.png')} />
 					</View>
@@ -35,12 +35,12 @@ module.exports = React.createClass({
 								resizeMode={'contain'}
 								onPress={this.onPress}
 								source={require('../img/login_text_3x.png')} />
-							<Image 
-								style={[styles.loginBar]} 
+							<Image
+								style={[styles.loginBar]}
 								resizeMode={'contain'}
 								source={require('../img/login_bar_3x.png')} />
 							<ImageButton
-								style={styles.signupText} 
+								style={styles.signupText}
 								resizeMode={'contain'}
 								onPress={this.onSignupPress}
 								source={require('../img/signin_text_3x.png')} />
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 				</Image>
 			</View>
 		);
-	}, 
+	},
 	onPress: function() {
 		//navigate over to login, access navigator as prop of signin
 		this.props.navigator.push({name: 'signin'});
@@ -58,14 +58,14 @@ module.exports = React.createClass({
 		//navigate over to signup, access navigator as prop of signup
 		this.props.navigator.push({name: 'signup'});
 	},
-	 //function that helps with laying out flexbox itmes 
-	 //takes a color argument to construct border, this is an additional 
-	 //style because we dont want to mess up our real styling 
+	 //function that helps with laying out flexbox itmes
+	 //takes a color argument to construct border, this is an additional
+	 //style because we dont want to mess up our real styling
 	 border: function(color) {
 	    return {
-	      //borderColor: color, 
+	      //borderColor: color,
 	      //borderWidth: 4,
-	    } 
+	    }
 	 },
 });
 
@@ -76,8 +76,8 @@ var styles = StyleSheet.create({
 	},
 	bg: {
 		flex: 1,
-		width: window.width, 
-		height: window.height, 
+		width: window.width,
+		height: window.height,
 	},
 	header: {
 		flex: 1,
@@ -86,28 +86,28 @@ var styles = StyleSheet.create({
     	marginTop: window.height/9,
 	},
 	footer:  {
-		flex: 1, 
+		flex: 1,
 		marginBottom: window.height/12,
-		justifyContent: 'space-around', 
-	}, 
+		justifyContent: 'space-around',
+	},
 	loginTextWrapper: {
-		flex: 1, 
-		flexDirection: 'column', 
+		flex: 1,
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent:'center',
 		marginTop: window.height/20,
 	},
 	loginText: {
-		width: window.width/6.5,   
-		height: (84/208)*(window.width/9), 
+		width: window.width/6.5,
+		height: (84/208)*(window.width/9),
 	},
 	loginBar: {
-		width: window.width/3, 
-		height: (70/553)*(window.width/2), 
-	}, 
+		width: window.width/3,
+		height: (70/553)*(window.width/2),
+	},
 	signupText: {
-		width: window.width/5.5, 
-		height: (84/208)*(window.width/9), 
+		width: window.width/5.5,
+		height: (84/208)*(window.width/9),
 	},
 	brand: {
 		flex: 1,

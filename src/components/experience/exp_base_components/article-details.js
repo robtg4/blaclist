@@ -5,10 +5,12 @@ var { View, Image, StyleSheet, Text, Modal, ScrollView, TouchableHighlight, WebV
 var Parse = require('parse/react-native');
 var { Icon } = require('react-native-icons');
 var Modal   = require('react-native-modalbox');
+var NavigationBar = require('react-native-navbar');
 //dynamic component references
 var Api = require('../../utils/api');
 var ImageButton = require('../../common/imageButton');
 var ProfileCircle = require('./profile-circle');
+var BackButton = require('../../common/backButton');
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
@@ -32,6 +34,20 @@ module.exports = React.createClass({
 		var article = this.state.entry;
 		return (
 			<View style={styles.container}>
+				<NavigationBar
+						style={styles.navbar}
+						statusBar={{
+							style: 'light-content',
+							hidden: false,
+						}}
+						tintColor={'#222222'}
+						title={{
+							title: 'BLACK MILLENNIALS',
+							tintColor: '#EDEDED',
+						}}
+						leftButton={
+							<BackButton
+								onPress={this.goBack} /> } />
 				<ScrollView>
 					<Image source={{uri:'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }} style={[styles.entryImage]} />
 					<View style={styles.topRow} >
@@ -86,7 +102,7 @@ module.exports = React.createClass({
 				</ScrollView>
 				<View style={styles.footer}>
 				</View>
-				<Modal style={[styles.modal, styles.modal]} ref={"modal"} onClosed={this.onClose} onOpened={this.onOpen} onClosingState={this.onClosingState}>
+				<Modal style={[styles.modal]} ref={"modal"} swipeToClose={this.state.swipeToClose}>
           <Text style={styles.text}>Basic modal</Text>
         </Modal>
 			</View>
@@ -95,15 +111,6 @@ module.exports = React.createClass({
 	openModal: function(id) {
     this.refs.modal.open();
   },
-	nClose: function() {
-    console.log('Modal just closed');
-  },
-  onOpen: function() {
-    console.log('Modal just openned');
-  },
-  onClosingState: function(state) {
-    console.log('the open/close of the swipeToClose just changed');
-  },
 	border: function(color) {
 	    return {
 	      //borderColor: color,
@@ -111,12 +118,14 @@ module.exports = React.createClass({
 	    }
 	 },
 	 onPressThoughts: function() {
-
+		 this.props.navigator.push({name: 'thoughts'});
 	 },
 	 onPressSource: function() {
 
 	 },
-
+	 goBack: function() {
+     this.props.navigator.pop();
+   },
 });
 
 var styles = StyleSheet.create({

@@ -81,7 +81,7 @@ module.exports = React.createClass({
 				var entry = false;
 				return <View>
 					<ArticlePreview
-						category={'Black Millenials'}
+						category={'Black Millennials'}
 						postTime={'30 minutes ago'}
 						entryBrand={'Blavity'}
 						key={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
@@ -91,7 +91,7 @@ module.exports = React.createClass({
 						text={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
 						onPress={() => this.onArticleDetailsPress(entry)} />
 					<ArticlePreview
-						category={'Black Millenials'}
+						category={'Black Millennials'}
 						postTime={'1 hour ago'}
 						entryBrand={'Blavity'}
 						key={'First Look At Cast Of Nat Turner Biopic “The Birth Of A Nation”'}
@@ -101,7 +101,7 @@ module.exports = React.createClass({
 						text={'First Look At Cast Of Nat Turner Biopic “The Birth Of A Nation”'}
 						onPress={() => this.onArticleDetailsPress(entry)} />
 					<ArticlePreview
-						category={'Black Millenials'}
+						category={'Black Millennials'}
 						postTime={'30 minutes ago'}
 						entryBrand={'Blavity'}
 						key={'ICYMI: Presidemnt Obama’s Town Hall #GunsInAmerica'}

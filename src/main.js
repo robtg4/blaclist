@@ -18,6 +18,7 @@ var MainView = require('./components/experience/main-view');
 var Onboarding = require('./components/authentication/onboarding');
 var Introduction = require('./components/authentication/introduction');
 var ArticleDetails = require('./components/experience/exp_base_components/article-details.js');
+var Thoughts = require('./components/experience/exp_base_components/thoughts.js');
 
 //we have router flux enabled and react-native-navbar but we
 //need time to change a few things around to enable more customized
@@ -32,6 +33,7 @@ var ROUTES ={
 	onboarding: Onboarding,
 	mainview: MainView,
 	articledetails: ArticleDetails,
+	thoughts: Thoughts, 
 };
 
 module.exports = React.createClass({
