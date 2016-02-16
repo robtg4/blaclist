@@ -75,18 +75,10 @@ module.exports = React.createClass({
       }
 
       if (value - i >= 0 && value - i <= 1) {
-        iconRef.setNativeProps({
-          style: {
-            opacity: value - i, 
-          }
-        });
+        iconRef.setNativeProps({style: [styles.icon,{opacity: value - i}]});
       }
       if (i - value >= 0 &&  i - value <= 1) {
-        iconRef.setNativeProps({
-          style: {
-            opacity: i - value,
-          }
-        });
+        iconRef.setNativeProps({style: [styles.icon,{opacity: i - value}]});
       }
     });
   },
