@@ -3,7 +3,7 @@ var React = require('react-native');
 var { View, Image, StyleSheet, Text, Modal, ScrollView, TouchableHighlight, WebView, Image} = React;
 //additional libraries
 var Parse = require('parse/react-native');
-var { Icon } = require('react-native-icons');
+var { Icon } = require('react-native-vector-icons/FontAwesome');
 var Modal   = require('react-native-modalbox');
 var NavigationBar = require('react-native-navbar');
 //dynamic component references
@@ -67,7 +67,7 @@ module.exports = React.createClass({
 								onPress={this.onPressThoughts}
 								underlayColor={'transparent'}>
 								<Icon
-			            name='fontawesome|comments'
+			            name='comments'
 			            size={30}
 			            color='#436675'
 			            style={[styles.twitterIcon, {backgroundColor: 'transparent'}]}/>

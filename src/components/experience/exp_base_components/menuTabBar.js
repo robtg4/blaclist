@@ -7,7 +7,7 @@ var { StyleSheet, Text, View, TouchableOpacity, Animated } = React;
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
-var { Icon, } = require('react-native-icons');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var styles = StyleSheet.create({
   tab: {
@@ -36,7 +36,7 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = React.createClass({ 
+module.exports = React.createClass({
   selectedTabIcons: [],
   unselectedTabIcons: [],
 
@@ -75,10 +75,18 @@ module.exports = React.createClass({
       }
 
       if (value - i >= 0 && value - i <= 1) {
-        iconRef.setNativeProps({opacity: value - i});
+        iconRef.setNativeProps({
+          style: {
+            opacity: value - i, 
+          }
+        });
       }
       if (i - value >= 0 &&  i - value <= 1) {
-        iconRef.setNativeProps({opacity: i - value});
+        iconRef.setNativeProps({
+          style: {
+            opacity: i - value,
+          }
+        });
       }
     });
   },
@@ -109,8 +117,8 @@ module.exports = React.createClass({
   },
   border: function(color) {
       return {
-        borderColor: color, 
+        borderColor: color,
         borderWidth: 1,
-      } 
+      }
   },
 });

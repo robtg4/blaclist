@@ -26,7 +26,6 @@
 		882D253D1C43C31400828B8B /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 882D253C1C43C31400828B8B /* YTPlayerView-iframe-player.html */; };
 		883829E31C3B3D04007EBC2E /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 883829DD1C3B3D04007EBC2E /* FontAwesome.otf */; };
 		883829E41C3B3D04007EBC2E /* foundation-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829DE1C3B3D04007EBC2E /* foundation-icons.ttf */; };
-		883829E51C3B3D04007EBC2E /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829DF1C3B3D04007EBC2E /* ionicons.ttf */; };
 		883829E61C3B3D04007EBC2E /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829E01C3B3D04007EBC2E /* Material-Design-Iconic-Font.ttf */; };
 		883829E71C3B3D04007EBC2E /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829E11C3B3D04007EBC2E /* octicons.ttf */; };
 		883829E81C3B3D04007EBC2E /* zocial-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883829E21C3B3D04007EBC2E /* zocial-regular-webfont.ttf */; };
@@ -75,6 +74,7 @@
 		889809F51C1ED60900D8EBB7 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 889809F41C1ED60000D8EBB7 /* libRCTSplashScreen.a */; };
 		889809FB1C1F248700D8EBB7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889809F91C1F248700D8EBB7 /* LaunchScreen.xib */; };
 		889809FE1C1F24F900D8EBB7 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 889809FD1C1F24F900D8EBB7 /* splash.png */; };
+		889918811C7301D8005FAF26 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8899187D1C7301D8005FAF26 /* ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,7 +267,6 @@
 		882D253C1C43C31400828B8B /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "YTPlayerView-iframe-player.html"; path = "../node_modules/react-native-youtube/Assets/YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		883829DD1C3B3D04007EBC2E /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FontAwesome.otf"; sourceTree = "<group>"; };
 		883829DE1C3B3D04007EBC2E /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "foundation-icons.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/foundation-icons.ttf"; sourceTree = "<group>"; };
-		883829DF1C3B3D04007EBC2E /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
 		883829E01C3B3D04007EBC2E /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		883829E11C3B3D04007EBC2E /* octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = octicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/octicons.ttf"; sourceTree = "<group>"; };
 		883829E21C3B3D04007EBC2E /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
@@ -316,6 +315,14 @@
 		889809EF1C1ED60000D8EBB7 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		889809F91C1F248700D8EBB7 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		889809FD1C1F24F900D8EBB7 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = ../../../../../../src/components/img/splash.png; sourceTree = "<group>"; };
+		889918631C72FE75005FAF26 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FontAwesome.otf"; sourceTree = "<group>"; };
+		889918641C72FE75005FAF26 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
+		8899187B1C7301D8005FAF26 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/FontAwesome.otf"; sourceTree = "<group>"; };
+		8899187C1C7301D8005FAF26 /* foundation-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "foundation-icons.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/foundation-icons.ttf"; sourceTree = "<group>"; };
+		8899187D1C7301D8005FAF26 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ionicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/ionicons.ttf"; sourceTree = "<group>"; };
+		8899187E1C7301D8005FAF26 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Material-Design-Iconic-Font.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
+		8899187F1C7301D8005FAF26 /* octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = octicons.ttf; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/octicons.ttf"; sourceTree = "<group>"; };
+		889918801C7301D8005FAF26 /* zocial-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zocial-regular-webfont.ttf"; path = "../node_modules/react-native-icons/ios/ReactNativeIcons/Libraries/FontAwesomeKit/zocial-regular-webfont.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,8 +609,15 @@
 		8877EC5A1C160D1E005EB156 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				8899187B1C7301D8005FAF26 /* FontAwesome.otf */,
+				8899187C1C7301D8005FAF26 /* foundation-icons.ttf */,
+				8899187D1C7301D8005FAF26 /* ionicons.ttf */,
+				8899187E1C7301D8005FAF26 /* Material-Design-Iconic-Font.ttf */,
+				8899187F1C7301D8005FAF26 /* octicons.ttf */,
+				889918801C7301D8005FAF26 /* zocial-regular-webfont.ttf */,
+				889918631C72FE75005FAF26 /* FontAwesome.otf */,
+				889918641C72FE75005FAF26 /* ionicons.ttf */,
 				883829DE1C3B3D04007EBC2E /* foundation-icons.ttf */,
-				883829DF1C3B3D04007EBC2E /* ionicons.ttf */,
 				883829E01C3B3D04007EBC2E /* Material-Design-Iconic-Font.ttf */,
 				883829E11C3B3D04007EBC2E /* octicons.ttf */,
 				883829E21C3B3D04007EBC2E /* zocial-regular-webfont.ttf */,
@@ -1019,13 +1033,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				882D253D1C43C31400828B8B /* YTPlayerView-iframe-player.html in Resources */,
 				883829E31C3B3D04007EBC2E /* FontAwesome.otf in Resources */,
 				883829E41C3B3D04007EBC2E /* foundation-icons.ttf in Resources */,
-				883829E51C3B3D04007EBC2E /* ionicons.ttf in Resources */,
+				889918811C7301D8005FAF26 /* ionicons.ttf in Resources */,
 				883829E61C3B3D04007EBC2E /* Material-Design-Iconic-Font.ttf in Resources */,
 				883829E71C3B3D04007EBC2E /* octicons.ttf in Resources */,
 				883829E81C3B3D04007EBC2E /* zocial-regular-webfont.ttf in Resources */,
+				882D253D1C43C31400828B8B /* YTPlayerView-iframe-player.html in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				889809DF1C1AB8D500D8EBB7 /* SF-Compact-Text-Heavy.otf in Resources */,
 				8877EC571C1600F6005EB156 /* BebasNeue Book.ttf in Resources */,

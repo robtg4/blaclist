@@ -2,7 +2,6 @@ var React = require('react-native');
 var { View, Image, StyleSheet, Text, ListView, TouchableHighlight} = React;
 
 //additional libraries
-var Parse = require('parse/react-native');
 var Spinner = require('react-native-spinkit');
 var NavigationBar = require('react-native-navbar');
 //dynamic component references + libraries
@@ -17,8 +16,6 @@ var window = Dimensions.get('window');
 
 module.exports = React.createClass({
 	componentWillMount: function() {
-		Parse.User.currentAsync()
-			.then((user) => { this.setState({user: user}); })
 	},
 	//on first login (and all new logins)
 	//need to pull onboarding keywords that indicate user interests
@@ -26,23 +23,7 @@ module.exports = React.createClass({
 	componentDidMount: function() {
 		//console.log(this.state.user);
 		var personalFeed = null;
-		var Onboarding = Parse.Object.extend("Onboarding");
-		var query = new Parse.Query(Onboarding);
-		query.equalTo("userObjectId", Parse.User.current());
-		var that = this;
-		query.find({
-		  success: function(result) {
-		    console.log("Successfully retrieved " + result.length + " users!");
-		    var object = result[0];
-		    console.log(object.id);
-		    // Do something with the returned Parse.Object values
-		    console.log(object.get('interests'));
-		    that.fetchData(object.get('interests'));
-		  },
-		  error: function(error) {
-		    console.log("Error: " + error.code + " " + error.message);
-		  }
-		});
+
 
 	},
 	//states of this components
@@ -51,7 +32,6 @@ module.exports = React.createClass({
 			user: null,
 			personalFeed: null,
 			selected: 'Home',
-			isLoaded: false,
 			dataSource: new ListView.DataSource({
                rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -71,9 +51,9 @@ module.exports = React.createClass({
 	},
 	//rendering component
 	render: function() {
-				if (!this.state.isLoaded) {
+				/*if (!this.state.isLoaded) {
             return this.renderLoadingView();
-        }
+        }*/
         /* return <View style={styles.container}>
 			    {this.renderListView()}
 		    </View>

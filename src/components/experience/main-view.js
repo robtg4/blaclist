@@ -45,21 +45,21 @@ module.exports = React.createClass({
           tabBarActiveTextColor={'#1A1A1A'}
         	tabBarPosition={'bottom'}
         	renderTabBar={() => <MenuTabBar />}>
-          <ScrollView tabLabel="ion|heart">
+          <ScrollView tabLabel="heart">
             <Causes navigator={this.props.navigator} />
           </ScrollView>
-          <ScrollView tabLabel="ion|pound" >
+          <ScrollView tabLabel="pound" >
             <Trending navigator={this.props.navigator} />
           </ScrollView>
           <ScrollView
             alwaysBounceVertical={false}
-            tabLabel="ion|ios-paper" >
+            tabLabel="ios-paper" >
             <Home navigator={this.props.navigator} />
           </ScrollView>
-          <ScrollView tabLabel="ion|play">
+          <ScrollView tabLabel="play">
              <Video navigator={this.props.navigator} />
           </ScrollView>
-          <ScrollView tabLabel="ion|ios-at">
+          <ScrollView tabLabel="ios-at">
             <Profile navigator={this.props.navigator} />
           </ScrollView>
         </ScrollableTabView>

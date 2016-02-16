@@ -2,7 +2,7 @@
 var React = require('react-native');
 var SplashScreen = require('@remobile/react-native-splashscreen');
 var {
-	View, 
+	View,
 	Text,
 	StyleSheet,
 	Image,
