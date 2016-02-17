@@ -3,7 +3,7 @@ var React = require('react-native');
 var { View, Image, StyleSheet, Text, Modal, ScrollView, TouchableHighlight, WebView, Image} = React;
 //additional libraries
 var Parse = require('parse/react-native');
-var { Icon } = require('react-native-vector-icons/FontAwesome');
+var Icon = require('react-native-vector-icons/FontAwesome');
 var Modal   = require('react-native-modalbox');
 var NavigationBar = require('react-native-navbar');
 //dynamic component references
