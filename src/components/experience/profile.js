@@ -4,14 +4,14 @@ var { View, Image, StyleSheet, Text, ScrollView } = React;
 //additional libraries
 var Parse = require('parse/react-native');
 var Spinner = require('react-native-spinkit');
-//dynamic component references + libraries 
+//dynamic component references + libraries
 var ImageButton = require('../common/imageButton');
 var KeywordBox = require('../authentication/onboarding/keyword-box')
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
 
-module.exports = React.createClass({ 
+module.exports = React.createClass({
 	componentWillMount: function() {
 		Parse.User.currentAsync()
 			.then((user) => { this.setState({user: user}); })
@@ -25,23 +25,23 @@ module.exports = React.createClass({
 		    var object = result[0];
 		    console.log(object.id);
 		    // retreive interests array
-		    that.setState({ keywords: object.get('interests') }); 
+		    that.setState({ keywords: object.get('interests') });
 		  },
 		  error: function(error) {
 		    console.log("Error: " + error.code + " " + error.message);
 		  }
 		});
-	},   
-	//states of this components 
+	},
+	//states of this components
 	getInitialState: function() {
 		return {
-			user: null, 
-			keywords: null, 
+			user: null,
+			keywords: null,
 		}
 	},
-	//rendering component 
+	//rendering component
 	render: function() {
-		var interests = this.state.keywords; 
+		var interests = this.state.keywords;
 		if (interests == null)
 		{
 			return this.renderLoadingView();
@@ -49,8 +49,8 @@ module.exports = React.createClass({
 		{
 			return <View style={styles.container}>
         		<ScrollView>
-					<View style={[styles.imageSection, this.border('red')]}>	
-						<Image 
+					<View style={[styles.imageSection, this.border('red')]}>
+						<Image
 							style={styles.profileImage}
 							source={require('../img/test-profile.png')} />
 						<View style={styles.usernameRow}>
@@ -58,7 +58,7 @@ module.exports = React.createClass({
 							<ImageButton
 								style={[styles.settingsBtn, this.border('red')]}
 								resizeMode={'contain'}
-								onPress={this.onReadyPress}
+								onPress={this.onSettingsPress}
 								source={require('../img/settings-icon.png')} />
 						</View>
 					</View>
@@ -111,21 +111,21 @@ module.exports = React.createClass({
 				</ScrollView>
 			</View>
 		}
-        
+
 	},
 	renderKeywords: function(interests) {
 	    return interests.map(function(keyword, i) {
 	    	console.log(keyword);
-			return <KeywordBox 
-				key={i} 
-				text={keyword} 
+			return <KeywordBox
+				key={i}
+				text={keyword}
 				onPress={ () => { this.onReadyPress }}
 				selected={false} />
-		});	
-	}, 
-	onReadyPress: function() {
-
-	}, 
+		});
+	},
+	onSettingsPress: function() {
+		this.props.navigator.push({ name: 'settings'});
+	},
 	//loading render
 	renderLoadingView: function() {
         return (
@@ -133,126 +133,125 @@ module.exports = React.createClass({
             	<Spinner style={styles.spinner} isVisible={!this.state.isLoaded} size={50} type={'Arc'} color={'#FF0000'}/>
             </View>
         );
-    }, 
+  },
 	border: function(color) {
       return {
-        //borderColor: color, 
+        //borderColor: color,
         //borderWidth: 1,
-      } 
-  	},
-
+      }
+  },
 });
 
 
 var styles = StyleSheet.create({
 	usernameRow: {
-		flexDirection: 'row', 
-	}, 
+		flexDirection: 'row',
+	},
 	settingsBtn: {
 		width: window.width/30,
 		height: window.width/30,
-	}, 
+	},
 	profileDetailsTextUnder: {
-		color:'white',  
+		color:'white',
 		fontFamily: 'SFCompactText-Medium',
-		fontSize: 15, 
-	}, 
+		fontSize: 15,
+	},
 	textBox: {
-		justifyContent: 'center', 
-		flexDirection: 'column', 
-		alignItems: 'center', 
-		alignSelf: 'center', 
-	}, 
+		justifyContent: 'center',
+		flexDirection: 'column',
+		alignItems: 'center',
+		alignSelf: 'center',
+	},
 	profileDetailsText: {
-		fontFamily: 'Bebas Neue', 
-		fontSize: 25, 
-		color: 'white', 
-	}, 
+		fontFamily: 'Bebas Neue',
+		fontSize: 25,
+		color: 'white',
+	},
 	igBtn: {
 		width: window.width/12,
 		height: window.width/12,
-		alignSelf: 'center', 
+		alignSelf: 'center',
 	},
 	fbBtn: {
 		width: window.width/20,
 		height: window.width/10,
-		alignSelf: 'center', 
-	}, 
+		alignSelf: 'center',
+	},
 	googleBtn:  {
 		width: window.width/18,
 		height: window.width/12,
-		alignSelf: 'center', 
-	}, 
+		alignSelf: 'center',
+	},
 	twBtn: {
 		width: window.width/12,
 		height: window.width/12,
 		alignSelf: 'center'
-	}, 
+	},
 	profileDescription: {
-		flex: 2, 
+		flex: 2,
 		fontFamily: 'SFCompactText-Medium',
-		alignItems: 'center', 
-		justifyContent: 'center', 
-		alignSelf: 'center', 
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
 		fontSize: 12,
-		color: 'white', 
-		textAlign: 'center', 
+		color: 'white',
+		textAlign: 'center',
 		marginLeft: window.width/25,
 		marginRight: window.width/25,
-		marginTop: window.height/50, 
-	}, 
+		marginTop: window.height/50,
+	},
 	socialIcons: {
-		flex: 1, 
-		flexDirection:'row', 
-		justifyContent: 'space-around', 
-		alignItems: 'center', 
-	}, 
+		flex: 1,
+		flexDirection:'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+	},
 	profileKeywords: {
-		justifyContent: 'center', 
-		flexDirection: 'row', 
-		flexWrap: 'wrap', 
+		justifyContent: 'center',
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 		alignItems: 'flex-start',
-	}, 
+	},
 	profileStatus: {
-		flex: 1, 
-		flexDirection: 'row', 
-		justifyContent: 'space-around', 
-	}, 
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+	},
   	profileImage: {
-  		marginTop: window.height/15, 
-		borderRadius: 60, 
-		width: 120, 
-		height: 120, 
-		marginBottom: 2, 
-		backgroundColor: 'transparent', 
-	},  
-	usernameText: {	
-		fontSize: 15, 
+  		marginTop: window.height/15,
+		borderRadius: 60,
+		width: 120,
+		height: 120,
+		marginBottom: 2,
+		backgroundColor: 'transparent',
+	},
+	usernameText: {
+		fontSize: 15,
 		fontFamily: 'SFCompactText-Medium',
-		color: 'white', 
-		marginBottom: window.height/30, 
-	}, 
+		color: 'white',
+		marginBottom: window.height/30,
+	},
 	container: {
 		flex: 1,
-		alignItems: 'center', 
-		justifyContent: 'center', 
-		backgroundColor: '#333333', 
-	}, 
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#333333',
+	},
 	imageSection: {
-		flex: 1, 
-		backgroundColor: "#222222", 
-		width: window.width, 
-		width: window.width, 
-		alignItems: 'center', 
-		flexDirection: 'column', 
-		justifyContent: 'center', 
-	}, 
+		flex: 1,
+		backgroundColor: "#222222",
+		width: window.width,
+		width: window.width,
+		alignItems: 'center',
+		flexDirection: 'column',
+		justifyContent: 'center',
+	},
 	detailsSection: {
-		flex: 2, 
-		backgroundColor: '#333333', 
-		width: window.width, 
-		flexDirection: 'column', 
-		justifyContent: 'center', 
+		flex: 2,
+		backgroundColor: '#333333',
+		width: window.width,
+		flexDirection: 'column',
+		justifyContent: 'center',
 		height: 1.8*window.height/3
 	}
 });

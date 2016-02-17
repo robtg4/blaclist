@@ -12,6 +12,7 @@ var {
 
 //authentication components
 var Signin = require('./components/authentication/signin');
+var Settings = require('./components/experience/settings');
 var Launch = require('./components/authentication/launch');
 var Signup = require('./components/authentication/signup');
 var MainView = require('./components/experience/main-view');
@@ -35,6 +36,7 @@ var ROUTES ={
 	articledetails: ArticleDetails,
 	thoughts: Thoughts,
 	causedetails: CauseDetails,
+	settings: Settings, 
 };
 
 module.exports = React.createClass({
