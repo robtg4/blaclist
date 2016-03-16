@@ -50,19 +50,27 @@ module.exports = React.createClass({
 								onPress={this.goBack} /> } />
 				<ScrollView>
 					<Image source={{uri:'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }} style={[styles.entryImage]} />
-					<View style={styles.topRow} >
+					<View style={[styles.thoughtRow, this.border('blue')]}>
 						<Text style={[styles.viewText]}>10,231 views</Text>
-						<View style={[styles.thoughtRow, this.border('red')]}>
-							<ProfileCircle
-								key={1}
-								onPress={this.openModal}
-								source={require('../../img/test-profiles/profile-image-1.png')} />
-							<ProfileCircle
-								key={2}
-								source={{uri: 'http://malcolmx.com/wp-content/uploads/2015/02/bio-sidebar.jpg'}} />
-							<ProfileCircle
-								key={3}
-								source={{ uri: 'http://soultrain.com/blog/wp-content/uploads/2015/10/marc-lamont-hill.jpg'}} />
+						<View style={[styles.iconSpaceRow, this.border('red')]}>
+							<TouchableHighlight
+								onPress={this.onPressThoughts}
+								underlayColor={'transparent'}>
+								<Icon
+									name='twitter'
+									size={30}
+									color='#436675'
+									style={[styles.twitterIcon, {backgroundColor: 'transparent'}]}/>
+							</TouchableHighlight>
+							<TouchableHighlight
+								onPress={this.onPressThoughts}
+								underlayColor={'transparent'}>
+								<Icon
+									name='facebook-official'
+									size={30}
+									color='#436675'
+									style={[styles.twitterIcon, {backgroundColor: 'transparent'}]}/>
+							</TouchableHighlight>
 							<TouchableHighlight
 								onPress={this.onPressThoughts}
 								underlayColor={'transparent'}>
@@ -100,8 +108,6 @@ module.exports = React.createClass({
 						</View>
 					</View>
 				</ScrollView>
-				<View style={styles.footer}>
-				</View>
 				<Modal style={[styles.modal]} ref={"modal"} swipeToClose={this.state.swipeToClose}>
           <Text style={styles.text}>Basic modal</Text>
         </Modal>
@@ -113,22 +119,29 @@ module.exports = React.createClass({
   },
 	border: function(color) {
 	    return {
-	      //borderColor: color,
-	      //borderWidth: 2,
+	    //  borderColor: color,
+	    //  borderWidth: 2,
 	    }
-	 },
-	 onPressThoughts: function() {
-		 this.props.navigator.push({name: 'thoughts'});
-	 },
-	 onPressSource: function() {
+	},
+  onPressThoughts: function() {
+	 this.props.navigator.push({name: 'thoughts'});
+  },
+  onPressSource: function() {
 
-	 },
-	 goBack: function() {
-     this.props.navigator.pop();
-   },
+  },
+  goBack: function() {
+   this.props.navigator.pop();
+  },
 });
 
 var styles = StyleSheet.create({
+	iconSpaceRow: {
+		justifyContent: 'space-between',
+		flexDirection: 'row',
+		flex: 0.5,
+		alignSelf: 'center',
+		marginLeft: window.width/15,
+	},
 	modal: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -190,6 +203,7 @@ var styles = StyleSheet.create({
 		width: window.width/1.1,
 		alignSelf: 'center',
 		justifyContent: 'center',
+		marginBottom: 5,
 		shadowColor:'black',
 	    shadowOffset: {width: 0.2, height: 0.2},
 	    shadowOpacity: 0.4,
@@ -212,22 +226,13 @@ var styles = StyleSheet.create({
 		color: 'white',
 		alignSelf: 'center',
 		justifyContent: 'center',
-		margin: window.width/20,
-	},
-	topRow: {
-		flexDirection: 'row',
-		marginTop: 5,
 	},
 	thoughtRow: {
 		flex: 0.7,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',
-		marginRight: window.width/30,
-	},
-	footer: {
-		flex: 0.07,
-		backgroundColor: '#DB202A',
+		margin: window.width/20,
 	},
 	entryImage: {
 		height: window.height/2.8,

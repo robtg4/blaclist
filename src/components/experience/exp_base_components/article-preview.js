@@ -38,14 +38,6 @@ module.exports = React.createClass({
               <Image
                 source={this.props.source}
                 style={[styles.articlePreview, this.border('red')]} >
-                <View style={[styles.categoryRow, this.border('black')]}>
-                  <KeywordBox
-                      style={[styles.category, this.border('blue')]}
-                      key={this.props.key}
-                      text={this.props.category}
-                      onPress={this.props.categoryPress}
-                      selected={true} />
-                </View>
               </Image>
               <View style={[styles.container, this.border('organge')]}>
                   <View style={[styles.header, this.border('blue')]}>
@@ -64,19 +56,13 @@ module.exports = React.createClass({
                           <Text style={[styles.rowText, {fontWeight: 'bold'}]}>{this.props.entryBrand}</Text>
                           <Text style={[styles.rowText]}>{this.props.postTime}</Text>
                       </View>
-                      <View style={styles.thoughtsRow}>
-                        <ProfileCircle
-                          key={1}
-                          source={require('../../img/test-profiles/profile-image-1.png')} />
-                        <ProfileCircle
-                          key={2}
-                          source={require('../../img/test-profiles/profile-image-2.png')} />
-                        <ProfileCircle
-                          key={3}
-                          source={require('../../img/test-profiles/profile-image-3.png')} />
-                        <View style={[styles.elipse, this.border('blue')]}>
-                          <ElipsesUI circleSize={5} key={4} />
-                        </View>
+                      <View style={[styles.categoryRow, this.border('black')]}>
+                        <KeywordBox
+                            style={[styles.category, this.border('blue')]}
+                            key={this.props.key}
+                            text={this.props.category}
+                            onPress={this.props.categoryPress}
+                            selected={true} />
                       </View>
                     </View>
                   </View>
@@ -96,6 +82,24 @@ module.exports = React.createClass({
       }
    },
 });
+
+/* thought row that goes after rowText
+<View style={styles.thoughtsRow}>
+  <ProfileCircle
+    key={1}
+    source={require('../../img/test-profiles/profile-image-1.png')} />
+  <ProfileCircle
+    key={2}
+    source={require('../../img/test-profiles/profile-image-2.png')} />
+  <ProfileCircle
+    key={3}
+    source={require('../../img/test-profiles/profile-image-3.png')} />
+  <View style={[styles.elipse, this.border('blue')]}>
+    <ElipsesUI circleSize={5} key={4} />
+  </View>
+</View>
+
+*/
 
 var styles = StyleSheet.create({
   elipse: {
@@ -156,11 +160,7 @@ var styles = StyleSheet.create({
   },
   categoryRow: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    alignSelf: 'flex-end',
-    height: window.width*0.95,
-    width:window.width*0.98,
+    
   },
   logoBtn: {
     height: window.width/10,

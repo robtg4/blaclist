@@ -217,8 +217,8 @@ var styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 	},
-  	profileImage: {
-  		marginTop: window.height/15,
+  profileImage: {
+  	marginTop: window.height/15,
 		borderRadius: 60,
 		width: 120,
 		height: 120,

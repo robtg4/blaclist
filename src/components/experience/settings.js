@@ -3,6 +3,7 @@ var React = require('react-native');
 var { View, Image, StyleSheet, TextInput} = React;
 //additional libraries
 var NavigationBar = require('react-native-navbar');
+var Icon = require('react-native-vector-icons/FontAwesome');
 //dynamic component references + libraries
 var BackButton = require('../common/backButton');
 var ImageButton = require('../common/imageButton');
@@ -18,6 +19,7 @@ module.exports = React.createClass({
       website: '',
       email: '',
       phone: '',
+      description: '',
 		};
 	},
 	render: function() {
@@ -40,31 +42,54 @@ module.exports = React.createClass({
             <View style={styles.userInfo}>
               <View style={styles.userPartOne}>
                 <View style={styles.userInfoOne}>
-                  <TextInput
-                    style={styles.input}
-                    value={this.state.username}
-                    onChangeText={(text) => this.setState({username: text})} />
-                  <TextInput
-                    style={styles.input}
-                    value={this.state.name}
-                    onChangeText={(text) => this.setState({name: text})} />
-                  <TextInput
-                    style={styles.input}
-                    value={this.state.website}
-                    onChangeText={(text) => this.setState({website: text})} />
-                  <TextInput
-                    style={styles.input}
-                    value={this.state.email}
-                    onChangeText={(text) => this.setState({email: text})} />
-                  <TextInput
-                    style={styles.input}
-                    value={this.state.phone}
-                    onChangeText={(text) => this.setState({phone: text})} />
+                  <View style={styles.inputRow}>
+                    <Icon size={15} name="at" color="#436675" style={styles.icon}/>
+                    <TextInput
+                      style={[styles.input,]}
+                      value={this.state.username}
+                      onChangeText={(text) => this.setState({username: text})} />
+                  </View>
+                  <View style={styles.inputRow}>
+                    <Icon size={15} name="user" color="#436675" style={styles.icon}/>
+                    <TextInput
+                      style={[styles.input,]}
+                      value={this.state.name}
+                      onChangeText={(text) => this.setState({name: text})} />
+                  </View>
+                  <View style={styles.inputRow}>
+                    <Icon size={15} name="globe" color="#436675" style={styles.icon}/>
+                    <TextInput
+                      style={[styles.input,]}
+                      value={this.state.website}
+                      onChangeText={(text) => this.setState({website: text})} />
+                  </View>
+                  <View style={styles.inputRow}>
+                    <Icon size={15} name="envelope" color="#436675" style={styles.icon}/>
+                    <TextInput
+                      style={[styles.input,]}
+                      value={this.state.email}
+                      onChangeText={(text) => this.setState({email: text})} />
+                  </View>
+                  <View style={styles.inputRow}>
+                    <Icon size={15} name="mobile" color="#436675" style={styles.icon}/>
+                    <TextInput
+                      style={[styles.input,]}
+                      value={this.state.phone}
+                      onChangeText={(text) => this.setState({phone: text})} />
+                  </View>
                 </View>
                 <View style={styles.userImage}>
+                  <Image
+                    style={styles.profileImage}
+                    source={require('../img/test-profile.png')} />
                 </View>
               </View>
               <View style={styles.userEndPart}>
+                <Icon size={15} name="info" color="#436675" style={styles.icon}/>
+                <TextInput
+                  style={[styles.inputBig,]}
+                  value={this.state.description}
+                  onChangeText={(text) => this.setState({description: text})} />
               </View>
             </View>
             <View style={[styles.socialIcons, this.border('red')]}>
@@ -104,8 +129,30 @@ module.exports = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  icon: {
+    width: 17,
+    height: 17,
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   userInfo: {
     flex: 1,
+    marginTop: 20,
+  },
+  profileImage: {
+		borderRadius: window.width/5/2,
+		width: window.width/5,
+		height: window.width/5,
+		marginBottom: 2,
+		backgroundColor: 'transparent',
+    alignItems: 'center',
+    marginLeft: 10,
+	},
+  inputRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   userPartOne: {
     flexDirection: 'row',
@@ -118,7 +165,9 @@ var styles = StyleSheet.create({
     flex: .333,
   },
   userEndPart: {
-
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 	text: {
 		fontSize: 20,
@@ -152,15 +201,22 @@ var styles = StyleSheet.create({
 	},
   container: {
     flex: 0.93,
-    backgroundColor: '#222222',
+    backgroundColor: '#303030',
   },
   input: {
-		height: window.height/22,
-		backgroundColor: 'rgba(255,255,255, 0.4)',
-		borderColor: 'gray',
-		borderWidth: 1,
-		borderRadius: 2, //round input box
-		width: window.width/1.7,
-		alignSelf: 'center', //center yourself on form when you have fixed widths
-	},
+		height: window.height/25,
+    marginBottom: 4,
+    backgroundColor: '#2A2A2A',
+    color: 'white',
+		width: window.width/2,
+    fontSize: 10,
+  },
+  inputBig: {
+		height: window.height/10,
+    marginBottom: 4,
+    backgroundColor: '#2A2A2A',
+    color: 'white',
+		width: window.width/1.5,
+    fontSize: 10,
+  },
 });
