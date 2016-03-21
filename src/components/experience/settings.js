@@ -1,11 +1,18 @@
 //settings page
 var React = require('react-native');
-var { View, Image, StyleSheet, TextInput} = React;
+var { View, Image, StyleSheet, TextInput, Text} = React;
 //additional libraries
 var NavigationBar = require('react-native-navbar');
 var Icon = require('react-native-vector-icons/FontAwesome');
+var MK = require('react-native-material-kit');
+var {
+  MKIconToggle,
+  MKSwitch,
+  MKColor,
+} = MK;
 //dynamic component references + libraries
 var BackButton = require('../common/backButton');
+var ForwardButton = require('../common/forwardButton');
 var ImageButton = require('../common/imageButton');
 //dimensions
 var Dimensions = require('Dimensions');
@@ -38,10 +45,10 @@ module.exports = React.createClass({
   						leftButton={
   							<BackButton
   								onPress={this.goBack} /> } />
-        	<View style={styles.container}>
-            <View style={styles.userInfo}>
-              <View style={styles.userPartOne}>
-                <View style={styles.userInfoOne}>
+        	<View style={[styles.container, this.border('green')]}>
+            <View style={[styles.userInfo, this.border('green')]}>
+              <View style={[styles.userPartOne, this.border('blue')]}>
+                <View style={[styles.userInfoOne, this.border('red')]}>
                   <View style={styles.inputRow}>
                     <Icon size={15} name="at" color="#436675" style={styles.icon}/>
                     <TextInput
@@ -84,41 +91,84 @@ module.exports = React.createClass({
                     source={require('../img/test-profile.png')} />
                 </View>
               </View>
-              <View style={styles.userEndPart}>
-                <Icon size={15} name="info" color="#436675" style={styles.icon}/>
+            </View>
+
+            <View>
+              <View style={[styles.inputRow, this.border('blue')]}>
+                <Icon size={15} name="info" color="#436675" style={[styles.iconx, this.border('purple')]}/>
                 <TextInput
-                  style={[styles.inputBig,]}
+                  style={[styles.inputBig, this.border('red')]}
                   value={this.state.description}
                   onChangeText={(text) => this.setState({description: text})} />
               </View>
             </View>
+
             <View style={[styles.socialIcons, this.border('red')]}>
-							<ImageButton
-								style={[styles.igBtn, this.border('red')]}
-								resizeMode={'contain'}
-								onPress={this.onReadyPress}
-								source={require('../img/instagram-icon.png')} />
-							<ImageButton
-								style={[styles.googleBtn, this.border('red')]}
-								resizeMode={'contain'}
-								onPress={this.onReadyPress}
-								source={require('../img/google-icon.png')} />
-							<ImageButton
-								style={[styles.fbBtn, this.border('red')]}
-								resizeMode={'contain'}
-								onPress={this.onReadyPress}
-								source={require('../img/facebook-icon.png')} />
-							<ImageButton
-								style={[styles.twBtn, this.border('red')]}
-								resizeMode={'contain'}
-								onPress={this.onReadyPress}
-								source={require('../img/twitter-icon.png')} />
+							<Icon
+								style={[styles.socialBtn, this.border('red')]}
+								name="instagram" size={40} color="#67AAC1" />
+              <Icon
+								style={[styles.socialBtn, this.border('red')]}
+								name="google" size={40} color="grey" />
+              <Icon
+								style={[styles.socialBtn, this.border('red')]}
+								name="facebook" size={40} color="#67AAC1" />
+              <Icon
+								style={[styles.socialBtn, this.border('red')]}
+								name="twitter" size={40} color="#67AAC1" />
+              <Icon
+								style={[styles.socialBtn, this.border('red')]}
+								name="linkedin-square" size={40} color="#67AAC1" />
 						</View>
+
+            <View style={{flex: 1}}>
+              <View style={[styles.extraSettings, this.border('red')]}>
+                <Text style={styles.extraText}>Edit Interests</Text>
+                <ForwardButton
+  								onPress={this.goToInterests} />
+              </View>
+              <View style={[styles.extraSettings, this.border('red')]}>
+                <Text style={styles.extraText}>Find Facebook Friends</Text>
+                <ForwardButton
+  								onPress={this.goToFriends} />
+              </View>
+              <View style={[styles.extraSettings, this.border('red')]}>
+                <Text style={styles.extraText}>Find Contracts</Text>
+                <ForwardButton
+  								onPress={this.goToContracts} />
+              </View>
+              <View style={[styles.extraSettings2, this.border('red')]}>
+                <Text style={[styles.extraText, {padding: 10, flex: 0.7}]}>Push Notifications</Text>
+                <MKSwitch
+                    style={[styles.switch, this.border('blue')]}
+                    trackSize={5}
+                    trackLength={30}
+                    thumbRadius={8}
+                    onColor="rgba(103,170,193,.3)"
+                    thumbOnColor={MKColor.Blue}
+                    rippleColor="rgba(211,45,42,.2)"
+                    onPress={() => console.log('orange switch pressed')}
+                    onCheckedChange={(e) => console.log('orange switch checked', e)} />
+              </View>
+            </View>
+
           </View>
         </View>
 	},
   goBack: function() {
     this.props.navigator.pop();
+  },
+  goToNotifications: function() {
+
+  },
+  goToContracts: function() {
+
+  },
+  goToFriends: function() {
+
+  },
+  goToInterests: function() {
+
   },
   border: function(color) {
       return {
@@ -136,9 +186,36 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  switch: {
+    flex: 0.3,
+    height:30,
+    justifyContent: 'center',
+    height: 45,
+    width: 55,
+  },
+  iconx: {
+    width: 17,
+    height: 17,
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  extraText: {
+    color: 'white',
+  },
+  extraSettings: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    paddingRight:30, 
+  },
+  extraSettings2: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   userInfo: {
-    flex: 1,
-    marginTop: 20,
+    marginTop: 5,
   },
   profileImage: {
 		borderRadius: window.width/5/2,
@@ -151,7 +228,6 @@ var styles = StyleSheet.create({
 	},
   inputRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
     alignItems: 'center',
   },
   userPartOne: {
@@ -173,31 +249,19 @@ var styles = StyleSheet.create({
 		fontSize: 20,
 		color: 'white',
 	},
-  igBtn: {
-		width: window.width/11,
-		height: window.width/11,
+  socialBtn: {
+		width: window.width/8,
+		height: window.width/8,
 		alignSelf: 'center',
-	},
-	fbBtn: {
-		width: window.width/19,
-		height: window.width/9,
-		alignSelf: 'center',
-	},
-	googleBtn:  {
-		width: window.width/17,
-		height: window.width/11,
-		alignSelf: 'center',
-	},
-	twBtn: {
-		width: window.width/11,
-		height: window.width/11,
-		alignSelf: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
 	},
   socialIcons: {
-		flex: 1,
 		flexDirection:'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',
+    margin: 10,
+    flex: 0.5,
 	},
   container: {
     flex: 0.93,
@@ -212,11 +276,13 @@ var styles = StyleSheet.create({
     fontSize: 10,
   },
   inputBig: {
-		height: window.height/10,
+		height: window.height/8,
     marginBottom: 4,
     backgroundColor: '#2A2A2A',
     color: 'white',
-		width: window.width/1.5,
+		width: window.width/1.3,
     fontSize: 10,
+    alignSelf: 'flex-start',
+    justifyContent: 'flex-end',
   },
 });
