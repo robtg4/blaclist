@@ -6,6 +6,7 @@ var Parse = require('parse/react-native');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var Modal   = require('react-native-modalbox');
 var NavigationBar = require('react-native-navbar');
+var HTMLView = require('react-native-htmlview');
 //dynamic component references
 var Api = require('../../utils/api');
 var ImageButton = require('../../common/imageButton');
@@ -31,7 +32,6 @@ module.exports = React.createClass({
 		}
 	},
 	render: function() {
-		var article = this.state.entry;
 		return (
 			<View style={styles.container}>
 				<NavigationBar
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 							<BackButton
 								onPress={this.goBack} /> } />
 				<ScrollView>
-					<Image source={{uri:'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }} style={[styles.entryImage]} />
+					<Image source={{uri:this.state.entry.lead_image}} style={[styles.entryImage]} />
 					<View style={[styles.thoughtRow, this.border('blue')]}>
 						<Text style={[styles.viewText]}>10,231 views</Text>
 						<View style={[styles.iconSpaceRow, this.border('red')]}>
@@ -84,27 +84,23 @@ module.exports = React.createClass({
 					</View>
 					<View style={styles.line} />
 					<View style={[styles.articleBody, this.border('red')]}>
-						<Text style={styles.titleText}>ICYMI: President Obama’s Town Hall #GunsInAmerica</Text>
+						<Text style={styles.titleText}>{this.state.entry.title}</Text>
 						<View style={styles.sourceRow}>
 							<ImageButton
 								style={[styles.logoBtn]}
 								resizeMode={'contain'}
 								onPress={this.onPressSource}
-								source={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}} />
+								source={{uri:this.state.entry.logo}} />
 							<View style={styles.sourceCol}>
 								<Text style={styles.brandName}>Blavity</Text>
-								<Text style={styles.authorName}>By DAVID E. SANGER, ERIC SCHMITT, and HELENE COOPER</Text>
+								<Text style={styles.authorName}>{"By " + this.state.entry.author_name}</Text>
 								<Text style={styles.postTime}>Yesterday</Text>
 							</View>
 						</View>
 						<View style={styles.bodyTextView}>
-							<Text style={styles.bodyText}>
-								President Obama expounded on his intentions to expand gun safety in America during a town hall moderated by CNN’s Anderson Cooper just days after announcing his Executive Actions on the matter.  As he enters the final phase of his Presidency, Mr. Obama’s move to fully focus his energy and attention on gun reform during the first full week of the new year isn’t a mere coincidence. Historians, anchors and amateurs alike are paying close attention to the final moves that will bookend the narrative of his legacy long beyond his departure from public office.
-							</Text>
-							<Image style={{width: 200, height: 150, marginTop: 10, alignSelf: 'center', marginBottom: 10,}} source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/secret.gif?dfe5c5'}} />
-							<Text style={styles.bodyText}>
-							He has referenced the Newtown shooting of first graders as the “worst day” of his presidency time and again—both during this town hall meeting and in the emotional unveiling of his executive actions on January 5.  It is no surprise, then, that he has chosen gun violence as the banner issue that will precede all other political ambitions this year.
-							</Text>
+							<HTMLView
+								stylesheet={bodyStyles}
+								value={this.state.entry.content} />
 						</View>
 					</View>
 				</ScrollView>
@@ -132,6 +128,33 @@ module.exports = React.createClass({
   goBack: function() {
    this.props.navigator.pop();
   },
+});
+
+var bodyStyles = StyleSheet.create({
+	p: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Medium',
+		fontSize: 15,
+		textAlign:'left',
+	},
+	a: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Medium',
+		fontSize: 15,
+		textAlign:'left',
+	},
+	ul: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Medium',
+		fontSize: 15,
+		textAlign:'left',
+	},
+	li: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Medium',
+		fontSize: 15,
+		textAlign:'left',
+	}, 
 });
 
 var styles = StyleSheet.create({
