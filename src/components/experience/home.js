@@ -4,10 +4,12 @@ var { View, Image, StyleSheet, Text, ListView, TouchableHighlight} = React;
 //additional libraries
 var Spinner = require('react-native-spinkit');
 var NavigationBar = require('react-native-navbar');
+
 //dynamic component references + libraries
 var ArticlePreview = require('./exp_base_components/article-preview');
 var Api = require('../utils/api');
 var ArticleDetails = require('./exp_base_components/article-details');
+
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
