@@ -143,6 +143,12 @@ var bodyStyles = StyleSheet.create({
 		fontSize: 15,
 		textAlign:'left',
 	},
+	ol: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Medium',
+		fontSize: 15,
+		textAlign:'left',
+	},
 	ul: {
 		color: 'white',
 		fontFamily: 'SFCompactDisplay-Medium',
@@ -154,7 +160,19 @@ var bodyStyles = StyleSheet.create({
 		fontFamily: 'SFCompactDisplay-Medium',
 		fontSize: 15,
 		textAlign:'left',
-	}, 
+	},
+	em: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Medium',
+		fontSize: 15,
+		textAlign:'left',
+	},
+	strong: {
+		color: 'white',
+		fontFamily: 'SFCompactDisplay-Bold',
+		fontSize: 15,
+		textAlign:'left',
+	}
 });
 
 var styles = StyleSheet.create({
