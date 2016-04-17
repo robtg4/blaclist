@@ -1,5 +1,5 @@
 var React = require('react-native');
-var { View, Image, StyleSheet, Text, ListView, TouchableHighlight} = React;
+var { View, Image, StyleSheet, Text, ListView, TouchableHighlight,ScrollView} = React;
 
 //additional libraries
 var Spinner = require('react-native-spinkit');
@@ -35,23 +35,23 @@ module.exports = React.createClass({
 		//making call to API to get users feed
 		//via their user token, using sample token for now
 		var that = this;
-		//testing to see if its entering function
-		console.log("Fetching Data via Home Feed Function + API");
 		var sample_token = "Uice4v-dLKszEzsSe-kbe9m-zSS76FAfzqGg7wOx4oE";
-	  Api.getArticles(sample_token)
-			.then((data) => {
-				console.log(data);
-				var entries = data;
-        that.setState({
-        	dataSource : that.state.dataSource.cloneWithRows(entries),
-          isLoaded   : true,
-        });
-		  }).done();
+		var API_URL = "http://162.243.112.29/api/v1/feed?access_token="+sample_token;
+		fetch(API_URL)
+			.then((response) => response.json())
+			.then((json) => {
+				console.log(json);
+				that.setState({
+					dataSource : that.state.dataSource.cloneWithRows(json),
+					isLoaded   : true,
+				});
+			});
 	},
 	//rendering component
 	render: function() {
 				if (!this.state.isLoaded) {
-            return this.renderLoadingView()
+					this.fetchData();
+          return this.renderLoadingView()
         }
 				return (
 					<View style={styles.container}>
