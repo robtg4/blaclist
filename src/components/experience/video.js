@@ -8,7 +8,6 @@ var VideoPreview = require('./exp_base_components/video-preview');
 var Parse = require('parse/react-native');
 var Spinner = require('react-native-spinkit');
 var Api = require('../utils/api');
-var FeedStore = require('../stores/feed-store');
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
@@ -30,11 +29,11 @@ module.exports = React.createClass({
     var that = this;
     query.find({
       success: function(result) {
-        console.log("Successfully retrieved " + result.length + " users!");
+        //console.log("Successfully retrieved " + result.length + " users!");
         var object = result[0];
-        console.log(object.id);
+        //console.log(object.id);
         // Do something with the returned Parse.Object values
-        console.log(object.get('interests'));
+        //console.log(object.get('interests'));
         that.fetchData(object.get('interests'));
       },
       error: function(error) {
@@ -47,7 +46,6 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       user: null,
-      videos: null,
       isLoaded: false,
       dataSource: new ListView.DataSource({
                rowHasChanged: (row1, row2) => row1 !== row2,
@@ -57,7 +55,7 @@ module.exports = React.createClass({
     //gettign data for rss feed based on user interests
   fetchData: function(personalFeed) {
     var that = this;
-      FeedStore.getVideos(personalFeed)
+    Api.getVideos(token)
       .then((data) => {
         var videos = data;
             that.setState({
@@ -69,21 +67,25 @@ module.exports = React.createClass({
   //rendering component
   render: function() {
 
-    if (!this.state.isLoaded) {
+    /*if (!this.state.isLoaded) {
       return this.renderLoadingView();
-    }
+    } else if (this.state.isLoaded) {
+      return <View style={styles.container}>
+        {this.renderListView()}
+      </View>
+    } */
     return <View>
-    <VideoPreview
-      category={'Black Millennials'}
-      entryBrand={'Blavity'}
-      key={"Black America's 2015 in Review"}
-      categoryPress={this.dummy}
-      selected={false}
-      src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png' }}
-      source={'LEHxHdwFmpw'}
-      views={'313 views'}
-      text={"Black America's 2015 in Review"}
-      onPress={() => this.dummy} />
+      <VideoPreview
+        category={'Black Millennials'}
+        entryBrand={'Blavity'}
+        key={"Black America's 2015 in Review"}
+        categoryPress={this.dummy}
+        selected={false}
+        src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png' }}
+        source={'LEHxHdwFmpw'}
+        views={'313 views'}
+        text={"Black America's 2015 in Review"}
+        onPress={() => this.dummy} />
       <VideoPreview
         category={'Hip-Hop'}
         entryBrand={'Complex'}
@@ -107,11 +109,6 @@ module.exports = React.createClass({
         text={'24 Questions Black People Have For White People'}
         onPress={() => this.dummy} />
     </View>
-    /*
-      return <View style={styles.container}>
-      {this.renderListView()}
-    </View>
-    */
   },
   //loading render
   renderLoadingView: function() {
@@ -123,13 +120,13 @@ module.exports = React.createClass({
   },
     //rendering list view
   renderListView: function() {
-        return (
-                <ListView
-                    dataSource = {this.state.dataSource}
-                    initialListSize = {5}
-                    pageSize={5}
-                    renderRow  = {this.renderEntry} />
-        );
+    return (
+            <ListView
+                dataSource = {this.state.dataSource}
+                initialListSize = {5}
+                pageSize={5}
+                renderRow  = {this.renderEntry} />
+    );
   },
   //rendering rows within list view
     renderEntry: function(video) {

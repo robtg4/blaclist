@@ -8,7 +8,6 @@ var NavigationBar = require('react-native-navbar');
 var ArticlePreview = require('./exp_base_components/article-preview');
 var ArticlePreviewAlt = require('./exp_base_components/article-preview-alt');
 var Api = require('../utils/api');
-var FeedStore = require('../stores/feed-store');
 var ArticleDetails = require('./exp_base_components/article-details');
 //dimensions
 var Dimensions = require('Dimensions');
@@ -40,7 +39,7 @@ module.exports = React.createClass({
     //gettign data for rss feed based on user interests
 	fetchData: function(personalFeed) {
 		var that = this;
-	    FeedStore.getArticles(personalFeed)
+    Api.getTrends(token)
 			.then((data) => {
 				var entries = data;
 		        that.setState({

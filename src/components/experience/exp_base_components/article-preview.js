@@ -56,14 +56,6 @@ module.exports = React.createClass({
                           <Text style={[styles.rowText, {fontWeight: 'bold'}]}>{this.props.entryBrand}</Text>
                           <Text style={[styles.rowText]}>{this.props.postTime}</Text>
                       </View>
-                      <View style={[styles.categoryRow, this.border('black')]}>
-                        <KeywordBox
-                            style={[styles.category, this.border('blue')]}
-                            key={this.props.key}
-                            text={this.props.category}
-                            onPress={this.props.categoryPress}
-                            selected={true} />
-                      </View>
                     </View>
                   </View>
               </View>
@@ -82,24 +74,6 @@ module.exports = React.createClass({
       }
    },
 });
-
-/* thought row that goes after rowText
-<View style={styles.thoughtsRow}>
-  <ProfileCircle
-    key={1}
-    source={require('../../img/test-profiles/profile-image-1.png')} />
-  <ProfileCircle
-    key={2}
-    source={require('../../img/test-profiles/profile-image-2.png')} />
-  <ProfileCircle
-    key={3}
-    source={require('../../img/test-profiles/profile-image-3.png')} />
-  <View style={[styles.elipse, this.border('blue')]}>
-    <ElipsesUI circleSize={5} key={4} />
-  </View>
-</View>
-
-*/
 
 var styles = StyleSheet.create({
   elipse: {
@@ -160,7 +134,7 @@ var styles = StyleSheet.create({
   },
   categoryRow: {
     flexDirection: 'row',
-    
+
   },
   logoBtn: {
     height: window.width/10,
@@ -210,3 +184,36 @@ var styles = StyleSheet.create({
   },
 
 });
+
+/* thought row that goes after rowText
+<View style={styles.thoughtsRow}>
+  <ProfileCircle
+    key={1}
+    source={require('../../img/test-profiles/profile-image-1.png')} />
+  <ProfileCircle
+    key={2}
+    source={require('../../img/test-profiles/profile-image-2.png')} />
+  <ProfileCircle
+    key={3}
+    source={require('../../img/test-profiles/profile-image-3.png')} />
+  <View style={[styles.elipse, this.border('blue')]}>
+    <ElipsesUI circleSize={5} key={4} />
+  </View>
+</View>
+
+//category press formatting - need to figure out
+//how to categorize sources
+<View style={[this.border('white')]}>
+    <Text style={[styles.rowText, {fontWeight: 'bold'}]}>{this.props.entryBrand}</Text>
+    <Text style={[styles.rowText]}>{this.props.postTime}</Text>
+</View>
+<View style={[styles.categoryRow, this.border('black')]}>
+  <KeywordBox
+      style={[styles.category, this.border('blue')]}
+      key={this.props.key}
+      text={this.props.category}
+      onPress={this.props.categoryPress}
+      selected={true} />
+</View>
+
+*/

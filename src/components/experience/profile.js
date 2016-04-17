@@ -115,7 +115,7 @@ module.exports = React.createClass({
 	},
 	renderKeywords: function(interests) {
 	    return interests.map(function(keyword, i) {
-	    	console.log(keyword);
+	    	//console.log(keyword);
 			return <KeywordBox
 				key={i}
 				text={keyword}
