@@ -68,6 +68,7 @@ module.exports = React.createClass({
           </View>
       );
   },
+	
   //rendering list view
 	renderListView: function() {
       return (
