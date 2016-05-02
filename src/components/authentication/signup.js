@@ -117,149 +117,24 @@ module.exports = React.createClass({
 			</View>
 		);
 	},
+	onTwLoginPress: function() {
+		//signing up via twitter
+	},
 	onFbSignupPress: function() {
-
-		var that=this;
-
-		//sign up/login via facebook and store credentials into parse
-		//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
-	    FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile"], function(error, data){
-		  if (!error) {
-
-			console.log('No error');
-		    var authData = {
-			    id: data.credentials.userId,
-			    access_token: data.credentials.token,
-			    expiration_date: data.credentials.tokenExpirationDate
-			 };
-			 //console indicating success
-			 console.log(authData.id);
-			 console.log(authData.access_token);
-			 console.log(authData.expiration_date);
-
-			 //set authData state
-			 that.setState({
-			 	authData: authData,
-			 });
-
-
-			 //sign up into parse db
-             Parse.FacebookUtils.logIn(authData, {
-			      success: (user) => {
-			        if (user.existed()) {
-			          // login: nothing to do
-			          console.log('User Already Logged In');
-
-			          //check if all necessary data in db via parse query
-			          if (user.get('email') === 'undefined' || (user.get('username').indexOf(" ") === -1))
-			          {
-			          		//get remaining data via api
-			          		var email = "";
-			          		var name = "";
-					        var a_token = user.get('authData').facebook.access_token;
-					        var user_id = user.get('authData').facebook.id;
-
-					        console.log(Parse.User.current().id);
-
-					        Api.fbDataFetch(user_id, a_token)
-					        	.then((data) => {
-							        console.log(data);
-							        console.log(data.username);
-							        console.log(data.email);
-							        Parse.User.current().setUsername("username", data.username);
-									Parse.User.current().setEmail("email", data.email);
-									Parse.User.current().save(null, {
-								        success: function(currentUser) {
-								        	console.log('Success');
-								            currentUser = Parse.User.current();
-								            getPlayerDataAndGraph ();
-								        },
-								        error: function(error) {
-								            console.log("Error: ", error);
-								        }
-								    });
-
-							    });
-
-			          }
-
-			          //set state that the user is done being loaded
-			          that.setState({loadingCurrentUser: false});
-			          that.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]);
-			        } else {
-			          // signup: update user data, e.g. email
-			          console.log('getting user additional information');
-			          var data = user.get('authData').facebook;
-			          var api = 'https://graph.facebook.com/v2.3/'+data.id+'?fields=name,email&access_token='+data.access_token;
-
-			          var fetchProfile = new FBSDKGraphRequest((error, result) => {
-			            if (error) {
-			              // TODO: error
-			              this.setState({loadingCurrentUser: false});
-			            } else {
-			              console.log(result);
-			              var name = result.name;
-			              var email = result.email;
-
-			              // FIXME: https://github.com/ParsePlatform/ParseReact/issues/45
-			              var userId = {
-			                className: '_User',
-			                objectId: user.id
-			              };
-
-			              ParseReact.Mutation.Set(userId, {
-			                username: email,
-			                email: email,
-			                name: name
-			              }).dispatch();
-
-			              that.setState({loadingCurrentUser: false});
-			              that.props.navigator.immediatelyResetRouteStack([{ name: 'introduction'}]);
-			            }
-			          }, '/me?fields=name,email');
-			          // FIXME https://github.com/facebook/react-native-fbsdk/issues/20
-			          // fetchProfile.start();
-			          FBSDKGraphRequestManager.batchRequests([fetchProfile], function() {}, 10)
-			        }
-			      },
-			      error: (user, error) => {
-			      	console.log('Error', error);
-			      	console.log(user.token);
-			        switch (error.code) {
-			          case Parse.Error.INVALID_SESSION_TOKEN:
-			            Parse.User.logOut().then(() => {
-			              this.onFacebookLogin(token);
-			            });
-			            break;
-			          default:
-			            // TODO: error
-			        }
-			        that.setState({loadingCurrentUser: false});
-			        that.setState({errorMessage: error.message});
-			      }
-			    });
-
-		  } else {
-		  	console.log('User did not succesfully log in');
-		  	console.log("Error: ", error);
-		    that.setState({errorMessage: error.message});
-		  }
-		});
+		//signing up via Facebook
 	},
 	onCreateAcctPress: function() {
 		if (this.state.password === this.state.passwordConfirmation)
 		{
-			var user = new Parse.User();
-				user.set("username", this.state.username);
-				user.set("password", this.state.password);
-				user.set("email", this.state.username);
-
-				user.signUp(null, {
-				  //navigate to new component (.immediatelyResetRouteStack)
-				  //when doing so and we pass new views of app (routes)
-				  success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'introduction'}]); },
-				  error: (user, error) => { this.setState({ errorMessage: error.message }); }
-			});
+			/* creating a new user once they create an account */
+			var sign_up = "http://162.243.112.29/api/v1/sign_up?email="+this.state.username+"&password="+this.state.password;
+			console.log(sign_up);
+			fetch(sign_up)
+				.then((response) => response.json())
+				.then((responseData) => {
+					console.log(responseData);
+				})
+				.done();
 		} else {
 			this.setState({ errorMessage: "Your passwords are not the same!"});
 		}
@@ -354,3 +229,148 @@ var styles = StyleSheet.create({
 		margin: 5
 	}
 });
+
+/*** old Parse login code
+
+onFbSignupPress: function() {
+
+	var that=this;
+
+	//sign up/login via facebook and store credentials into parse
+	//need approval  "user_likes", "user_about_me", "user_actions.music", "user_actions.news", "user_actions.books"
+		FBLoginManager.loginWithPermissions(["email","user_friends", "public_profile"], function(error, data){
+		if (!error) {
+
+		console.log('No error');
+			var authData = {
+				id: data.credentials.userId,
+				access_token: data.credentials.token,
+				expiration_date: data.credentials.tokenExpirationDate
+		 };
+		 //console indicating success
+		 console.log(authData.id);
+		 console.log(authData.access_token);
+		 console.log(authData.expiration_date);
+
+		 //set authData state
+		 that.setState({
+			authData: authData,
+		 });
+
+
+		 //sign up into parse db
+					 Parse.FacebookUtils.logIn(authData, {
+					success: (user) => {
+						if (user.existed()) {
+							// login: nothing to do
+							console.log('User Already Logged In');
+
+							//check if all necessary data in db via parse query
+							if (user.get('email') === 'undefined' || (user.get('username').indexOf(" ") === -1))
+							{
+									//get remaining data via api
+									var email = "";
+									var name = "";
+								var a_token = user.get('authData').facebook.access_token;
+								var user_id = user.get('authData').facebook.id;
+
+								console.log(Parse.User.current().id);
+
+								Api.fbDataFetch(user_id, a_token)
+									.then((data) => {
+										console.log(data);
+										console.log(data.username);
+										console.log(data.email);
+										Parse.User.current().setUsername("username", data.username);
+								Parse.User.current().setEmail("email", data.email);
+								Parse.User.current().save(null, {
+											success: function(currentUser) {
+												console.log('Success');
+													currentUser = Parse.User.current();
+													getPlayerDataAndGraph ();
+											},
+											error: function(error) {
+													console.log("Error: ", error);
+											}
+									});
+
+								});
+
+							}
+
+							//set state that the user is done being loaded
+							that.setState({loadingCurrentUser: false});
+							that.props.navigator.immediatelyResetRouteStack([{ name: 'mainview'}]);
+						} else {
+							// signup: update user data, e.g. email
+							console.log('getting user additional information');
+							var data = user.get('authData').facebook;
+							var api = 'https://graph.facebook.com/v2.3/'+data.id+'?fields=name,email&access_token='+data.access_token;
+
+							var fetchProfile = new FBSDKGraphRequest((error, result) => {
+								if (error) {
+
+									this.setState({loadingCurrentUser: false});
+								} else {
+									console.log(result);
+									var name = result.name;
+									var email = result.email;
+
+
+										className: '_User',
+										objectId: user.id
+									};
+
+									ParseReact.Mutation.Set(userId, {
+										username: email,
+										email: email,
+										name: name
+									}).dispatch();
+
+									that.setState({loadingCurrentUser: false});
+									that.props.navigator.immediatelyResetRouteStack([{ name: 'introduction'}]);
+								}
+							}, '/me?fields=name,email');
+
+							// fetchProfile.start();
+							FBSDKGraphRequestManager.batchRequests([fetchProfile], function() {}, 10)
+						}
+					},
+					error: (user, error) => {
+						console.log('Error', error);
+						console.log(user.token);
+						switch (error.code) {
+							case Parse.Error.INVALID_SESSION_TOKEN:
+								Parse.User.logOut().then(() => {
+									this.onFacebookLogin(token);
+								});
+								break;
+							default:
+
+						}
+						that.setState({loadingCurrentUser: false});
+						that.setState({errorMessage: error.message});
+					}
+				});
+
+		} else {
+			console.log('User did not succesfully log in');
+			console.log("Error: ", error);
+			that.setState({errorMessage: error.message});
+		}
+	});
+},*/
+/*
+// old parse code, but parse closes in 2017
+var user = new Parse.User();
+	user.set("username", this.state.username);
+	user.set("password", this.state.password);
+	user.set("email", this.state.username);
+
+	user.signUp(null, {
+		//navigate to new component (.immediatelyResetRouteStack)
+		//when doing so and we pass new views of app (routes)
+		success: (user) => { this.props.navigator.immediatelyResetRouteStack([{ name: 'introduction'}]); },
+		error: (user, error) => { this.setState({ errorMessage: error.message }); }
+	});
+*/
