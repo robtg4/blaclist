@@ -21,6 +21,7 @@
 {
   NSURL *jsCodeLocation;
   
+  /** consoling all fonts available to react native */
   for (NSString* family in [UIFont familyNames])
   {
     NSLog(@"%@", family);
