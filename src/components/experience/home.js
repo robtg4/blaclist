@@ -59,6 +59,9 @@ module.exports = React.createClass({
 						{this.renderListView()}
 	    		</View>
 				);
+
+				Note: Entry is not defined because the data is not currently
+				dynamic - it is static. 
 			*/
 			return <View>
 				<ArticlePreview

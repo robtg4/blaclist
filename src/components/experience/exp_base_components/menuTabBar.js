@@ -2,11 +2,10 @@
 
 var React = require('react-native');
 var { StyleSheet, Text, View, TouchableOpacity, Animated } = React;
-
 //dimensions
 var Dimensions = require('Dimensions');
 var window = Dimensions.get('window');
-
+//libraries
 var Icon = require('react-native-vector-icons/Ionicons');
 
 var styles = StyleSheet.create({
