@@ -34,7 +34,7 @@ module.exports = React.createClass({
 	fetchData: function() {
 		//making call to API to get users feed
 		//via their user token, using sample token for now
-		var that = this;
+		/* var that = this;
 		var sample_token = "Uice4v-dLKszEzsSe-kbe9m-zSS76FAfzqGg7wOx4oE";
 		var API_URL = "http://162.243.112.29/api/v1/feed?access_token="+sample_token;
 		fetch(API_URL)
@@ -46,10 +46,17 @@ module.exports = React.createClass({
 					isLoaded   : true,
 				});
 			});
+		*/
+		//USING SAMPLE DATA FROM STORE IN A DYNAMIC MANNER FOR now
+		var Entries = require('../stores/sampledata'); 
+		var Data = Entries.Entries;
+		/*this.setState({
+			dataSource : that.state.dataSource.cloneWithRows(Data),
+			isLoaded   : true,
+		});*/
 	},
 	//rendering component
 	render: function() {
-			/*
 				if (!this.state.isLoaded) {
 					this.fetchData();
           return this.renderLoadingView()
@@ -59,37 +66,6 @@ module.exports = React.createClass({
 						{this.renderListView()}
 	    		</View>
 				);
-
-				Note: Entry is not defined because the data is not currently
-				dynamic - it is static. 
-			*/
-			return <View>
-				<ArticlePreview
-					postTime={'30 minutes ago'}
-					entryBrand={'Blavity'}
-					key={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
-					src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}}
-					source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-696x364.jpg?0fd4d3' }}
-					text={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
-					onPress={() => this.onArticleDetailsPress(entry)} />
-				<ArticlePreview
-					postTime={'1 hour ago'}
-					entryBrand={'Blavity'}
-					key={'First Look At Cast Of Nat Turner Biopic “The Birth Of A Nation”'}
-					src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}}
-					source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/birth.jpg?0fd4d3' }}
-					text={'First Look At Cast Of Nat Turner Biopic “The Birth Of A Nation”'}
-					onPress={() => this.onArticleDetailsPress(entry)} />
-				<ArticlePreview
-					postTime={'30 minutes ago'}
-					entryBrand={'Blavity'}
-					key={'ICYMI: Presidemnt Obama’s Town Hall #GunsInAmerica'}
-					src={{uri:'http://blavity.com/wp-content/uploads/2015/12/Blavity.png'}}
-					source={{uri: 'http://blavity.blavity.netdna-cdn.com/wp-content/uploads/2016/01/obama_gun_town_hall1-218x150.jpg?0fd4d3' }}
-					text={'ICYMI: President Obama’s Town Hall #GunsInAmerica'}
-					onPress={() => this.onArticleDetailsPress(entry)} />
-			</View>
-
 	},
 	//loading render
 	renderLoadingView: function() {
