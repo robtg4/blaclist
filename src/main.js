@@ -11,16 +11,16 @@ var {
 } = React;
 
 //authentication components
-var Signin = require('./components/authentication/signin');
-var Settings = require('./components/experience/settings');
-var Launch = require('./components/authentication/launch');
-var Signup = require('./components/authentication/signup');
-var MainView = require('./components/experience/main-view');
-var Onboarding = require('./components/authentication/onboarding');
-var Introduction = require('./components/authentication/introduction');
-var ArticleDetails = require('./components/experience/exp_base_components/article-details');
-var Thoughts = require('./components/experience/exp_base_components/thoughts');
-var CauseDetails = require('./components/experience/exp_base_components/cause-details');
+var Signin = require('./screens/signin');
+var Settings = require('./screens/settings');
+var Launch = require('./screens/launch');
+var Signup = require('./screens/signup');
+var MainView = require('./screens/main-view');
+var Onboarding = require('./screens/onboarding');
+var Introduction = require('./screens/introduction');
+var ArticleDetails = require('./screen_detail_components/article-details');
+var Thoughts = require('./screen_detail_components/thoughts');
+var CauseDetails = require('./screen_detail_components/cause-details');
 //we have router flux enabled and react-native-navbar but we
 //need time to change a few things around to enable more customized
 //component transitions
@@ -36,7 +36,7 @@ var ROUTES ={
 	articledetails: ArticleDetails,
 	thoughts: Thoughts,
 	causedetails: CauseDetails,
-	settings: Settings, 
+	settings: Settings,
 };
 
 module.exports = React.createClass({
